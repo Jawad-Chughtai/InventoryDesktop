@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InventoryDesktop.EntityFramework\InventoryDesktop.EntityFramework.csproj" />
+  </ItemGroup>
+
 </Project>

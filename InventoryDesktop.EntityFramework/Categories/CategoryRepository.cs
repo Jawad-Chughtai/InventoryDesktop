@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InventoryDesktop.EntityFramework.SubCategories;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,61 @@ namespace InventoryDesktop.EntityFramework.Categories
 {
     public class CategoryRepository
     {
+        private readonly InventoryDbContext _db = new();
+
+        public async Task<Category> CreateAsync(Category category)
+        {
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+            _db.Categories.Add(category);
+            await _db.SaveChangesAsync();
+            return category;
+        }
+
+        public async Task<Category> UpdateAsync(Category category)
+        {
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+
+            var entity = await _db.Categories.FirstOrDefaultAsync(x => x.Id == category.Id);
+            if(entity != null)
+            {
+                entity.Name = category.Name;
+                await _db.SaveChangesAsync();
+                return category;
+            }
+            else
+            {
+                throw new Exception($"No record found with name: {category.Name}");
+            }
+        }
+
+        public async Task<Category> GetAsync(int id)
+        {
+            return await _db.Categories.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<List<Category>> GetListAsync()
+        {
+            return await _db.Categories.OrderBy(x => x.Name).ToListAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var entity = await _db.Categories.FirstOrDefaultAsync(x => x.Id == id) ?? throw new ArgumentNullException(nameof(id));
+            try
+            {
+                _db.Categories.Remove(entity);
+                _db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
