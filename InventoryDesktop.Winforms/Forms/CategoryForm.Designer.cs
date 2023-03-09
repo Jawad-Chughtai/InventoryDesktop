@@ -33,6 +33,9 @@
             categoryListbox = new ListBox();
             editButton = new Button();
             deleteButton = new Button();
+            updateNameTextbox = new TextBox();
+            updateButton = new Button();
+            updateIdLabel = new Label();
             SuspendLayout();
             // 
             // categoryNameTextbox
@@ -50,7 +53,7 @@
             saveButton.TabIndex = 1;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = true;
-            saveButton.Click += saveButton_Click;
+            saveButton.Click += SaveButton_Click;
             // 
             // categoryListbox
             // 
@@ -69,6 +72,7 @@
             editButton.TabIndex = 3;
             editButton.Text = "Edit";
             editButton.UseVisualStyleBackColor = true;
+            editButton.Click += EditButton_Click;
             // 
             // deleteButton
             // 
@@ -78,19 +82,49 @@
             deleteButton.TabIndex = 4;
             deleteButton.Text = "Delete";
             deleteButton.UseVisualStyleBackColor = true;
-            deleteButton.Click += deleteButton_Click;
+            deleteButton.Click += DeleteButton_Click;
+            // 
+            // updateNameTextbox
+            // 
+            updateNameTextbox.Location = new Point(470, 111);
+            updateNameTextbox.Name = "updateNameTextbox";
+            updateNameTextbox.Size = new Size(177, 23);
+            updateNameTextbox.TabIndex = 5;
+            // 
+            // updateButton
+            // 
+            updateButton.Location = new Point(653, 110);
+            updateButton.Name = "updateButton";
+            updateButton.Size = new Size(75, 23);
+            updateButton.TabIndex = 6;
+            updateButton.Text = "Update";
+            updateButton.UseVisualStyleBackColor = true;
+            updateButton.Click += UpdateButton_Click;
+            // 
+            // updateIdLabel
+            // 
+            updateIdLabel.AutoSize = true;
+            updateIdLabel.Location = new Point(470, 137);
+            updateIdLabel.Name = "updateIdLabel";
+            updateIdLabel.Size = new Size(38, 15);
+            updateIdLabel.TabIndex = 7;
+            updateIdLabel.Text = "label1";
             // 
             // CategoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(updateIdLabel);
+            Controls.Add(updateButton);
+            Controls.Add(updateNameTextbox);
             Controls.Add(deleteButton);
             Controls.Add(editButton);
             Controls.Add(categoryListbox);
             Controls.Add(saveButton);
             Controls.Add(categoryNameTextbox);
             Name = "CategoryForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CategoryForm";
             Load += CategoryForm_Load;
             ResumeLayout(false);
@@ -104,5 +138,8 @@
         private ListBox categoryListbox;
         private Button editButton;
         private Button deleteButton;
+        private TextBox updateNameTextbox;
+        private Button updateButton;
+        private Label updateIdLabel;
     }
 }

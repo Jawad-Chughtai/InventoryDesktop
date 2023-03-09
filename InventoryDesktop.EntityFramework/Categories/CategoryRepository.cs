@@ -31,7 +31,7 @@ namespace InventoryDesktop.EntityFramework.Categories
             }
 
             var entity = await _db.Categories.FirstOrDefaultAsync(x => x.Id == category.Id);
-            if(entity != null)
+            if (entity != null)
             {
                 entity.Name = category.Name;
                 await _db.SaveChangesAsync();
@@ -56,15 +56,21 @@ namespace InventoryDesktop.EntityFramework.Categories
         public async Task DeleteAsync(int id)
         {
             var entity = await _db.Categories.FirstOrDefaultAsync(x => x.Id == id) ?? throw new ArgumentNullException(nameof(id));
-            try
+            var any = await _db.SubCategories.AnyAsync(x => x.CategoryId == id);
+            if(!any)
             {
                 _db.Categories.Remove(entity);
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
             }
-            catch(Exception ex)
+            else
             {
-                throw;
+                throw new Exception($"Cannot delete {entity.Name} - Data used in sub category.");
             }
+        }
+
+        public async Task<Category> FindByNameAsync(string name)
+        {
+            return await _db.Categories.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
         }
     }
 }

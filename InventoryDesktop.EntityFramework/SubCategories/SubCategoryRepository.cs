@@ -56,5 +56,10 @@ namespace InventoryDesktop.EntityFramework.SubCategories
             _db.SubCategories.Remove(entity);
             await _db.SaveChangesAsync();
         }
+
+        public async Task<SubCategory> FindByNameAsync(string name)
+        {
+            return await _db.SubCategories.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+        }
     }
 }

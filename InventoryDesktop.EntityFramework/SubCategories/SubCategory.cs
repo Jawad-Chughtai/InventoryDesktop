@@ -1,9 +1,11 @@
 ﻿using InventoryDesktop.EntityFramework.Categories;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventoryDesktop.EntityFramework.SubCategories
 {
+    [Index(nameof(Name))]
     public class SubCategory
     {
         [Key]

@@ -1,14 +1,5 @@
 ﻿using InventoryDesktop.Applications.Categories;
 using InventoryDesktop.EntityFramework.Categories;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace InventoryDesktop.Winforms.Forms
 {
@@ -33,33 +24,80 @@ namespace InventoryDesktop.Winforms.Forms
             categoryListbox.ValueMember = "Id";
         }
 
-        private async void saveButton_Click(object sender, EventArgs e)
+        private async void SaveButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(categoryNameTextbox.Text))
+            try
             {
-                MessageBox.Show("Please enter category name.");
-                return;
-            }
-            var category = new Category()
-            {
-                Name = categoryNameTextbox.Text.Trim(),
-            };
-            await _categoryService.CreateAsync(category);
-            categoryNameTextbox.Text = "";
-            await GetListAsync();
-        }
-
-        private async void deleteButton_Click(object sender, EventArgs e)
-        {
-            if (categoryListbox.SelectedValue != null)
-            {
-                var id = Convert.ToInt32(categoryListbox.SelectedValue);
-                await _categoryService.DeleteAsync(id);
+                if (string.IsNullOrWhiteSpace(categoryNameTextbox.Text))
+                {
+                    MessageBox.Show("Please enter category name.");
+                    return;
+                }
+                var category = new Category()
+                {
+                    Name = categoryNameTextbox.Text,
+                };
+                await _categoryService.CreateAsync(category);
+                categoryNameTextbox.Text = "";
                 await GetListAsync();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select a category to delete");
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void DeleteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (categoryListbox.SelectedValue != null)
+                {
+                    var id = Convert.ToInt32(categoryListbox.SelectedValue);
+                    await _categoryService.DeleteAsync(id);
+                    await GetListAsync();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a category to delete");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void UpdateButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(updateNameTextbox.Text))
+                {
+                    MessageBox.Show("Please enter category name.");
+                    return;
+                }
+                var category = new Category()
+                {
+                    Id = Convert.ToInt32(updateIdLabel.Text),
+                    Name = updateNameTextbox.Text,
+                };
+                await _categoryService.UpdateAsync(category);
+                updateNameTextbox.Text = "";
+                await GetListAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            if (categoryListbox.SelectedItem is Category category)
+            {
+                updateIdLabel.Text = category?.Id.ToString();
+                updateNameTextbox.Text = category?.Name;
             }
         }
     }
