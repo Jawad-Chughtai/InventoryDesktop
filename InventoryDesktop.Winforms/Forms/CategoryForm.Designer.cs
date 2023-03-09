@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             categoryNameTextbox = new TextBox();
             saveButton = new Button();
             categoryListbox = new ListBox();
@@ -36,6 +37,9 @@
             updateNameTextbox = new TextBox();
             updateButton = new Button();
             updateIdLabel = new Label();
+            errorProvider = new ErrorProvider(components);
+            categoryNameErrorLabel = new Label();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // categoryNameTextbox
@@ -44,6 +48,7 @@
             categoryNameTextbox.Name = "categoryNameTextbox";
             categoryNameTextbox.Size = new Size(177, 23);
             categoryNameTextbox.TabIndex = 0;
+            categoryNameTextbox.Validating += CategoryNameTextbox_Validating;
             // 
             // saveButton
             // 
@@ -110,11 +115,25 @@
             updateIdLabel.TabIndex = 7;
             updateIdLabel.Text = "label1";
             // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
+            // 
+            // categoryNameErrorLabel
+            // 
+            categoryNameErrorLabel.AutoSize = true;
+            categoryNameErrorLabel.ForeColor = Color.Firebrick;
+            categoryNameErrorLabel.Location = new Point(160, 72);
+            categoryNameErrorLabel.Name = "categoryNameErrorLabel";
+            categoryNameErrorLabel.Size = new Size(0, 15);
+            categoryNameErrorLabel.TabIndex = 8;
+            // 
             // CategoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(categoryNameErrorLabel);
             Controls.Add(updateIdLabel);
             Controls.Add(updateButton);
             Controls.Add(updateNameTextbox);
@@ -127,6 +146,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CategoryForm";
             Load += CategoryForm_Load;
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -141,5 +161,7 @@
         private TextBox updateNameTextbox;
         private Button updateButton;
         private Label updateIdLabel;
+        private ErrorProvider errorProvider;
+        private Label categoryNameErrorLabel;
     }
 }

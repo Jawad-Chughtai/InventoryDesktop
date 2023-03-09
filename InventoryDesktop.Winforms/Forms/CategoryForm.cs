@@ -1,5 +1,7 @@
 ﻿using InventoryDesktop.Applications.Categories;
 using InventoryDesktop.EntityFramework.Categories;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InventoryDesktop.Winforms.Forms
 {
@@ -28,18 +30,16 @@ namespace InventoryDesktop.Winforms.Forms
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(categoryNameTextbox.Text))
+                if (!errorProvider.HasErrors)
                 {
-                    MessageBox.Show("Please enter category name.");
-                    return;
+                    var category = new Category()
+                    {
+                        Name = categoryNameTextbox.Text,
+                    };
+                    await _categoryService.CreateAsync(category);
+                    categoryNameTextbox.Text = "";
+                    await GetListAsync();
                 }
-                var category = new Category()
-                {
-                    Name = categoryNameTextbox.Text,
-                };
-                await _categoryService.CreateAsync(category);
-                categoryNameTextbox.Text = "";
-                await GetListAsync();
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace InventoryDesktop.Winforms.Forms
                     MessageBox.Show("Please select a category to delete");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -100,5 +100,23 @@ namespace InventoryDesktop.Winforms.Forms
                 updateNameTextbox.Text = category?.Name;
             }
         }
+
+        /* Validators Start Here */
+        #region Validators
+        private void CategoryNameTextbox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(categoryNameTextbox.Text))
+            {
+                e.Cancel = true;
+                errorProvider.SetError(categoryNameTextbox, "Name is required.");
+                categoryNameErrorLabel.Text = "Name is required.";
+            }
+            else
+            {
+                errorProvider.SetError(categoryNameTextbox, null);
+                categoryNameErrorLabel.Text = null;
+            }
+        }
+        #endregion
     }
 }
