@@ -1,13 +1,13 @@
-﻿using InventoryDesktop.EntityFramework.Categories;
-using InventoryDesktop.EntityFramework.SubCategories;
+﻿using InventoryDesktop.EntityFramework.ItemTypes;
+using InventoryDesktop.EntityFramework.ItemCategories;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryDesktop.EntityFramework
 {
     public class InventoryDbContext : DbContext
     {
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<ItemType> ItemTypes { get; set; }
+        public DbSet<ItemCategory> ItemCategories { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -20,7 +20,11 @@ namespace InventoryDesktop.Winforms.Forms
         private void LoginButton_Click(object sender, EventArgs e)
         {
             errorLabel.Visible = false;
-            if (usernameTextbox.Text == "admin" && passwordTextbox.Text == "admin")
+            if (string.IsNullOrWhiteSpace(usernameTextbox.Text) || string.IsNullOrWhiteSpace(passwordTextbox.Text))
+            {
+                errorLabel.Visible = true;
+            }
+            else if (usernameTextbox.Text == "admin" && passwordTextbox.Text == "admin")
             {
                 DialogResult = DialogResult.OK;
                 Close();

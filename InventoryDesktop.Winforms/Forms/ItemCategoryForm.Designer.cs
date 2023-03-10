@@ -1,6 +1,6 @@
 ﻿namespace InventoryDesktop.Winforms.Forms
 {
-    partial class SubCategoryForm
+    partial class ItemCategoryForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,11 +33,11 @@
             updateNameTextbox = new TextBox();
             deleteButton = new Button();
             editButton = new Button();
-            subcategoryListBox = new ListBox();
+            categoryListbox = new ListBox();
             saveButton = new Button();
             subcategoryNameTextbox = new TextBox();
-            categoryCombobox = new ComboBox();
-            updateCategoryCombobox = new ComboBox();
+            typeCombobox = new ComboBox();
+            updateTypeListbox = new ComboBox();
             SuspendLayout();
             // 
             // updateIdLabel
@@ -88,12 +88,12 @@
             // 
             // subcategoryListBox
             // 
-            subcategoryListBox.FormattingEnabled = true;
-            subcategoryListBox.ItemHeight = 15;
-            subcategoryListBox.Location = new Point(116, 144);
-            subcategoryListBox.Name = "subcategoryListBox";
-            subcategoryListBox.Size = new Size(177, 229);
-            subcategoryListBox.TabIndex = 10;
+            categoryListbox.FormattingEnabled = true;
+            categoryListbox.ItemHeight = 15;
+            categoryListbox.Location = new Point(116, 144);
+            categoryListbox.Name = "subcategoryListBox";
+            categoryListbox.Size = new Size(177, 229);
+            categoryListbox.TabIndex = 10;
             // 
             // saveButton
             // 
@@ -114,37 +114,37 @@
             // 
             // categoryCombobox
             // 
-            categoryCombobox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            categoryCombobox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            categoryCombobox.FormattingEnabled = true;
-            categoryCombobox.Location = new Point(299, 79);
-            categoryCombobox.Name = "categoryCombobox";
-            categoryCombobox.Size = new Size(180, 23);
-            categoryCombobox.TabIndex = 16;
+            typeCombobox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            typeCombobox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            typeCombobox.FormattingEnabled = true;
+            typeCombobox.Location = new Point(299, 79);
+            typeCombobox.Name = "categoryCombobox";
+            typeCombobox.Size = new Size(180, 23);
+            typeCombobox.TabIndex = 16;
             // 
             // updateCategoryCombobox
             // 
-            updateCategoryCombobox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            updateCategoryCombobox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            updateCategoryCombobox.FormattingEnabled = true;
-            updateCategoryCombobox.Location = new Point(423, 188);
-            updateCategoryCombobox.Name = "updateCategoryCombobox";
-            updateCategoryCombobox.Size = new Size(180, 23);
-            updateCategoryCombobox.TabIndex = 17;
+            updateTypeListbox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            updateTypeListbox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            updateTypeListbox.FormattingEnabled = true;
+            updateTypeListbox.Location = new Point(423, 188);
+            updateTypeListbox.Name = "updateCategoryCombobox";
+            updateTypeListbox.Size = new Size(180, 23);
+            updateTypeListbox.TabIndex = 17;
             // 
             // SubCategoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(updateCategoryCombobox);
-            Controls.Add(categoryCombobox);
+            Controls.Add(updateTypeListbox);
+            Controls.Add(typeCombobox);
             Controls.Add(updateIdLabel);
             Controls.Add(updateButton);
             Controls.Add(updateNameTextbox);
             Controls.Add(deleteButton);
             Controls.Add(editButton);
-            Controls.Add(subcategoryListBox);
+            Controls.Add(categoryListbox);
             Controls.Add(saveButton);
             Controls.Add(subcategoryNameTextbox);
             Name = "SubCategoryForm";
@@ -162,10 +162,10 @@
         private TextBox updateNameTextbox;
         private Button deleteButton;
         private Button editButton;
-        private ListBox subcategoryListBox;
+        private ListBox categoryListbox;
         private Button saveButton;
         private TextBox subcategoryNameTextbox;
-        private ComboBox categoryCombobox;
-        private ComboBox updateCategoryCombobox;
+        private ComboBox typeCombobox;
+        private ComboBox updateTypeListbox;
     }
 }

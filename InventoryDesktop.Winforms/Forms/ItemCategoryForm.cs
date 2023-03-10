@@ -1,24 +1,14 @@
-﻿using InventoryDesktop.Applications.SubCategories;
-using InventoryDesktop.EntityFramework.Categories;
-using InventoryDesktop.EntityFramework.SubCategories;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using InventoryDesktop.Applications.ItemCategories;
+using InventoryDesktop.EntityFramework.ItemCategories;
+using InventoryDesktop.EntityFramework.ItemTypes;
 
 namespace InventoryDesktop.Winforms.Forms
 {
-    public partial class SubCategoryForm : Form
+    public partial class ItemCategoryForm : Form
     {
-        private readonly SubCategoryService _subCategoryService = new();
-        private static List<Category> Categories = new();
-        public SubCategoryForm()
+        private readonly ItemCategoryService _itemCategoryService = new();
+        private static List<ItemType> ItemTypes = new();
+        public ItemCategoryForm()
         {
             InitializeComponent();
         }
@@ -31,19 +21,19 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async Task GetListAsync()
         {
-            var data = await _subCategoryService.GetListAsync();
-            subcategoryListBox.DataSource = data;
-            subcategoryListBox.DisplayMember = "Name";
-            subcategoryListBox.ValueMember = "Id";
+            var data = await _itemCategoryService.GetListAsync();
+            categoryListbox.DataSource = data;
+            categoryListbox.DisplayMember = "Name";
+            categoryListbox.ValueMember = "Id";
         }
 
         private async Task GetCategoryLookupAsync()
         {
-            Categories = await _subCategoryService.GetCategoryLookupAsync();
-            categoryCombobox.DataSource = new List<Category>(Categories);
-            categoryCombobox.DisplayMember = "Name";
-            categoryCombobox.ValueMember = "Id";
-            categoryCombobox.SelectedItem = null;
+            ItemTypes = await _itemCategoryService.GetCategoryLookupAsync();
+            typeCombobox.DataSource = new List<ItemType>(ItemTypes);
+            typeCombobox.DisplayMember = "Name";
+            typeCombobox.ValueMember = "Id";
+            typeCombobox.SelectedItem = null;
         }
 
         private async void SaveButton_Click(object sender, EventArgs e)
@@ -54,18 +44,18 @@ namespace InventoryDesktop.Winforms.Forms
                 {
                     MessageBox.Show("Please enter sub category name.");
                 }
-                else if (categoryCombobox.SelectedValue == null)
+                else if (typeCombobox.SelectedValue == null)
                 {
                     MessageBox.Show("Please select a category");
                 }
                 else
                 {
-                    var subcategory = new SubCategory
+                    var subcategory = new ItemCategory
                     {
                         Name = subcategoryNameTextbox.Text,
-                        CategoryId = (int)categoryCombobox.SelectedValue
+                        ItemTypeId = (int)typeCombobox.SelectedValue
                     };
-                    await _subCategoryService.CreateAsync(subcategory);
+                    await _itemCategoryService.CreateAsync(subcategory);
                     await GetListAsync();
                 }
             }
@@ -77,24 +67,24 @@ namespace InventoryDesktop.Winforms.Forms
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            if (subcategoryListBox.SelectedItem is SubCategory subcategory)
+            if (categoryListbox.SelectedItem is ItemCategory subcategory)
             {
-                updateCategoryCombobox.DataSource = new List<Category>(Categories);
-                updateCategoryCombobox.DisplayMember = "Name";
-                updateCategoryCombobox.ValueMember = "Id";
+                updateTypeListbox.DataSource = new List<ItemType>(ItemTypes);
+                updateTypeListbox.DisplayMember = "Name";
+                updateTypeListbox.ValueMember = "Id";
 
                 updateIdLabel.Text = subcategory.Id.ToString();
                 updateNameTextbox.Text = subcategory.Name;
-                updateCategoryCombobox.SelectedValue = subcategory.CategoryId;
+                updateTypeListbox.SelectedValue = subcategory.ItemTypeId;
             }
         }
 
         private async void DeleteButton_Click(object sender, EventArgs e)
         {
-            if(subcategoryListBox.SelectedValue != null)
+            if(categoryListbox.SelectedValue != null)
             {
-                int id = Convert.ToInt32(subcategoryListBox.SelectedValue);
-                await _subCategoryService.DeleteAsync(id);
+                int id = Convert.ToInt32(categoryListbox.SelectedValue);
+                await _itemCategoryService.DeleteAsync(id);
                 await GetListAsync();   
             }
         }
@@ -107,19 +97,19 @@ namespace InventoryDesktop.Winforms.Forms
                 {
                     MessageBox.Show("Please enter sub category name.");
                 }
-                else if (updateCategoryCombobox.SelectedValue == null)
+                else if (updateTypeListbox.SelectedValue == null)
                 {
                     MessageBox.Show("Please select a category");
                 }
                 else
                 {
-                    var subcategory = new SubCategory
+                    var category = new ItemCategory
                     {
                         Id = Convert.ToInt32(updateIdLabel.Text),
                         Name = updateNameTextbox.Text,
-                        CategoryId = (int)updateCategoryCombobox.SelectedValue
+                        ItemTypeId = (int)updateTypeListbox.SelectedValue
                     };
-                    await _subCategoryService.UpdateAsync(subcategory);
+                    await _itemCategoryService.UpdateAsync(category);
                     await GetListAsync();
                 }
             }
