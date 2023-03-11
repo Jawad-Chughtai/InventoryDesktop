@@ -11,25 +11,26 @@ namespace InventoryDesktop.Applications.ItemTypes
             return await _itemTypeRepository.GetAsync(id);
         }
 
-        public async Task<List<ItemType>> GetListAsync()
+        public async Task<List<ItemType>> GetListAsync(string? searchText = null)
         {
-            return await _itemTypeRepository.GetListAsync();
+            searchText = searchText?.Trim().ToLower();  
+            return await _itemTypeRepository.GetListAsync(searchText);
         }
 
-        public async Task<ItemType> CreateAsync(ItemType category)
+        public async Task<ItemType> CreateAsync(ItemType itemType)
         {
-            category.Name = category.Name.Trim();
-            category.Code = category.Code.Trim().ToUpper();
+            itemType.Name = itemType.Name.Trim();
+            itemType.Code = itemType.Code.Trim().ToUpper();
 
-            return await _itemTypeRepository.CreateAsync(category);
+            return await _itemTypeRepository.CreateAsync(itemType);
         }
 
-        public async Task<ItemType> UpdateAsync(ItemType category)
+        public async Task<ItemType> UpdateAsync(ItemType itemType)
         {
-            category.Name = category.Name.Trim();
-            category.Code = category.Code.Trim().ToUpper();
+            itemType.Name = itemType.Name.Trim();
+            itemType.Code = itemType.Code.Trim().ToUpper();
 
-            return await _itemTypeRepository.UpdateAsync(category);
+            return await _itemTypeRepository.UpdateAsync(itemType);
         }
 
         public async Task DeleteAsync(int id)

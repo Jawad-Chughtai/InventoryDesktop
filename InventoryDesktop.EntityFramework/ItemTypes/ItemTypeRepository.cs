@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace InventoryDesktop.EntityFramework.ItemTypes
 {
@@ -6,61 +7,61 @@ namespace InventoryDesktop.EntityFramework.ItemTypes
     {
         private readonly InventoryDbContext _db = new();
 
-        public async Task<ItemType> CreateAsync(ItemType category)
+        public async Task<ItemType> CreateAsync(ItemType itemType)
         {
             #region Existing Check
 
-            if (category == null)
+            if (itemType == null)
             {
-                throw new ArgumentNullException(nameof(category));
+                throw new ArgumentNullException(nameof(itemType));
             }
 
-            if(await _db.ItemTypes.AnyAsync(x => x.Name.ToLower() == category.Name.ToLower()))
+            if(await _db.ItemTypes.AnyAsync(x => x.Name.ToLower() == itemType.Name.ToLower()))
             {
-                throw new Exception($"Category with same name '{category.Name}' already exists.");
+                throw new Exception($"Category with same name '{itemType.Name}' already exists.");
             }
-            else if(await _db.ItemTypes.AnyAsync(x => x.Code.ToLower() == category.Code.ToLower()))
+            else if(await _db.ItemTypes.AnyAsync(x => x.Code.ToLower() == itemType.Code.ToLower()))
             {
-                throw new Exception($"Category with same code '{category.Code}' already exists.");
+                throw new Exception($"Category with same code '{itemType.Code}' already exists.");
             }
 
             #endregion
 
-            _db.ItemTypes.Add(category);
+            _db.ItemTypes.Add(itemType);
             await _db.SaveChangesAsync();
-            return category;
+            return itemType;
         }
 
-        public async Task<ItemType> UpdateAsync(ItemType category)
+        public async Task<ItemType> UpdateAsync(ItemType itemType)
         {
             #region Existing Check
 
-            if (category == null)
+            if (itemType == null)
             {
-                throw new ArgumentNullException(nameof(category));
+                throw new ArgumentNullException(nameof(itemType));
             }
 
-            if (await _db.ItemTypes.AnyAsync(x => x.Name.ToLower() == category.Name.ToLower()))
+            if (await _db.ItemTypes.AnyAsync(x => x.Name.ToLower() == itemType.Name.ToLower() && x.Id != itemType.Id))
             {
-                throw new Exception($"Category with same name '{category.Name}' already exists.");
+                throw new Exception($"Item type with same name '{itemType.Name}' already exists.");
             }
-            else if (await _db.ItemTypes.AnyAsync(x => x.Code.ToLower() == category.Code.ToLower()))
+            else if (await _db.ItemTypes.AnyAsync(x => x.Code.ToLower() == itemType.Code.ToLower() && x.Id != itemType.Id))
             {
-                throw new Exception($"Category with same code '{category.Code}' already exists.");
+                throw new Exception($"Item type with same code '{itemType.Code}' already exists.");
             }
 
             #endregion
 
-            var entity = await _db.ItemTypes.FirstOrDefaultAsync(x => x.Id == category.Id);
+            var entity = await _db.ItemTypes.FirstOrDefaultAsync(x => x.Id == itemType.Id);
             if (entity != null)
             {
-                entity.Name = category.Name;
+                entity.Name = itemType.Name;
                 await _db.SaveChangesAsync();
-                return category;
+                return itemType;
             }
             else
             {
-                throw new Exception($"No record found with name: {category.Name}");
+                throw new Exception($"No record found with name: {itemType.Name}");
             }
         }
 
@@ -69,9 +70,14 @@ namespace InventoryDesktop.EntityFramework.ItemTypes
             return await _db.ItemTypes.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<ItemType>> GetListAsync()
+        public async Task<List<ItemType>> GetListAsync(string? searchText = null)
         {
-            return await _db.ItemTypes.OrderBy(x => x.Name).ToListAsync();
+            return await _db.ItemTypes
+                    .Where(x => searchText == null 
+                    || x.Name.ToLower().Contains(searchText)
+                    || x.Code.ToLower().Contains(searchText))
+                    .OrderBy(x => x.Name)
+                    .ToListAsync();
         }
 
         public async Task DeleteAsync(int id)
