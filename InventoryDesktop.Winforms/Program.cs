@@ -18,7 +18,7 @@ namespace InventoryDesktop.Winforms
             //{
             //    Application.Run(new ItemTypeForm());
             //}
-            Application.Run(new ItemTypeForm());
+            Application.Run(new ItemCategoryForm());
 
         }
     }

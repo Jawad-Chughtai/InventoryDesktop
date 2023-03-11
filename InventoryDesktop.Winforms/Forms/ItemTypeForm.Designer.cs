@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             nameTextbox = new TextBox();
             saveButton = new Button();
             nameErrorLabel = new Label();
@@ -89,9 +93,9 @@
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(0, 2);
             label1.Name = "label1";
-            label1.Size = new Size(39, 15);
+            label1.Size = new Size(47, 15);
             label1.TabIndex = 9;
-            label1.Text = "Name";
+            label1.Text = "Name *";
             // 
             // label2
             // 
@@ -99,12 +103,13 @@
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(249, 2);
             label2.Name = "label2";
-            label2.Size = new Size(35, 15);
+            label2.Size = new Size(43, 15);
             label2.TabIndex = 11;
-            label2.Text = "Code";
+            label2.Text = "Code *";
             // 
             // codeTextbox
             // 
+            codeTextbox.CharacterCasing = CharacterCasing.Upper;
             codeTextbox.Location = new Point(251, 20);
             codeTextbox.Name = "codeTextbox";
             codeTextbox.Size = new Size(223, 25);
@@ -206,17 +211,51 @@
             // 
             datagrid.AllowUserToAddRows = false;
             datagrid.AllowUserToDeleteRows = false;
-            datagrid.BackgroundColor = Color.White;
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            datagrid.BackgroundColor = SystemColors.ControlLightLight;
+            datagrid.BorderStyle = BorderStyle.None;
+            datagrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLightLight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            datagrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             datagrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Gainsboro;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            datagrid.DefaultCellStyle = dataGridViewCellStyle2;
             datagrid.Dock = DockStyle.Bottom;
             datagrid.GridColor = SystemColors.ActiveBorder;
             datagrid.Location = new Point(0, 67);
             datagrid.MultiSelect = false;
             datagrid.Name = "datagrid";
+            datagrid.ReadOnly = true;
             datagrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.Desktop;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            datagrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             datagrid.RowHeadersVisible = false;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            datagrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
             datagrid.RowTemplate.Height = 25;
             datagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            datagrid.ShowCellErrors = false;
+            datagrid.ShowCellToolTips = false;
+            datagrid.ShowEditingIcon = false;
+            datagrid.ShowRowErrors = false;
             datagrid.Size = new Size(1094, 429);
             datagrid.TabIndex = 15;
             datagrid.TabStop = false;

@@ -20,6 +20,6 @@ namespace InventoryDesktop.EntityFramework.ItemCategories
         public int ItemTypeId { get; set; }
 
         [ForeignKey(nameof(ItemTypeId))]
-        public ItemType ItemType { get; set; }
+        public virtual ItemType ItemType { get; set; }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using InventoryDesktop.Applications.ItemTypes;
 using InventoryDesktop.EntityFramework.ItemTypes;
 using InventoryDesktop.Winforms.Enums;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System.Windows.Forms;
 
 namespace InventoryDesktop.Winforms.Forms
 {
@@ -26,18 +24,11 @@ namespace InventoryDesktop.Winforms.Forms
             var types = await _itemTypeService.GetListAsync(searchText);
             datagrid.DataSource = types;
 
-            CustomizeDataGridView();
+            InitDataGridView();
         }
 
-        private void CustomizeDataGridView()
+        private void InitDataGridView()
         {
-            datagrid.BackgroundColor = Color.White;
-            datagrid.ForeColor = Color.Black;
-            datagrid.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
-            datagrid.RowHeadersVisible = false;
-            datagrid.BorderStyle = BorderStyle.None;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
             datagrid.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[0].Width = 100;

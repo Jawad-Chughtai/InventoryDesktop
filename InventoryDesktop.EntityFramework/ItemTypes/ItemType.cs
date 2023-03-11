@@ -13,6 +13,5 @@ namespace InventoryDesktop.EntityFramework.ItemTypes
         [Required]
         public string Name { get; set; }
         public string Code { get; set; }
-        public List<ItemCategory> ItemCategories { get; set; }
     }
 }

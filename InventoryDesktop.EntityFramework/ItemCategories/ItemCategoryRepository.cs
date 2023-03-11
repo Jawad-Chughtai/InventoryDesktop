@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using InventoryDesktop.EntityFramework.ItemTypes;
+using Microsoft.EntityFrameworkCore;
 
 namespace InventoryDesktop.EntityFramework.ItemCategories
 {
@@ -6,28 +7,58 @@ namespace InventoryDesktop.EntityFramework.ItemCategories
     {
         private readonly InventoryDbContext _db = new();
 
-        public async Task<ItemCategory> CreateAsync(ItemCategory subcategory)
+        public async Task<ItemCategory> CreateAsync(ItemCategory category)
         {
-            if (subcategory == null)
-            {
-                throw new ArgumentNullException(nameof(subcategory));
-            }
-            _db.ItemCategories.Add(subcategory);
-            await _db.SaveChangesAsync();
-            return subcategory;
-        }
+            #region Existing Check
 
-        public async Task<ItemCategory> UpdateAsync(ItemCategory category)
-        {
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category));
             }
+
+            if (await _db.ItemCategories.AnyAsync(x => x.Name.ToLower() == category.Name.ToLower()))
+            {
+                throw new Exception($"Category with same name '{category.Name}' already exists");
+            }
+            else if (await _db.ItemCategories.AnyAsync(x => x.Code.ToLower() == category.Code.ToLower()))
+            {
+                throw new Exception($"Category with same code '{category.Code}' already exists");
+            }
+
+            #endregion
+
+            _db.ItemCategories.Add(category);
+            await _db.SaveChangesAsync();
+            return category;
+        }
+
+        public async Task<ItemCategory> UpdateAsync(ItemCategory category)
+        {
+            #region Existing Check
+
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category));
+            }
+
+            if (await _db.ItemCategories.AnyAsync(x => x.Name.ToLower() == category.Name.ToLower() && x.Id != category.Id))
+            {
+                throw new Exception($"Category with same name '{category.Name}' already exists");
+            }
+            else if (await _db.ItemCategories.AnyAsync(x => x.Code.ToLower() == category.Code.ToLower() && x.Id != category.Id))
+            {
+                throw new Exception($"Category with same code '{category.Code}' already exists");
+            }
+
+            #endregion
+
             var entity = await _db.ItemCategories.FirstOrDefaultAsync(x => x.Id == category.Id);
-            if(entity != null)
+            if (entity != null)
             {
                 entity.Name = category.Name;
+                entity.Code = category.Code;
                 entity.ItemTypeId = category.ItemTypeId;
+
                 await _db.SaveChangesAsync();
                 return entity;
             }
@@ -42,13 +73,18 @@ namespace InventoryDesktop.EntityFramework.ItemCategories
             return await _db.ItemCategories.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<ItemCategory>> GetListAsync()
+        public async Task<List<ItemCategory>> GetListAsync(
+            string? searchText = null,
+            int? typeId = null)
         {
-            var x = await _db.ItemCategories
+            return await _db.ItemCategories
+                .Where(x => typeId == null || x.ItemTypeId == typeId)
+                .Where(x => searchText == null 
+                || x.Name.ToLower().Contains(searchText)
+                || x.Code.ToLower().Contains(searchText))
                 .Include(x => x.ItemType)
                 .OrderBy(x => x.Name)
                 .ToListAsync();
-            return x;
         }
 
         public async Task DeleteAsync(int id)

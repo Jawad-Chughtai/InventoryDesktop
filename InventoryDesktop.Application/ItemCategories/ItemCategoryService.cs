@@ -13,31 +13,29 @@ namespace InventoryDesktop.Applications.ItemCategories
             return await _itemCategoryRepository.GetAsync(id);
         }
 
-        public async Task<List<ItemCategory>> GetListAsync()
+        public async Task<List<ItemCategory>> GetListAsync(
+            string? searchText = null,
+            int? typeId = null)
         {
-            return await _itemCategoryRepository.GetListAsync();
+            searchText = searchText?.Trim().ToLower();
+
+            return await _itemCategoryRepository.GetListAsync(searchText, typeId);
         }
 
-        public async Task<ItemCategory> CreateAsync(ItemCategory subcategory)
+        public async Task<ItemCategory> CreateAsync(ItemCategory category)
         {
-            subcategory.Name = subcategory.Name.Trim();
-            var existing = await _itemCategoryRepository.FindByNameAsync(subcategory.Name);
-            if (existing != null)
-            {
-                throw new Exception($"Sub Category with same name '{subcategory.Name}' already exists.");
-            }
-            return await _itemCategoryRepository.CreateAsync(subcategory);
+            category.Name = category.Name.Trim();
+            category.Code = category.Code.Trim().ToUpper();
+
+            return await _itemCategoryRepository.CreateAsync(category);
         }
 
-        public async Task<ItemCategory> UpdateAsync(ItemCategory subcategory)
+        public async Task<ItemCategory> UpdateAsync(ItemCategory category)
         {
-            subcategory.Name = subcategory.Name.Trim();
-            var existing = await _itemCategoryRepository.FindByNameAsync(subcategory.Name);
-            if (existing != null && existing.Id != subcategory.Id)
-            {
-                throw new Exception($"Sub Category with same name '{subcategory.Name}' already exists.");
-            }
-            return await _itemCategoryRepository.UpdateAsync(subcategory);
+            category.Name = category.Name.Trim();
+            category.Code = category.Code.Trim().ToUpper();
+
+            return await _itemCategoryRepository.UpdateAsync(category);
         }
 
         public async Task DeleteAsync(int id)
@@ -45,7 +43,7 @@ namespace InventoryDesktop.Applications.ItemCategories
             await _itemCategoryRepository.DeleteAsync(id);
         }
 
-        public async Task<List<ItemType>> GetCategoryLookupAsync()
+        public async Task<List<ItemType>> GetItemTypeLookup()
         {
             return await _itemTypeRepository.GetListAsync();
         }

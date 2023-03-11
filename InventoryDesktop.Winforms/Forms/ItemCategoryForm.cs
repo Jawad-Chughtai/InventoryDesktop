@@ -1,13 +1,19 @@
 ﻿using InventoryDesktop.Applications.ItemCategories;
+using InventoryDesktop.Applications.ItemTypes;
 using InventoryDesktop.EntityFramework.ItemCategories;
 using InventoryDesktop.EntityFramework.ItemTypes;
+using InventoryDesktop.Winforms.Enums;
+using InventoryDesktop.Winforms.Models;
+using System;
 
 namespace InventoryDesktop.Winforms.Forms
 {
     public partial class ItemCategoryForm : Form
     {
         private readonly ItemCategoryService _itemCategoryService = new();
-        private static List<ItemType> ItemTypes = new();
+        private ItemCategory? _itemCategory { get; set; } = null;
+        bool isLoading = true;
+
         public ItemCategoryForm()
         {
             InitializeComponent();
@@ -16,47 +22,90 @@ namespace InventoryDesktop.Winforms.Forms
         private async void SubCategoryForm_Load(object sender, EventArgs e)
         {
             await GetListAsync();
-            await GetCategoryLookupAsync();
+            await GetItemTypeLookup();
         }
 
-        private async Task GetListAsync()
+        private void InitDataGridView()
         {
-            var data = await _itemCategoryService.GetListAsync();
-            categoryListbox.DataSource = data;
-            categoryListbox.DisplayMember = "Name";
-            categoryListbox.ValueMember = "Id";
+            datagrid.AutoGenerateColumns = false;
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("id", "Id");
+            datagrid.Columns.Add("name", "Name");
+            datagrid.Columns.Add("code", "Code");
+            datagrid.Columns.Add("typename", "Item Type");
+            datagrid.Columns.Add("typeid", "Type Id");
+
+            datagrid.Columns["id"].DataPropertyName = "Id";
+            datagrid.Columns["name"].DataPropertyName = "Name";
+            datagrid.Columns["code"].DataPropertyName = "Code";
+            datagrid.Columns["typename"].DataPropertyName = "TypeName";
+            datagrid.Columns["typeid"].DataPropertyName = "TypeId";
+
+            datagrid.Columns["typeid"].Visible = false;
+            datagrid.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[0].Width = 100;
+            datagrid.CurrentCell = null;
         }
 
-        private async Task GetCategoryLookupAsync()
+        /* CRUD Functions */
+        #region
+
+        private async Task GetListAsync(string? searchText = null, int? typeId = null)
         {
-            ItemTypes = await _itemCategoryService.GetCategoryLookupAsync();
-            typeCombobox.DataSource = new List<ItemType>(ItemTypes);
+            var data = await _itemCategoryService.GetListAsync(searchText, typeId);
+            datagrid.DataSource = data.ToItemCategoryModel();
+
+            InitDataGridView();
+        }
+
+        private async Task GetItemTypeLookup()
+        {
+            var itemTypes = await _itemCategoryService.GetItemTypeLookup();
+            typeCombobox.DataSource = new List<ItemType>(itemTypes);
             typeCombobox.DisplayMember = "Name";
             typeCombobox.ValueMember = "Id";
             typeCombobox.SelectedItem = null;
+
+            itemTypes.Insert(0, new ItemType());
+            typeFilter.DataSource = new List<ItemType>(itemTypes);
+            typeFilter.DisplayMember = "Name";
+            typeFilter.ValueMember = "Id";
+            typeFilter.SelectedItem = null;
+            isLoading = false;
         }
 
         private async void SaveButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(subcategoryNameTextbox.Text))
+                if (IsValidSaveForm())
                 {
-                    MessageBox.Show("Please enter sub category name.");
-                }
-                else if (typeCombobox.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select a category");
-                }
-                else
-                {
-                    var subcategory = new ItemCategory
+                    if (_itemCategory == null)
                     {
-                        Name = subcategoryNameTextbox.Text,
-                        ItemTypeId = (int)typeCombobox.SelectedValue
-                    };
-                    await _itemCategoryService.CreateAsync(subcategory);
-                    await GetListAsync();
+                        _itemCategory = new ItemCategory
+                        {
+                            Name = nameTextbox.Text,
+                            Code = codeTextbox.Text,
+                            ItemTypeId = (int)typeCombobox.SelectedValue
+                        };
+
+                        await _itemCategoryService.CreateAsync(_itemCategory);
+                    }
+                    else
+                    {
+                        _itemCategory.Name = nameTextbox.Text;
+                        _itemCategory.Code = codeTextbox.Text;
+                        _itemCategory.ItemTypeId = (int)typeCombobox.SelectedValue;
+
+                        await _itemCategoryService.UpdateAsync(_itemCategory);
+                    }
+
+                    ResetForm();
+
+                    var typeId = (int?)typeFilter.SelectedValue == 0 ? null : (int?)typeFilter.SelectedValue;
+                    await GetListAsync(searchTextbox.Text, typeId);
                 }
             }
             catch (Exception ex)
@@ -67,50 +116,33 @@ namespace InventoryDesktop.Winforms.Forms
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            if (categoryListbox.SelectedItem is ItemCategory subcategory)
+            if (datagrid.SelectedCells.Count > 0)
             {
-                updateTypeListbox.DataSource = new List<ItemType>(ItemTypes);
-                updateTypeListbox.DisplayMember = "Name";
-                updateTypeListbox.ValueMember = "Id";
+                SetSelectedItemCategory();
+                nameTextbox.Text = _itemCategory.Name;
+                codeTextbox.Text = _itemCategory.Code;
+                typeCombobox.SelectedValue = _itemCategory.ItemTypeId;
 
-                updateIdLabel.Text = subcategory.Id.ToString();
-                updateNameTextbox.Text = subcategory.Name;
-                updateTypeListbox.SelectedValue = subcategory.ItemTypeId;
+                saveButton.Text = SaveButtonText.Update.ToString();
             }
         }
 
         private async void DeleteButton_Click(object sender, EventArgs e)
         {
-            if(categoryListbox.SelectedValue != null)
-            {
-                int id = Convert.ToInt32(categoryListbox.SelectedValue);
-                await _itemCategoryService.DeleteAsync(id);
-                await GetListAsync();   
-            }
-        }
-
-        private async void UpdateButton_Click(object sender, EventArgs e)
-        {
             try
             {
-                if (string.IsNullOrEmpty(updateNameTextbox.Text))
+                if (datagrid.SelectedCells.Count > 0)
                 {
-                    MessageBox.Show("Please enter sub category name.");
-                }
-                else if (updateTypeListbox.SelectedValue == null)
-                {
-                    MessageBox.Show("Please select a category");
-                }
-                else
-                {
-                    var category = new ItemCategory
+                    SetSelectedItemCategory();
+                    if (MessageBox.Show($"Are you sure you want to delete {_itemCategory.Name}", "Confirm Deletion", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        Id = Convert.ToInt32(updateIdLabel.Text),
-                        Name = updateNameTextbox.Text,
-                        ItemTypeId = (int)updateTypeListbox.SelectedValue
-                    };
-                    await _itemCategoryService.UpdateAsync(category);
-                    await GetListAsync();
+                        await _itemCategoryService.DeleteAsync(_itemCategory.Id);
+                        await GetListAsync(searchTextbox.Text);
+                    }
+                    else
+                    {
+                        _itemCategory = null;
+                    }
                 }
             }
             catch (Exception ex)
@@ -118,5 +150,123 @@ namespace InventoryDesktop.Winforms.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
+        #endregion
+
+        private void ResetForm()
+        {
+            _itemCategory = null;
+            saveButton.Text = SaveButtonText.Save.ToString();
+
+            nameTextbox.Text = null;
+            codeTextbox.Text = null;
+            typeCombobox.SelectedItem = null;
+            typeCombobox.Text = null;
+
+            ResetErrorLabels();
+        }
+
+        private void ResetErrorLabels()
+        {
+            nameErrorLabel.Visible = false;
+            codeErrorLabel.Visible = false;
+            typeErrorLabel.Visible = false;
+        }
+
+        private void SetSelectedItemCategory()
+        {
+            int rowIndex = datagrid.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = datagrid.Rows[rowIndex];
+            datagrid.CurrentCell = null;
+
+            _itemCategory = new ItemCategory
+            {
+                Id = (int)selectedRow.Cells["Id"].Value,
+                Name = selectedRow.Cells["Name"].Value.ToString(),
+                Code = selectedRow.Cells["Code"].Value.ToString(),
+                ItemTypeId = (int)selectedRow.Cells["TypeId"].Value
+            };
+        }
+
+        /* Validators Start Here */
+        #region Validators
+
+        private bool IsValidSaveForm()
+        {
+            ResetErrorLabels();
+
+            if (string.IsNullOrWhiteSpace(nameTextbox.Text))
+            {
+                nameErrorLabel.Visible = true;
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(codeTextbox.Text))
+            {
+                codeErrorLabel.Visible = true;
+                return false;
+            }
+            else if (typeCombobox.SelectedValue == null)
+            {
+                typeErrorLabel.Visible = true;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        #endregion
+
+        /* Event Handling Starts Here */
+        #region Event Handling
+
+        private void SaveForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                SaveButton_Click(sender, e);
+            }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            saveButton.Text = SaveButtonText.Save.ToString();
+            ResetForm();
+        }
+
+        private async void SearchButton_Click(object sender, EventArgs e)
+        {
+            var typeId = (int?)typeFilter.SelectedValue == 0 ? null : (int?)typeFilter.SelectedValue;
+            await GetListAsync(searchTextbox.Text, typeId);
+        }
+
+        private void Search_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                e.Handled = true;
+                SearchButton_Click(sender, e);
+            }
+        }
+
+        private async void TypeFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isLoading)
+            {
+                int? typeId = Convert.ToInt32(typeFilter.SelectedValue);
+                if (typeId == 0)
+                {
+                    typeId = null;
+                }
+                await GetListAsync(searchTextbox.Text, typeId);
+            }
+        }
+
+        #endregion
+
     }
 }
