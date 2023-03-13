@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -69,11 +71,22 @@ namespace InventoryDesktop.EntityFramework.Users
         {
             try
             {
-                var any = await _db.Users.AnyAsync(x => string.Equals(x.Username, username) 
-                                            && string.Equals(x.Password, password, StringComparison.Ordinal));
-                if (any)
+                var user = await _db.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
+
+                if (user != null)
                 {
-                    return 1;
+                    var usernamecheck = string.Equals(user.Username, username);
+                    var passwordcheck = string.Equals(user.Password, password);
+                    
+                    if (usernamecheck && passwordcheck)
+                    {
+                        return 1;
+                    }
+
+                    else
+                    {
+                        return -1;
+                    }
                 }
                 else
                 {
