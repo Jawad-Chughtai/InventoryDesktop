@@ -2,9 +2,9 @@
 
 namespace InventoryDesktop.Winforms.Enums
 {
-    public enum SaveButtonText
+    public static class SaveButtonText
     {
-        Save,
-        Update
+        public const string Save = "Save";
+        public const string Update = "Update";
     }
 }

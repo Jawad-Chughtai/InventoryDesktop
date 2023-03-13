@@ -14,7 +14,7 @@ namespace InventoryDesktop.Winforms.Forms
             InitializeComponent();
         }
 
-        private async void CategoryForm_Load(object sender, EventArgs e)
+        private async void ItemTypeForm_Load(object sender, EventArgs e)
         {
             await GetListAsync(searchTextbox.Text);
         }
@@ -99,7 +99,7 @@ namespace InventoryDesktop.Winforms.Forms
                 nameTextbox.Text = _itemType.Name;
                 codeTextbox.Text = _itemType.Code;
 
-                saveButton.Text = SaveButtonText.Update.ToString();
+                saveButton.Text = SaveButtonText.Update;
             }
         }
 
@@ -139,14 +139,14 @@ namespace InventoryDesktop.Winforms.Forms
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            saveButton.Text = SaveButtonText.Save.ToString();
+            saveButton.Text = SaveButtonText.Save;
             ResetForm();
         }
 
         private void ResetForm()
         {
             _itemType = null;
-            saveButton.Text = SaveButtonText.Save.ToString();
+            saveButton.Text = SaveButtonText.Save;
 
             nameTextbox.Text = null;
             codeTextbox.Text = null;

@@ -47,23 +47,31 @@
             panel4 = new Panel();
             deleteButton = new Button();
             editButton = new Button();
-            panel2 = new Panel();
             typeFilter = new ComboBox();
             label3 = new Label();
             searchButton = new Button();
             label4 = new Label();
             searchTextbox = new TextBox();
+            panel5 = new Panel();
+            panel6 = new Panel();
+            fillPanel = new Panel();
+            panel2 = new Panel();
             panel3 = new Panel();
             datagrid = new DataGridView();
+            panel8 = new Panel();
+            panel7 = new Panel();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
+            fillPanel.SuspendLayout();
             panel2.SuspendLayout();
+            panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datagrid).BeginInit();
+            panel8.SuspendLayout();
+            panel7.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Anchor = AnchorStyles.Top;
             panel1.Controls.Add(typeCombobox);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(typeErrorLabel);
@@ -75,9 +83,9 @@
             panel1.Controls.Add(nameErrorLabel);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(codeTextbox);
-            panel1.Location = new Point(80, 29);
+            panel1.Location = new Point(0, 18);
             panel1.Name = "panel1";
-            panel1.Size = new Size(728, 100);
+            panel1.Size = new Size(741, 100);
             panel1.TabIndex = 18;
             // 
             // typeCombobox
@@ -114,13 +122,16 @@
             // 
             // resetButton
             // 
+            resetButton.BackColor = Color.Firebrick;
+            resetButton.FlatStyle = FlatStyle.Popup;
             resetButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            resetButton.ForeColor = Color.White;
             resetButton.Location = new Point(572, 71);
             resetButton.Name = "resetButton";
             resetButton.Size = new Size(75, 26);
             resetButton.TabIndex = 5;
             resetButton.Text = "Reset";
-            resetButton.UseVisualStyleBackColor = true;
+            resetButton.UseVisualStyleBackColor = false;
             resetButton.Click += ResetButton_Click;
             // 
             // label1
@@ -143,13 +154,16 @@
             // 
             // saveButton
             // 
+            saveButton.BackColor = Color.FromArgb(16, 163, 127);
+            saveButton.FlatStyle = FlatStyle.Popup;
             saveButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            saveButton.ForeColor = Color.White;
             saveButton.Location = new Point(653, 71);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(75, 26);
             saveButton.TabIndex = 4;
             saveButton.Text = "Save";
-            saveButton.UseVisualStyleBackColor = true;
+            saveButton.UseVisualStyleBackColor = false;
             saveButton.Click += SaveButton_Click;
             // 
             // codeErrorLabel
@@ -197,54 +211,47 @@
             // 
             // panel4
             // 
-            panel4.Anchor = AnchorStyles.Top;
             panel4.Controls.Add(deleteButton);
             panel4.Controls.Add(editButton);
-            panel4.Location = new Point(80, 637);
+            panel4.Dock = DockStyle.Bottom;
+            panel4.Location = new Point(0, 607);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1094, 35);
+            panel4.Size = new Size(1082, 42);
             panel4.TabIndex = 21;
             // 
             // deleteButton
             // 
-            deleteButton.Location = new Point(1019, 0);
+            deleteButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            deleteButton.BackColor = Color.Firebrick;
+            deleteButton.FlatStyle = FlatStyle.Popup;
+            deleteButton.ForeColor = Color.White;
+            deleteButton.Location = new Point(918, 6);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(75, 26);
             deleteButton.TabIndex = 9;
             deleteButton.Text = "Delete";
-            deleteButton.UseVisualStyleBackColor = true;
+            deleteButton.UseVisualStyleBackColor = false;
             deleteButton.Click += DeleteButton_Click;
             // 
             // editButton
             // 
-            editButton.Location = new Point(938, 0);
+            editButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            editButton.BackColor = Color.FromArgb(16, 163, 127);
+            editButton.FlatStyle = FlatStyle.Popup;
+            editButton.ForeColor = Color.White;
+            editButton.Location = new Point(1007, 6);
             editButton.Name = "editButton";
             editButton.Size = new Size(75, 26);
             editButton.TabIndex = 8;
             editButton.Text = "Edit";
-            editButton.UseVisualStyleBackColor = true;
+            editButton.UseVisualStyleBackColor = false;
             editButton.Click += EditButton_Click;
-            // 
-            // panel2
-            // 
-            panel2.Anchor = AnchorStyles.Top;
-            panel2.Controls.Add(typeFilter);
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(searchButton);
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(searchTextbox);
-            panel2.Controls.Add(panel3);
-            panel2.Controls.Add(datagrid);
-            panel2.Location = new Point(80, 135);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1094, 496);
-            panel2.TabIndex = 22;
             // 
             // typeFilter
             // 
             typeFilter.DropDownStyle = ComboBoxStyle.DropDownList;
             typeFilter.FormattingEnabled = true;
-            typeFilter.Location = new Point(2, 36);
+            typeFilter.Location = new Point(1, 32);
             typeFilter.Name = "typeFilter";
             typeFilter.Size = new Size(226, 25);
             typeFilter.TabIndex = 21;
@@ -255,7 +262,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(2, 18);
+            label3.Location = new Point(-64, 7);
             label3.Name = "label3";
             label3.Size = new Size(58, 15);
             label3.TabIndex = 22;
@@ -263,20 +270,25 @@
             // 
             // searchButton
             // 
+            searchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            searchButton.BackColor = Color.FromArgb(16, 163, 127);
+            searchButton.FlatStyle = FlatStyle.Popup;
             searchButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            searchButton.Location = new Point(1019, 35);
+            searchButton.ForeColor = Color.White;
+            searchButton.Location = new Point(1007, 31);
             searchButton.Name = "searchButton";
             searchButton.Size = new Size(75, 26);
             searchButton.TabIndex = 7;
             searchButton.Text = "Search";
-            searchButton.UseVisualStyleBackColor = true;
+            searchButton.UseVisualStyleBackColor = false;
             searchButton.Click += SearchButton_Click;
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(779, 18);
+            label4.Location = new Point(767, 14);
             label4.Name = "label4";
             label4.Size = new Size(42, 15);
             label4.TabIndex = 18;
@@ -284,21 +296,59 @@
             // 
             // searchTextbox
             // 
-            searchTextbox.Location = new Point(781, 36);
+            searchTextbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            searchTextbox.Location = new Point(770, 32);
             searchTextbox.Name = "searchTextbox";
             searchTextbox.Size = new Size(223, 25);
             searchTextbox.TabIndex = 6;
             searchTextbox.KeyDown += Search_KeyDown;
             // 
+            // panel5
+            // 
+            panel5.Dock = DockStyle.Left;
+            panel5.Location = new Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(75, 649);
+            panel5.TabIndex = 23;
+            // 
+            // panel6
+            // 
+            panel6.Dock = DockStyle.Right;
+            panel6.Location = new Point(1157, 0);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(75, 649);
+            panel6.TabIndex = 24;
+            // 
+            // fillPanel
+            // 
+            fillPanel.Controls.Add(panel2);
+            fillPanel.Controls.Add(panel7);
+            fillPanel.Controls.Add(panel4);
+            fillPanel.Dock = DockStyle.Fill;
+            fillPanel.Location = new Point(75, 0);
+            fillPanel.Name = "fillPanel";
+            fillPanel.Size = new Size(1082, 649);
+            fillPanel.TabIndex = 25;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(panel3);
+            panel2.Controls.Add(panel8);
+            panel2.Controls.Add(label3);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 125);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1082, 482);
+            panel2.TabIndex = 24;
+            // 
             // panel3
             // 
-            panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 0);
-            panel3.MaximumSize = new Size(0, 1);
+            panel3.Controls.Add(datagrid);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(0, 60);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1094, 1);
-            panel3.TabIndex = 16;
+            panel3.Size = new Size(1082, 422);
+            panel3.TabIndex = 25;
             // 
             // datagrid
             // 
@@ -319,15 +369,15 @@
             datagrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = Color.Gainsboro;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.ActiveCaptionText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             datagrid.DefaultCellStyle = dataGridViewCellStyle2;
-            datagrid.Dock = DockStyle.Bottom;
+            datagrid.Dock = DockStyle.Fill;
             datagrid.GridColor = SystemColors.ActiveBorder;
-            datagrid.Location = new Point(0, 67);
+            datagrid.Location = new Point(0, 0);
             datagrid.MultiSelect = false;
             datagrid.Name = "datagrid";
             datagrid.ReadOnly = true;
@@ -349,31 +399,57 @@
             datagrid.ShowCellToolTips = false;
             datagrid.ShowEditingIcon = false;
             datagrid.ShowRowErrors = false;
-            datagrid.Size = new Size(1094, 429);
+            datagrid.Size = new Size(1082, 422);
             datagrid.TabIndex = 15;
             datagrid.TabStop = false;
+            // 
+            // panel8
+            // 
+            panel8.Controls.Add(label4);
+            panel8.Controls.Add(searchTextbox);
+            panel8.Controls.Add(typeFilter);
+            panel8.Controls.Add(searchButton);
+            panel8.Dock = DockStyle.Top;
+            panel8.Location = new Point(0, 0);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(1082, 60);
+            panel8.TabIndex = 24;
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(panel1);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(1082, 125);
+            panel7.TabIndex = 23;
             // 
             // ItemCategoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1264, 681);
-            Controls.Add(panel2);
-            Controls.Add(panel4);
-            Controls.Add(panel1);
+            ClientSize = new Size(1232, 649);
+            Controls.Add(fillPanel);
+            Controls.Add(panel6);
+            Controls.Add(panel5);
             Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "ItemCategoryForm";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Item Category";
-            Load += SubCategoryForm_Load;
+            Load += ItemCategoryForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel4.ResumeLayout(false);
+            fillPanel.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)datagrid).EndInit();
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            panel7.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -392,14 +468,19 @@
         private Button editButton;
         private Label label5;
         private Label typeErrorLabel;
-        private Panel panel2;
         private Button searchButton;
         private Label label4;
         private TextBox searchTextbox;
-        private Panel panel3;
-        private DataGridView datagrid;
         private ComboBox typeCombobox;
         private ComboBox typeFilter;
         private Label label3;
+        private Panel panel5;
+        private Panel panel6;
+        private Panel fillPanel;
+        private Panel panel7;
+        private Panel panel2;
+        private Panel panel3;
+        private DataGridView datagrid;
+        private Panel panel8;
     }
 }

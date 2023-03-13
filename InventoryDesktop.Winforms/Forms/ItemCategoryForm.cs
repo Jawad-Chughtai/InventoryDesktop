@@ -1,5 +1,4 @@
 ﻿using InventoryDesktop.Applications.ItemCategories;
-using InventoryDesktop.Applications.ItemTypes;
 using InventoryDesktop.EntityFramework.ItemCategories;
 using InventoryDesktop.EntityFramework.ItemTypes;
 using InventoryDesktop.Winforms.Enums;
@@ -19,7 +18,7 @@ namespace InventoryDesktop.Winforms.Forms
             InitializeComponent();
         }
 
-        private async void SubCategoryForm_Load(object sender, EventArgs e)
+        private async void ItemCategoryForm_Load(object sender, EventArgs e)
         {
             await GetListAsync();
             await GetItemTypeLookup();
@@ -123,7 +122,7 @@ namespace InventoryDesktop.Winforms.Forms
                 codeTextbox.Text = _itemCategory.Code;
                 typeCombobox.SelectedValue = _itemCategory.ItemTypeId;
 
-                saveButton.Text = SaveButtonText.Update.ToString();
+                saveButton.Text = SaveButtonText.Update;
             }
         }
 
@@ -156,7 +155,7 @@ namespace InventoryDesktop.Winforms.Forms
         private void ResetForm()
         {
             _itemCategory = null;
-            saveButton.Text = SaveButtonText.Save.ToString();
+            saveButton.Text = SaveButtonText.Save;
 
             nameTextbox.Text = null;
             codeTextbox.Text = null;
@@ -233,7 +232,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            saveButton.Text = SaveButtonText.Save.ToString();
+            saveButton.Text = SaveButtonText.Save;
             ResetForm();
         }
 

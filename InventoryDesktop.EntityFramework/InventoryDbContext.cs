@@ -1,6 +1,7 @@
 ﻿using InventoryDesktop.EntityFramework.ItemTypes;
 using InventoryDesktop.EntityFramework.ItemCategories;
 using Microsoft.EntityFrameworkCore;
+using InventoryDesktop.EntityFramework.Users;
 
 namespace InventoryDesktop.EntityFramework
 {
@@ -8,6 +9,7 @@ namespace InventoryDesktop.EntityFramework
     {
         public DbSet<ItemType> ItemTypes { get; set; }
         public DbSet<ItemCategory> ItemCategories { get; set; }
+        public DbSet<User> Users { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

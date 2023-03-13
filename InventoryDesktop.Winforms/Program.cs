@@ -13,13 +13,11 @@ namespace InventoryDesktop.Winforms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            //using var loginForm = new LoginForm();
-            //if (loginForm.ShowDialog() == DialogResult.OK)
-            //{
-            //    Application.Run(new ItemTypeForm());
-            //}
-            Application.Run(new MainForm());
-
+            using var loginForm = new LoginForm();
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new MainForm());
+            }
         }
     }
 }

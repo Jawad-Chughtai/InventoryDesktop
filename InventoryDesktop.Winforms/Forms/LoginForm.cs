@@ -19,20 +19,23 @@ namespace InventoryDesktop.Winforms.Forms
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            errorLabel.Visible = false;
-            if (string.IsNullOrWhiteSpace(usernameTextbox.Text) || string.IsNullOrWhiteSpace(passwordTextbox.Text))
-            {
-                errorLabel.Visible = true;
-            }
-            else if (usernameTextbox.Text == "admin" && passwordTextbox.Text == "admin")
-            {
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-            else
-            {
-                errorLabel.Visible = true;
-            }
+            //errorLabel.Visible = false;
+            //if (string.IsNullOrWhiteSpace(usernameTextbox.Text) || string.IsNullOrWhiteSpace(passwordTextbox.Text))
+            //{
+            //    errorLabel.Visible = true;
+            //}
+            //else if (usernameTextbox.Text == "admin" && passwordTextbox.Text == "admin")
+            //{
+            //    DialogResult = DialogResult.OK;
+            //    Close();
+            //}
+            //else
+            //{
+            //    errorLabel.Visible = true;
+            //}
+
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void TextBoxKeyDownEvent(object sender, KeyEventArgs e)

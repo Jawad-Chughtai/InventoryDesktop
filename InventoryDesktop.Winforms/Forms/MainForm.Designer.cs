@@ -35,7 +35,7 @@
             LeftToolStripPanel = new ToolStripPanel();
             ContentPanel = new ToolStripContentPanel();
             topPanel = new Panel();
-            formNameLabel = new Label();
+            pageTitleLabel = new Label();
             sidePanel = new Panel();
             panel1 = new Panel();
             navPanel = new Panel();
@@ -116,7 +116,7 @@
             // topPanel
             // 
             topPanel.BackColor = Color.FromArgb(52, 53, 65);
-            topPanel.Controls.Add(formNameLabel);
+            topPanel.Controls.Add(pageTitleLabel);
             topPanel.Dock = DockStyle.Top;
             topPanel.ForeColor = SystemColors.ControlLightLight;
             topPanel.Location = new Point(0, 0);
@@ -124,15 +124,15 @@
             topPanel.Size = new Size(1360, 50);
             topPanel.TabIndex = 3;
             // 
-            // formNameLabel
+            // pageTitleLabel
             // 
-            formNameLabel.AutoSize = true;
-            formNameLabel.Font = new Font("Century Gothic", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            formNameLabel.Location = new Point(243, 9);
-            formNameLabel.Name = "formNameLabel";
-            formNameLabel.Size = new Size(130, 30);
-            formNameLabel.TabIndex = 1;
-            formNameLabel.Text = "Item Type";
+            pageTitleLabel.AutoSize = true;
+            pageTitleLabel.Font = new Font("Century Gothic", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            pageTitleLabel.Location = new Point(275, 9);
+            pageTitleLabel.Name = "pageTitleLabel";
+            pageTitleLabel.Size = new Size(60, 30);
+            pageTitleLabel.TabIndex = 1;
+            pageTitleLabel.Text = "Title";
             // 
             // sidePanel
             // 
@@ -175,7 +175,7 @@
             navbar.Location = new Point(0, 0);
             navbar.Name = "navbar";
             navbar.Padding = new Padding(0);
-            navbar.Size = new Size(200, 187);
+            navbar.Size = new Size(200, 168);
             navbar.TabIndex = 0;
             // 
             // menuDashboard
@@ -433,7 +433,7 @@
         private ToolStripPanel LeftToolStripPanel;
         private ToolStripContentPanel ContentPanel;
         private Panel topPanel;
-        private Label formNameLabel;
+        private Label pageTitleLabel;
         private Panel sidePanel;
         private Panel logoPanel;
         private Panel navPanel;
