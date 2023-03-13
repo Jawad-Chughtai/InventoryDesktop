@@ -20,6 +20,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async void ItemCategoryForm_Load(object sender, EventArgs e)
         {
+            nameTextbox.Select();
             await GetListAsync();
             await GetItemTypeLookup();
         }

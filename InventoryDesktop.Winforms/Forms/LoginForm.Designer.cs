@@ -104,12 +104,15 @@
             // 
             // loginButton
             // 
+            loginButton.BackColor = Color.FromArgb(16, 163, 127);
+            loginButton.FlatStyle = FlatStyle.Popup;
+            loginButton.ForeColor = Color.White;
             loginButton.Location = new Point(51, 149);
             loginButton.Name = "loginButton";
             loginButton.Size = new Size(149, 30);
             loginButton.TabIndex = 3;
             loginButton.Text = "Login";
-            loginButton.UseVisualStyleBackColor = true;
+            loginButton.UseVisualStyleBackColor = false;
             loginButton.Click += LoginButton_Click;
             // 
             // label1

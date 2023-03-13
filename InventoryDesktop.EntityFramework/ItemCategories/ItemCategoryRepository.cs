@@ -1,5 +1,4 @@
-﻿using InventoryDesktop.EntityFramework.ItemTypes;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace InventoryDesktop.EntityFramework.ItemCategories
 {

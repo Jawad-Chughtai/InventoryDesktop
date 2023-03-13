@@ -44,6 +44,7 @@
             menuItem = new ToolStripMenuItem();
             menuItemType = new ToolStripMenuItem();
             menuItemCategory = new ToolStripMenuItem();
+            menuUser = new ToolStripMenuItem();
             logoPanel = new Panel();
             contentsToolStripMenuItem = new ToolStripMenuItem();
             indexToolStripMenuItem = new ToolStripMenuItem();
@@ -157,12 +158,13 @@
             // 
             // navPanel
             // 
+            navPanel.AutoScroll = true;
             navPanel.BackColor = Color.Transparent;
             navPanel.Controls.Add(navbar);
-            navPanel.Dock = DockStyle.Top;
+            navPanel.Dock = DockStyle.Fill;
             navPanel.Location = new Point(0, 77);
             navPanel.Name = "navPanel";
-            navPanel.Size = new Size(200, 170);
+            navPanel.Size = new Size(200, 622);
             navPanel.TabIndex = 1;
             // 
             // navbar
@@ -170,20 +172,20 @@
             navbar.BackColor = Color.FromArgb(119, 120, 128);
             navbar.Font = new Font("Century Gothic", 14F, FontStyle.Regular, GraphicsUnit.Point);
             navbar.ImeMode = ImeMode.Off;
-            navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuItemType, menuItemCategory });
+            navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuItemType, menuItemCategory, menuUser });
             navbar.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             navbar.Location = new Point(0, 0);
             navbar.Name = "navbar";
             navbar.Padding = new Padding(0);
-            navbar.Size = new Size(200, 168);
+            navbar.Size = new Size(200, 233);
             navbar.TabIndex = 0;
             // 
             // menuDashboard
             // 
             menuDashboard.ForeColor = Color.White;
             menuDashboard.Name = "menuDashboard";
-            menuDashboard.Padding = new Padding(4, 8, 4, 8);
-            menuDashboard.Size = new Size(199, 42);
+            menuDashboard.Padding = new Padding(4, 10, 4, 10);
+            menuDashboard.Size = new Size(199, 46);
             menuDashboard.Text = "Dashboard";
             menuDashboard.TextAlign = ContentAlignment.MiddleLeft;
             menuDashboard.Click += MenuDashboard_Click;
@@ -192,8 +194,8 @@
             // 
             menuItem.ForeColor = Color.White;
             menuItem.Name = "menuItem";
-            menuItem.Padding = new Padding(4, 8, 4, 8);
-            menuItem.Size = new Size(199, 42);
+            menuItem.Padding = new Padding(4, 10, 4, 10);
+            menuItem.Size = new Size(199, 46);
             menuItem.Text = "Items";
             menuItem.TextAlign = ContentAlignment.MiddleLeft;
             menuItem.Click += MenuItem_Click;
@@ -204,8 +206,8 @@
             menuItemType.ForeColor = Color.White;
             menuItemType.Margin = new Padding(10, 0, 0, 0);
             menuItemType.Name = "menuItemType";
-            menuItemType.Padding = new Padding(4, 8, 4, 8);
-            menuItemType.Size = new Size(189, 41);
+            menuItemType.Padding = new Padding(4, 6, 4, 6);
+            menuItemType.Size = new Size(189, 37);
             menuItemType.Text = "Item Types";
             menuItemType.TextAlign = ContentAlignment.MiddleLeft;
             menuItemType.Click += MenuItemType_Click;
@@ -216,11 +218,21 @@
             menuItemCategory.ForeColor = Color.White;
             menuItemCategory.Margin = new Padding(10, 0, 0, 0);
             menuItemCategory.Name = "menuItemCategory";
-            menuItemCategory.Padding = new Padding(4, 8, 4, 8);
-            menuItemCategory.Size = new Size(189, 41);
+            menuItemCategory.Padding = new Padding(4, 6, 4, 6);
+            menuItemCategory.Size = new Size(189, 37);
             menuItemCategory.Text = "Item Categories";
             menuItemCategory.TextAlign = ContentAlignment.MiddleLeft;
             menuItemCategory.Click += MenuItemCategory_Click;
+            // 
+            // menuUser
+            // 
+            menuUser.ForeColor = Color.White;
+            menuUser.Name = "menuUser";
+            menuUser.Padding = new Padding(4, 10, 4, 10);
+            menuUser.Size = new Size(199, 46);
+            menuUser.Text = "Users";
+            menuUser.TextAlign = ContentAlignment.MiddleLeft;
+            menuUser.Click += MenuUser_Click;
             // 
             // logoPanel
             // 
@@ -468,5 +480,6 @@
         private ToolStripMenuItem menuItemCategory;
         private ToolStripMenuItem menuDashboard;
         private Panel panel1;
+        private ToolStripMenuItem menuUser;
     }
 }

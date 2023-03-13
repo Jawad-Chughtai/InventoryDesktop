@@ -16,6 +16,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async void ItemTypeForm_Load(object sender, EventArgs e)
         {
+            nameTextbox.Select();
             await GetListAsync(searchTextbox.Text);
         }
 

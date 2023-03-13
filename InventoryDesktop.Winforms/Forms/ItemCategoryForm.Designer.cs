@@ -33,12 +33,12 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            nameTextbox = new TextBox();
             typeCombobox = new ComboBox();
             label5 = new Label();
             typeErrorLabel = new Label();
             resetButton = new Button();
             label1 = new Label();
-            nameTextbox = new TextBox();
             saveButton = new Button();
             codeErrorLabel = new Label();
             nameErrorLabel = new Label();
@@ -59,6 +59,7 @@
             panel3 = new Panel();
             datagrid = new DataGridView();
             panel8 = new Panel();
+            panel9 = new Panel();
             panel7 = new Panel();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -77,16 +78,24 @@
             panel1.Controls.Add(typeErrorLabel);
             panel1.Controls.Add(resetButton);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(nameTextbox);
             panel1.Controls.Add(saveButton);
             panel1.Controls.Add(codeErrorLabel);
             panel1.Controls.Add(nameErrorLabel);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(codeTextbox);
+            panel1.Controls.Add(nameTextbox);
             panel1.Location = new Point(0, 18);
             panel1.Name = "panel1";
             panel1.Size = new Size(741, 100);
             panel1.TabIndex = 18;
+            // 
+            // nameTextbox
+            // 
+            nameTextbox.Location = new Point(2, 20);
+            nameTextbox.Name = "nameTextbox";
+            nameTextbox.Size = new Size(223, 25);
+            nameTextbox.TabIndex = 1;
+            nameTextbox.KeyDown += SaveForm_KeyDown;
             // 
             // typeCombobox
             // 
@@ -143,14 +152,6 @@
             label1.Size = new Size(47, 15);
             label1.TabIndex = 9;
             label1.Text = "Name *";
-            // 
-            // nameTextbox
-            // 
-            nameTextbox.Location = new Point(2, 20);
-            nameTextbox.Name = "nameTextbox";
-            nameTextbox.Size = new Size(223, 25);
-            nameTextbox.TabIndex = 1;
-            nameTextbox.KeyDown += SaveForm_KeyDown;
             // 
             // saveButton
             // 
@@ -405,6 +406,7 @@
             // 
             // panel8
             // 
+            panel8.Controls.Add(panel9);
             panel8.Controls.Add(label4);
             panel8.Controls.Add(searchTextbox);
             panel8.Controls.Add(typeFilter);
@@ -414,6 +416,15 @@
             panel8.Name = "panel8";
             panel8.Size = new Size(1082, 60);
             panel8.TabIndex = 24;
+            // 
+            // panel9
+            // 
+            panel9.BackColor = SystemColors.ActiveBorder;
+            panel9.Dock = DockStyle.Top;
+            panel9.Location = new Point(0, 0);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(1082, 1);
+            panel9.TabIndex = 22;
             // 
             // panel7
             // 
@@ -482,5 +493,6 @@
         private Panel panel3;
         private DataGridView datagrid;
         private Panel panel8;
+        private Panel panel9;
     }
 }

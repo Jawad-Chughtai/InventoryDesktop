@@ -76,5 +76,11 @@ namespace InventoryDesktop.Winforms
             CloseDropDownItems();
             OpenChildForm(new ItemCategoryForm(), PageTitles.ItemCategory);
         }
+
+        private void MenuUser_Click(object sender, EventArgs e)
+        {
+            CloseDropDownItems();
+            OpenChildForm(new UserForm(), PageTitles.User);
+        }
     }
 }

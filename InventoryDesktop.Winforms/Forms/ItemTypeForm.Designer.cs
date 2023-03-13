@@ -189,7 +189,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1078, 478);
+            panel2.Size = new Size(1074, 474);
             panel2.TabIndex = 16;
             // 
             // panel11
@@ -198,7 +198,7 @@
             panel11.Dock = DockStyle.Fill;
             panel11.Location = new Point(0, 61);
             panel11.Name = "panel11";
-            panel11.Size = new Size(1078, 417);
+            panel11.Size = new Size(1074, 413);
             panel11.TabIndex = 21;
             // 
             // datagrid
@@ -250,7 +250,7 @@
             datagrid.ShowCellToolTips = false;
             datagrid.ShowEditingIcon = false;
             datagrid.ShowRowErrors = false;
-            datagrid.Size = new Size(1078, 417);
+            datagrid.Size = new Size(1074, 413);
             datagrid.TabIndex = 15;
             datagrid.TabStop = false;
             // 
@@ -262,7 +262,7 @@
             panel10.Dock = DockStyle.Top;
             panel10.Location = new Point(0, 1);
             panel10.Name = "panel10";
-            panel10.Size = new Size(1078, 60);
+            panel10.Size = new Size(1074, 60);
             panel10.TabIndex = 20;
             // 
             // label4
@@ -271,7 +271,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ControlText;
-            label4.Location = new Point(763, 14);
+            label4.Location = new Point(759, 14);
             label4.Name = "label4";
             label4.Size = new Size(42, 15);
             label4.TabIndex = 18;
@@ -285,7 +285,7 @@
             searchButton.FlatStyle = FlatStyle.Popup;
             searchButton.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             searchButton.ForeColor = SystemColors.ControlLightLight;
-            searchButton.Location = new Point(1003, 31);
+            searchButton.Location = new Point(999, 31);
             searchButton.Name = "searchButton";
             searchButton.Size = new Size(75, 26);
             searchButton.TabIndex = 19;
@@ -298,7 +298,7 @@
             searchTextbox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             searchTextbox.BackColor = SystemColors.Window;
             searchTextbox.ForeColor = SystemColors.ControlText;
-            searchTextbox.Location = new Point(766, 32);
+            searchTextbox.Location = new Point(762, 32);
             searchTextbox.Name = "searchTextbox";
             searchTextbox.Size = new Size(223, 25);
             searchTextbox.TabIndex = 17;
@@ -306,14 +306,13 @@
             // 
             // linePanel
             // 
-            linePanel.BackColor = SystemColors.ActiveCaptionText;
-            linePanel.BorderStyle = BorderStyle.FixedSingle;
+            linePanel.BackColor = SystemColors.ActiveBorder;
             linePanel.Dock = DockStyle.Top;
             linePanel.ForeColor = SystemColors.ActiveCaption;
             linePanel.Location = new Point(0, 0);
             linePanel.MaximumSize = new Size(0, 1);
             linePanel.Name = "linePanel";
-            linePanel.Size = new Size(1078, 1);
+            linePanel.Size = new Size(1074, 1);
             linePanel.TabIndex = 16;
             // 
             // panel4
@@ -321,9 +320,9 @@
             panel4.Controls.Add(deleteButton);
             panel4.Controls.Add(editButton);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 603);
+            panel4.Location = new Point(0, 599);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1078, 42);
+            panel4.Size = new Size(1074, 42);
             panel4.TabIndex = 20;
             // 
             // deleteButton
@@ -333,7 +332,7 @@
             deleteButton.FlatAppearance.BorderColor = Color.Firebrick;
             deleteButton.FlatStyle = FlatStyle.Popup;
             deleteButton.ForeColor = SystemColors.ControlLightLight;
-            deleteButton.Location = new Point(914, 6);
+            deleteButton.Location = new Point(910, 6);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(75, 26);
             deleteButton.TabIndex = 6;
@@ -348,7 +347,7 @@
             editButton.FlatAppearance.BorderColor = Color.FromArgb(16, 163, 127);
             editButton.FlatStyle = FlatStyle.Popup;
             editButton.ForeColor = SystemColors.ControlLightLight;
-            editButton.Location = new Point(1003, 6);
+            editButton.Location = new Point(999, 6);
             editButton.Name = "editButton";
             editButton.Size = new Size(75, 26);
             editButton.TabIndex = 5;
@@ -361,15 +360,15 @@
             panel5.Dock = DockStyle.Left;
             panel5.Location = new Point(0, 0);
             panel5.Name = "panel5";
-            panel5.Size = new Size(75, 645);
+            panel5.Size = new Size(75, 641);
             panel5.TabIndex = 21;
             // 
             // panel6
             // 
             panel6.Dock = DockStyle.Right;
-            panel6.Location = new Point(1153, 0);
+            panel6.Location = new Point(1149, 0);
             panel6.Name = "panel6";
-            panel6.Size = new Size(75, 645);
+            panel6.Size = new Size(75, 641);
             panel6.TabIndex = 22;
             // 
             // panel7
@@ -380,7 +379,7 @@
             panel7.Dock = DockStyle.Fill;
             panel7.Location = new Point(75, 0);
             panel7.Name = "panel7";
-            panel7.Size = new Size(1078, 645);
+            panel7.Size = new Size(1074, 641);
             panel7.TabIndex = 23;
             // 
             // panel9
@@ -389,7 +388,7 @@
             panel9.Dock = DockStyle.Fill;
             panel9.Location = new Point(0, 125);
             panel9.Name = "panel9";
-            panel9.Size = new Size(1078, 478);
+            panel9.Size = new Size(1074, 474);
             panel9.TabIndex = 22;
             // 
             // panel8
@@ -398,7 +397,7 @@
             panel8.Dock = DockStyle.Top;
             panel8.Location = new Point(0, 0);
             panel8.Name = "panel8";
-            panel8.Size = new Size(1078, 125);
+            panel8.Size = new Size(1074, 125);
             panel8.TabIndex = 21;
             // 
             // ItemTypeForm
@@ -407,7 +406,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1228, 645);
+            ClientSize = new Size(1224, 641);
             ControlBox = false;
             Controls.Add(panel7);
             Controls.Add(panel6);
