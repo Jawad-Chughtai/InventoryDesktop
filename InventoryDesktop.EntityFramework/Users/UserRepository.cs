@@ -1,12 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Primitives;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryDesktop.EntityFramework.Users
 {
@@ -76,39 +68,31 @@ namespace InventoryDesktop.EntityFramework.Users
             await _db.SaveChangesAsync();
         }
 
-        public async Task<int> LoginAsync(string? username, string? password)
+        public async Task<User> LoginAsync(string? username, string? password)
         {
-            try
-            {
-                var user = await _db.Users
+            var user = await _db.Users
                     .FirstOrDefaultAsync(x =>
                     x.Username == username
                     && x.Password == password
                     && !x.IsDeleted);
+            if (user != null)
+            {
+                var usernamecheck = string.Equals(user.Username, username);
+                var passwordcheck = string.Equals(user.Password, password);
 
-                if (user != null)
+                if (usernamecheck && passwordcheck)
                 {
-                    var usernamecheck = string.Equals(user.Username, username);
-                    var passwordcheck = string.Equals(user.Password, password);
-
-                    if (usernamecheck && passwordcheck)
-                    {
-                        return 1;
-                    }
-
-                    else
-                    {
-                        return -1;
-                    }
+                    return user;
                 }
+
                 else
                 {
-                    return -1;
+                    return null;
                 }
             }
-            catch
+            else
             {
-                return -1;
+                return null;
             }
         }
     }

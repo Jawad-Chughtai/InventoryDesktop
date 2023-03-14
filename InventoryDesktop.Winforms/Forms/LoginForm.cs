@@ -1,20 +1,12 @@
 ﻿using InventoryDesktop.Applications.Users;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using InventoryDesktop.EntityFramework.Users;
 
 namespace InventoryDesktop.Winforms.Forms
 {
     public partial class LoginForm : Form
     {
         private readonly UserService _userService = new();
-
+        public User? LoggedInUser { get; private set; } = null;
         public LoginForm()
         {
             InitializeComponent();
@@ -23,7 +15,7 @@ namespace InventoryDesktop.Winforms.Forms
         private async void LoginButton_Click(object sender, EventArgs e)
         {
             errorLabel.Visible = false;
-            
+
             var username = usernameTextbox.Text;
             var password = passwordTextbox.Text;
             Thread.Sleep(50);
@@ -35,9 +27,9 @@ namespace InventoryDesktop.Winforms.Forms
             {
                 try
                 {
-                    var result = await _userService.LoginAsync(username, password);
+                    LoggedInUser = await _userService.LoginAsync(username, password);
 
-                    if (result == 1)
+                    if (LoggedInUser != null)
                     {
                         DialogResult = DialogResult.OK;
                         Close();

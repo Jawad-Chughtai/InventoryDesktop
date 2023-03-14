@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace InventoryDesktop.EntityFramework.ItemTypes
 {
@@ -16,11 +15,11 @@ namespace InventoryDesktop.EntityFramework.ItemTypes
                 throw new ArgumentNullException(nameof(itemType));
             }
 
-            if(await _db.ItemTypes.AnyAsync(x => x.Name.ToLower() == itemType.Name.ToLower()))
+            if (await _db.ItemTypes.AnyAsync(x => x.Name.ToLower() == itemType.Name.ToLower()))
             {
                 throw new Exception($"Category with same name '{itemType.Name}' already exists.");
             }
-            else if(await _db.ItemTypes.AnyAsync(x => x.Code.ToLower() == itemType.Code.ToLower()))
+            else if (await _db.ItemTypes.AnyAsync(x => x.Code.ToLower() == itemType.Code.ToLower()))
             {
                 throw new Exception($"Category with same code '{itemType.Code}' already exists.");
             }
@@ -73,7 +72,7 @@ namespace InventoryDesktop.EntityFramework.ItemTypes
         public async Task<List<ItemType>> GetListAsync(string? searchText = null)
         {
             return await _db.ItemTypes
-                    .Where(x => searchText == null 
+                    .Where(x => searchText == null
                     || x.Name.ToLower().Contains(searchText)
                     || x.Code.ToLower().Contains(searchText))
                     .OrderBy(x => x.Name)
@@ -84,7 +83,7 @@ namespace InventoryDesktop.EntityFramework.ItemTypes
         {
             var entity = await _db.ItemTypes.FirstOrDefaultAsync(x => x.Id == id) ?? throw new ArgumentNullException(nameof(id));
             var any = await _db.ItemCategories.AnyAsync(x => x.ItemTypeId == id);
-            if(!any)
+            if (!any)
             {
                 _db.ItemTypes.Remove(entity);
                 await _db.SaveChangesAsync();

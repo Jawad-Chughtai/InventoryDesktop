@@ -16,13 +16,13 @@ namespace InventoryDesktop.EntityFramework.Users
 
         [Required]
         public string Username { get; set; }
-        
+
         [Required]
         public string Password { get; set; }
-        
+
         [Required]
-        public string Role { get; set; }    
-        
+        public string Role { get; set; }
+
         public bool IsIncluded { get; set; } = true;
 
         public DateTime CreationTime { get; set; } = new DateTime();

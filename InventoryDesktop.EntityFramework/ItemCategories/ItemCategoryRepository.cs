@@ -78,7 +78,7 @@ namespace InventoryDesktop.EntityFramework.ItemCategories
         {
             return await _db.ItemCategories
                 .Where(x => typeId == null || x.ItemTypeId == typeId)
-                .Where(x => searchText == null 
+                .Where(x => searchText == null
                 || x.Name.ToLower().Contains(searchText)
                 || x.Code.ToLower().Contains(searchText))
                 .Include(x => x.ItemType)

@@ -3,7 +3,6 @@ using InventoryDesktop.EntityFramework.ItemCategories;
 using InventoryDesktop.EntityFramework.ItemTypes;
 using InventoryDesktop.Winforms.Enums;
 using InventoryDesktop.Winforms.Models;
-using System;
 
 namespace InventoryDesktop.Winforms.Forms
 {

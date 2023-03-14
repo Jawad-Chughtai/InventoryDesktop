@@ -35,9 +35,11 @@
             LeftToolStripPanel = new ToolStripPanel();
             ContentPanel = new ToolStripContentPanel();
             topPanel = new Panel();
+            focusButton = new Button();
+            panel1 = new Panel();
+            userButton = new Button();
             pageTitleLabel = new Label();
             sidePanel = new Panel();
-            panel1 = new Panel();
             navPanel = new Panel();
             navbar = new MenuStrip();
             menuDashboard = new ToolStripMenuItem();
@@ -71,10 +73,14 @@
             printPreviewToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             exitToolStripMenuItem = new ToolStripMenuItem();
+            userPropPanel = new Panel();
+            logoutButton = new Button();
             topPanel.SuspendLayout();
+            panel1.SuspendLayout();
             sidePanel.SuspendLayout();
             navPanel.SuspendLayout();
             navbar.SuspendLayout();
+            userPropPanel.SuspendLayout();
             SuspendLayout();
             // 
             // BottomToolStripPanel
@@ -117,6 +123,8 @@
             // topPanel
             // 
             topPanel.BackColor = Color.FromArgb(52, 53, 65);
+            topPanel.Controls.Add(focusButton);
+            topPanel.Controls.Add(panel1);
             topPanel.Controls.Add(pageTitleLabel);
             topPanel.Dock = DockStyle.Top;
             topPanel.ForeColor = SystemColors.ControlLightLight;
@@ -124,6 +132,41 @@
             topPanel.Name = "topPanel";
             topPanel.Size = new Size(1360, 50);
             topPanel.TabIndex = 3;
+            // 
+            // focusButton
+            // 
+            focusButton.Location = new Point(1016, 17);
+            focusButton.Name = "focusButton";
+            focusButton.Size = new Size(0, 0);
+            focusButton.TabIndex = 3;
+            focusButton.UseVisualStyleBackColor = true;
+            focusButton.Visible = false;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(userButton);
+            panel1.Dock = DockStyle.Right;
+            panel1.Location = new Point(1110, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(250, 50);
+            panel1.TabIndex = 2;
+            // 
+            // userButton
+            // 
+            userButton.Cursor = Cursors.Hand;
+            userButton.Dock = DockStyle.Fill;
+            userButton.FlatAppearance.BorderColor = Color.FromArgb(119, 120, 128);
+            userButton.FlatStyle = FlatStyle.Flat;
+            userButton.Font = new Font("Century Gothic", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            userButton.Location = new Point(0, 0);
+            userButton.Name = "userButton";
+            userButton.Size = new Size(250, 50);
+            userButton.TabIndex = 0;
+            userButton.TabStop = false;
+            userButton.Text = "User";
+            userButton.UseVisualStyleBackColor = true;
+            userButton.Click += UserButton_Click;
+            userButton.MouseLeave += UserButton_MouseLeave;
             // 
             // pageTitleLabel
             // 
@@ -139,7 +182,6 @@
             // 
             sidePanel.BackColor = Color.FromArgb(52, 53, 65);
             sidePanel.Controls.Add(navPanel);
-            sidePanel.Controls.Add(panel1);
             sidePanel.Controls.Add(logoPanel);
             sidePanel.Dock = DockStyle.Left;
             sidePanel.ForeColor = Color.White;
@@ -147,14 +189,6 @@
             sidePanel.Name = "sidePanel";
             sidePanel.Size = new Size(200, 699);
             sidePanel.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 640);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(200, 59);
-            panel1.TabIndex = 2;
             // 
             // navPanel
             // 
@@ -164,7 +198,7 @@
             navPanel.Dock = DockStyle.Fill;
             navPanel.Location = new Point(0, 135);
             navPanel.Name = "navPanel";
-            navPanel.Size = new Size(200, 505);
+            navPanel.Size = new Size(200, 564);
             navPanel.TabIndex = 1;
             // 
             // navbar
@@ -414,10 +448,40 @@
             exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "E&xit";
             // 
+            // userPropPanel
+            // 
+            userPropPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            userPropPanel.BackColor = Color.FromArgb(52, 53, 65);
+            userPropPanel.Controls.Add(logoutButton);
+            userPropPanel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            userPropPanel.ForeColor = Color.White;
+            userPropPanel.Location = new Point(1110, 50);
+            userPropPanel.Name = "userPropPanel";
+            userPropPanel.Size = new Size(250, 38);
+            userPropPanel.TabIndex = 8;
+            userPropPanel.Visible = false;
+            // 
+            // logoutButton
+            // 
+            logoutButton.Cursor = Cursors.Hand;
+            logoutButton.Dock = DockStyle.Fill;
+            logoutButton.FlatAppearance.BorderColor = Color.FromArgb(119, 120, 128);
+            logoutButton.FlatStyle = FlatStyle.Flat;
+            logoutButton.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            logoutButton.Location = new Point(0, 0);
+            logoutButton.Name = "logoutButton";
+            logoutButton.Size = new Size(250, 38);
+            logoutButton.TabIndex = 1;
+            logoutButton.TabStop = false;
+            logoutButton.Text = "Logout";
+            logoutButton.UseVisualStyleBackColor = true;
+            logoutButton.Click += LogoutButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1360, 749);
+            Controls.Add(userPropPanel);
             Controls.Add(sidePanel);
             Controls.Add(topPanel);
             Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
@@ -430,11 +494,13 @@
             Load += MainForm_Load;
             topPanel.ResumeLayout(false);
             topPanel.PerformLayout();
+            panel1.ResumeLayout(false);
             sidePanel.ResumeLayout(false);
             navPanel.ResumeLayout(false);
             navPanel.PerformLayout();
             navbar.ResumeLayout(false);
             navbar.PerformLayout();
+            userPropPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -480,7 +546,11 @@
         private ToolStripMenuItem menuItemType;
         private ToolStripMenuItem menuItemCategory;
         private ToolStripMenuItem menuDashboard;
-        private Panel panel1;
         private ToolStripMenuItem menuUser;
+        private Panel panel1;
+        private Button userButton;
+        private Button focusButton;
+        private Panel userPropPanel;
+        private Button logoutButton;
     }
 }

@@ -1,6 +1,4 @@
-﻿using InventoryDesktop.Applications.ItemCategories;
-using InventoryDesktop.Applications.Users;
-using InventoryDesktop.EntityFramework.ItemCategories;
+﻿using InventoryDesktop.Applications.Users;
 using InventoryDesktop.EntityFramework.Users;
 using InventoryDesktop.Winforms.Enums;
 

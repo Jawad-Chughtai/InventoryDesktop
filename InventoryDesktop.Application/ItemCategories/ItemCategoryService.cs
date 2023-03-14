@@ -1,5 +1,5 @@
-﻿using InventoryDesktop.EntityFramework.ItemTypes;
-using InventoryDesktop.EntityFramework.ItemCategories;
+﻿using InventoryDesktop.EntityFramework.ItemCategories;
+using InventoryDesktop.EntityFramework.ItemTypes;
 
 namespace InventoryDesktop.Applications.ItemCategories
 {

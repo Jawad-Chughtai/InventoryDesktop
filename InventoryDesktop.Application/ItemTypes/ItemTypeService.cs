@@ -13,7 +13,7 @@ namespace InventoryDesktop.Applications.ItemTypes
 
         public async Task<List<ItemType>> GetListAsync(string? searchText = null)
         {
-            searchText = searchText?.Trim().ToLower();  
+            searchText = searchText?.Trim().ToLower();
             return await _itemTypeRepository.GetListAsync(searchText);
         }
 

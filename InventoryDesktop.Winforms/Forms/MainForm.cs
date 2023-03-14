@@ -1,20 +1,13 @@
-﻿using InventoryDesktop.Winforms.Enums;
+﻿using InventoryDesktop.EntityFramework.Users;
+using InventoryDesktop.Winforms.Enums;
 using InventoryDesktop.Winforms.Forms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace InventoryDesktop.Winforms
 {
     public partial class MainForm : Form
     {
         private Form? _activeForm { get; set; } = null;
+        public User? _loggedInUser { get; set; } = null;
 
         public MainForm()
         {
@@ -24,7 +17,13 @@ namespace InventoryDesktop.Winforms
         private void MainForm_Load(object sender, EventArgs e)
         {
             CloseDropDownItems();
+            SetUpUser();
             OpenChildForm(new DashboardForm(), PageTitles.Dashboard);
+        }
+
+        private void SetUpUser()
+        {
+            userButton.Text = _loggedInUser.FullName;
         }
 
         //method to open child forms inside parent form
@@ -82,6 +81,25 @@ namespace InventoryDesktop.Winforms
         {
             CloseDropDownItems();
             OpenChildForm(new UserForm(), PageTitles.User);
+        }
+
+        private void UserButton_MouseLeave(object sender, EventArgs e)
+        {
+            focusButton.Select();
+        }
+
+        private void UserButton_Click(object sender, EventArgs e)
+        {
+            if (userPropPanel.Visible == true)
+            {
+                userPropPanel.Visible = false;
+            }
+            else userPropPanel.Visible = true;
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }

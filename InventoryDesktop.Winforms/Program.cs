@@ -16,7 +16,11 @@ namespace InventoryDesktop.Winforms
             using var loginForm = new LoginForm();
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new MainForm());
+                var mainForm = new MainForm
+                {
+                    _loggedInUser = loginForm.LoggedInUser
+                };
+                Application.Run(mainForm);
             }
         }
     }
