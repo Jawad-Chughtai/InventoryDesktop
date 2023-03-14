@@ -42,7 +42,7 @@ namespace InventoryDesktop.Winforms.Forms
             {
                 if (IsValidSaveForm())
                 {
-                    if (_itemType == null)
+                    if (saveButton.Text == SaveButtonText.Save)
                     {
                         _itemType = new ItemType()
                         {

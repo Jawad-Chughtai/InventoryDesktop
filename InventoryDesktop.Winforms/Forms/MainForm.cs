@@ -24,7 +24,7 @@ namespace InventoryDesktop.Winforms
         private void MainForm_Load(object sender, EventArgs e)
         {
             CloseDropDownItems();
-            //OpenChildForm(new DashboardForm(), PageTitles.Dashboard);
+            OpenChildForm(new DashboardForm(), PageTitles.Dashboard);
         }
 
         //method to open child forms inside parent form
@@ -57,6 +57,7 @@ namespace InventoryDesktop.Winforms
         private void MenuDashboard_Click(object sender, EventArgs e)
         {
             CloseDropDownItems();
+            OpenChildForm(new DashboardForm(), PageTitles.Dashboard);
         }
 
         private void CloseDropDownItems()

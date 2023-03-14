@@ -11,7 +11,9 @@ namespace InventoryDesktop.EntityFramework.Users
         public string FirstName { get; set; }
 
         public string? LastName { get; set; }
-        
+
+        public string FullName { get { return $"{FirstName} {LastName}"; } }
+
         [Required]
         public string Username { get; set; }
         
@@ -19,6 +21,14 @@ namespace InventoryDesktop.EntityFramework.Users
         public string Password { get; set; }
         
         [Required]
-        public string Role { get; set; }     
+        public string Role { get; set; }    
+        
+        public bool IsIncluded { get; set; } = true;
+
+        public DateTime CreationTime { get; set; } = new DateTime();
+
+        public string CreationTimeString { get { return CreationTime.ToString("MMM, dd yyyy hh:mm tt"); } }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

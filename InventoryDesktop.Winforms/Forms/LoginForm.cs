@@ -22,11 +22,11 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async void LoginButton_Click(object sender, EventArgs e)
         {
-            var username = usernameTextbox.Text;
-            var password = passwordTextbox.Text;
-            
             errorLabel.Visible = false;
             
+            var username = usernameTextbox.Text;
+            var password = passwordTextbox.Text;
+            Thread.Sleep(50);
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 errorLabel.Visible = true;

@@ -37,15 +37,15 @@
             panel1 = new Panel();
             panel7 = new Panel();
             panel9 = new Panel();
-            panel10 = new Panel();
             datagrid = new DataGridView();
             panel8 = new Panel();
+            panel10 = new Panel();
             panel3 = new Panel();
             deleteButton = new Button();
             editButton = new Button();
             panel2 = new Panel();
             panel4 = new Panel();
-            typeCombobox = new ComboBox();
+            roleCombobox = new ComboBox();
             label5 = new Label();
             roleErrorLabel = new Label();
             label4 = new Label();
@@ -66,6 +66,7 @@
             panel7.SuspendLayout();
             panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datagrid).BeginInit();
+            panel8.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -110,21 +111,13 @@
             // 
             // panel9
             // 
-            panel9.Controls.Add(panel10);
             panel9.Controls.Add(datagrid);
             panel9.Dock = DockStyle.Fill;
             panel9.Location = new Point(0, 1);
             panel9.Name = "panel9";
+            panel9.Padding = new Padding(0, 10, 0, 0);
             panel9.Size = new Size(1070, 435);
             panel9.TabIndex = 1;
-            // 
-            // panel10
-            // 
-            panel10.Dock = DockStyle.Top;
-            panel10.Location = new Point(0, 0);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(1070, 15);
-            panel10.TabIndex = 17;
             // 
             // datagrid
             // 
@@ -153,7 +146,7 @@
             datagrid.DefaultCellStyle = dataGridViewCellStyle2;
             datagrid.Dock = DockStyle.Fill;
             datagrid.GridColor = SystemColors.ActiveBorder;
-            datagrid.Location = new Point(0, 0);
+            datagrid.Location = new Point(0, 10);
             datagrid.MultiSelect = false;
             datagrid.Name = "datagrid";
             datagrid.ReadOnly = true;
@@ -175,18 +168,27 @@
             datagrid.ShowCellToolTips = false;
             datagrid.ShowEditingIcon = false;
             datagrid.ShowRowErrors = false;
-            datagrid.Size = new Size(1070, 435);
+            datagrid.Size = new Size(1070, 425);
             datagrid.TabIndex = 16;
             datagrid.TabStop = false;
             // 
             // panel8
             // 
             panel8.BackColor = SystemColors.ActiveBorder;
+            panel8.Controls.Add(panel10);
             panel8.Dock = DockStyle.Top;
             panel8.Location = new Point(0, 0);
             panel8.Name = "panel8";
             panel8.Size = new Size(1070, 1);
             panel8.TabIndex = 0;
+            // 
+            // panel10
+            // 
+            panel10.Dock = DockStyle.Top;
+            panel10.Location = new Point(0, 0);
+            panel10.Name = "panel10";
+            panel10.Size = new Size(1070, 10);
+            panel10.TabIndex = 17;
             // 
             // panel3
             // 
@@ -211,6 +213,7 @@
             deleteButton.TabIndex = 9;
             deleteButton.Text = "Delete";
             deleteButton.UseVisualStyleBackColor = false;
+            deleteButton.Click += DeleteButton_Click;
             // 
             // editButton
             // 
@@ -225,6 +228,7 @@
             editButton.TabIndex = 8;
             editButton.Text = "Edit";
             editButton.UseVisualStyleBackColor = false;
+            editButton.Click += EditButton_Click;
             // 
             // panel2
             // 
@@ -238,7 +242,7 @@
             // panel4
             // 
             panel4.Anchor = AnchorStyles.Left;
-            panel4.Controls.Add(typeCombobox);
+            panel4.Controls.Add(roleCombobox);
             panel4.Controls.Add(label5);
             panel4.Controls.Add(roleErrorLabel);
             panel4.Controls.Add(label4);
@@ -260,15 +264,16 @@
             panel4.Size = new Size(912, 135);
             panel4.TabIndex = 16;
             // 
-            // typeCombobox
+            // roleCombobox
             // 
-            typeCombobox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            typeCombobox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            typeCombobox.FormattingEnabled = true;
-            typeCombobox.Location = new Point(495, 89);
-            typeCombobox.Name = "typeCombobox";
-            typeCombobox.Size = new Size(226, 25);
-            typeCombobox.TabIndex = 5;
+            roleCombobox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            roleCombobox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            roleCombobox.DropDownStyle = ComboBoxStyle.DropDownList;
+            roleCombobox.FormattingEnabled = true;
+            roleCombobox.Location = new Point(495, 89);
+            roleCombobox.Name = "roleCombobox";
+            roleCombobox.Size = new Size(226, 25);
+            roleCombobox.TabIndex = 5;
             // 
             // label5
             // 
@@ -371,6 +376,7 @@
             resetButton.TabIndex = 7;
             resetButton.Text = "Reset";
             resetButton.UseVisualStyleBackColor = false;
+            resetButton.Click += ResetButton_Click;
             // 
             // label1
             // 
@@ -405,6 +411,7 @@
             saveButton.TabIndex = 6;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = false;
+            saveButton.Click += SaveButton_Click;
             // 
             // lnameErrorLabel
             // 
@@ -444,7 +451,6 @@
             // lnameTextbox
             // 
             lnameTextbox.BackColor = SystemColors.Window;
-            lnameTextbox.CharacterCasing = CharacterCasing.Upper;
             lnameTextbox.ForeColor = SystemColors.ControlText;
             lnameTextbox.Location = new Point(251, 20);
             lnameTextbox.Name = "lnameTextbox";
@@ -470,6 +476,7 @@
             panel7.ResumeLayout(false);
             panel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)datagrid).EndInit();
+            panel8.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -503,7 +510,7 @@
         private Label label3;
         private TextBox usernameTextbox;
         private Label usernameErrorLabel;
-        private ComboBox typeCombobox;
+        private ComboBox roleCombobox;
         private Panel panel7;
         private Panel panel9;
         private Panel panel8;

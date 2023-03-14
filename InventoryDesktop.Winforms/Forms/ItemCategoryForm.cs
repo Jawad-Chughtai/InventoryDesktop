@@ -82,7 +82,7 @@ namespace InventoryDesktop.Winforms.Forms
             {
                 if (IsValidSaveForm())
                 {
-                    if (_itemCategory == null)
+                    if (saveButton.Text == SaveButtonText.Save)
                     {
                         _itemCategory = new ItemCategory
                         {
