@@ -43,5 +43,10 @@ namespace InventoryDesktop.Applications.Users
         {
             await _userRepository.DeleteAsync(id);
         }
+
+        public async Task<User> GetSuperAdminAsync(string role)
+        {
+            return await _userRepository.GetSuperAdminAsync(role);
+        }
     }
 }

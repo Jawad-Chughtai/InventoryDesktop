@@ -95,5 +95,10 @@ namespace InventoryDesktop.EntityFramework.Users
                 return null;
             }
         }
+
+        public async Task<User> GetSuperAdminAsync(string role)
+        {
+            return await _db.Users.FirstOrDefaultAsync(x => x.Role.Equals(role));
+        }
     }
 }

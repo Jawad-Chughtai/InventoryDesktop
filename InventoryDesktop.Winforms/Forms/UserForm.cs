@@ -8,6 +8,7 @@ namespace InventoryDesktop.Winforms.Forms
     {
         private readonly UserService _userService = new();
         private User? _user = null;
+        MainForm? _mainForm = null;
 
         public UserForm()
         {
@@ -16,9 +17,16 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async void UserForm_Load(object sender, EventArgs e)
         {
+            loginWithUser.Visible = false;
             fnameTextbox.Select();
             await GetListAsync();
             InitRoles();
+
+            _mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+            if (_mainForm != null && _mainForm._loggedInUser.Role.Contains(UserRoles.SuperAdmin))
+            {
+                loginWithUser.Visible = true;
+            }
         }
 
         private void InitDataGridView()
@@ -54,7 +62,6 @@ namespace InventoryDesktop.Winforms.Forms
                 UserRoles.User
             };
 
-            roleCombobox.Items.Clear();
             roleCombobox.DataSource = roles;
             roleCombobox.SelectedItem = UserRoles.User;
         }
@@ -101,7 +108,9 @@ namespace InventoryDesktop.Winforms.Forms
                         Role = roleCombobox.SelectedItem.ToString()
                     };
 
-                    await _userService.UpdateAsync(_user);
+                    var updatedUser = await _userService.UpdateAsync(_user);
+
+                    _mainForm?.SetUpUser(updatedUser);
                 }
 
                 ResetForm();
@@ -227,6 +236,32 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void LoginWithUser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
+                if (_mainForm != null && _mainForm._loggedInUser.Role.Contains(UserRoles.SuperAdmin))
+                {
+                    if (datagrid.SelectedCells.Count > 0)
+                    {
+                        int rowIndex = datagrid.SelectedCells[0].RowIndex;
+                        DataGridViewRow selectedRow = datagrid.Rows[rowIndex];
+                        datagrid.CurrentCell = null;
+
+                        _user = await _userService.GetAsync((int)selectedRow.Cells["id"].Value);
+                        _mainForm.IsSuperAdmin = true;
+                        _mainForm.SetUpUser(_user);
+                        UserForm_Load(sender, e);
+                    }
+                }
+            }
+            catch
+            {
+                Application.Restart();
             }
         }
     }

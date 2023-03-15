@@ -14,14 +14,18 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async void LoginButton_Click(object sender, EventArgs e)
         {
+            loginButton.Enabled = false;
             errorLabel.Visible = false;
 
             var username = usernameTextbox.Text;
             var password = passwordTextbox.Text;
+
             Thread.Sleep(50);
+            
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 errorLabel.Visible = true;
+                loginButton.Enabled = true;
             }
             else
             {
@@ -37,11 +41,13 @@ namespace InventoryDesktop.Winforms.Forms
                     else
                     {
                         errorLabel.Visible = true;
+                        loginButton.Enabled = true;
                     }
                 }
                 catch
                 {
                     errorLabel.Visible = true;
+                    loginButton.Enabled = true; 
                 }
             }
         }

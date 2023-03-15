@@ -75,6 +75,7 @@
             exitToolStripMenuItem = new ToolStripMenuItem();
             userPropPanel = new Panel();
             logoutButton = new Button();
+            superAdminLabel = new Label();
             topPanel.SuspendLayout();
             panel1.SuspendLayout();
             sidePanel.SuspendLayout();
@@ -123,6 +124,7 @@
             // topPanel
             // 
             topPanel.BackColor = Color.FromArgb(52, 53, 65);
+            topPanel.Controls.Add(superAdminLabel);
             topPanel.Controls.Add(focusButton);
             topPanel.Controls.Add(panel1);
             topPanel.Controls.Add(pageTitleLabel);
@@ -455,9 +457,9 @@
             userPropPanel.Controls.Add(logoutButton);
             userPropPanel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             userPropPanel.ForeColor = Color.White;
-            userPropPanel.Location = new Point(1110, 50);
+            userPropPanel.Location = new Point(1110, 47);
             userPropPanel.Name = "userPropPanel";
-            userPropPanel.Size = new Size(250, 38);
+            userPropPanel.Size = new Size(250, 44);
             userPropPanel.TabIndex = 8;
             userPropPanel.Visible = false;
             // 
@@ -470,12 +472,26 @@
             logoutButton.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             logoutButton.Location = new Point(0, 0);
             logoutButton.Name = "logoutButton";
-            logoutButton.Size = new Size(250, 38);
+            logoutButton.Size = new Size(250, 44);
             logoutButton.TabIndex = 1;
             logoutButton.TabStop = false;
             logoutButton.Text = "Logout";
             logoutButton.UseVisualStyleBackColor = true;
             logoutButton.Click += LogoutButton_Click;
+            // 
+            // superAdminLabel
+            // 
+            superAdminLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            superAdminLabel.AutoSize = true;
+            superAdminLabel.Cursor = Cursors.Hand;
+            superAdminLabel.ForeColor = Color.DodgerBlue;
+            superAdminLabel.Location = new Point(966, 31);
+            superAdminLabel.Name = "superAdminLabel";
+            superAdminLabel.Size = new Size(138, 19);
+            superAdminLabel.TabIndex = 10;
+            superAdminLabel.Text = "Back To Super Admin";
+            superAdminLabel.Visible = false;
+            superAdminLabel.Click += SuperAdminLabel_Click;
             // 
             // MainForm
             // 
@@ -552,5 +568,6 @@
         private Button focusButton;
         private Panel userPropPanel;
         private Button logoutButton;
+        private Label superAdminLabel;
     }
 }

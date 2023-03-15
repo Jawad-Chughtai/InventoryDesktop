@@ -41,6 +41,7 @@
             panel8 = new Panel();
             panel10 = new Panel();
             panel3 = new Panel();
+            loginWithUser = new Button();
             deleteButton = new Button();
             editButton = new Button();
             panel2 = new Panel();
@@ -192,6 +193,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(loginWithUser);
             panel3.Controls.Add(deleteButton);
             panel3.Controls.Add(editButton);
             panel3.Dock = DockStyle.Bottom;
@@ -199,6 +201,23 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(1070, 42);
             panel3.TabIndex = 1;
+            // 
+            // loginWithUser
+            // 
+            loginWithUser.Anchor = AnchorStyles.Left;
+            loginWithUser.BackColor = Color.Firebrick;
+            loginWithUser.FlatAppearance.BorderColor = Color.Firebrick;
+            loginWithUser.FlatStyle = FlatStyle.Popup;
+            loginWithUser.ForeColor = SystemColors.ControlLightLight;
+            loginWithUser.Location = new Point(0, 8);
+            loginWithUser.Name = "loginWithUser";
+            loginWithUser.Size = new Size(144, 26);
+            loginWithUser.TabIndex = 10;
+            loginWithUser.TabStop = false;
+            loginWithUser.Text = "Login With User";
+            loginWithUser.UseVisualStyleBackColor = false;
+            loginWithUser.Visible = false;
+            loginWithUser.Click += LoginWithUser_Click;
             // 
             // deleteButton
             // 
@@ -516,5 +535,6 @@
         private Panel panel8;
         private DataGridView datagrid;
         private Panel panel10;
+        private Button loginWithUser;
     }
 }
