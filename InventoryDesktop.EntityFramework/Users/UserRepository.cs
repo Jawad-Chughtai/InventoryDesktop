@@ -4,7 +4,7 @@ namespace InventoryDesktop.EntityFramework.Users
 {
     public class UserRepository
     {
-        private readonly InventoryDbContext _db = new();
+        private readonly InventoryDbContext context = new();
 
         public async Task<User> CreateAsync(User user)
         {
@@ -12,13 +12,13 @@ namespace InventoryDesktop.EntityFramework.Users
             {
                 throw new ArgumentNullException(nameof(user));
             }
-            else if (await _db.Users.AnyAsync(x => x.Username.ToLower() == user.Username.ToLower()))
+            else if (await context.Users.AnyAsync(x => x.Username.ToLower() == user.Username.ToLower()))
             {
                 throw new Exception($"'{user.Username}' already taken");
             }
 
-            _db.Users.Add(user);
-            await _db.SaveChangesAsync();
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
             return user;
         }
 
@@ -28,12 +28,12 @@ namespace InventoryDesktop.EntityFramework.Users
             {
                 throw new ArgumentNullException(nameof(user));
             }
-            else if (await _db.Users.AnyAsync(x => x.Username.ToLower() == user.Username.ToLower() && x.Id != user.Id))
+            else if (await context.Users.AnyAsync(x => x.Username.ToLower() == user.Username.ToLower() && x.Id != user.Id))
             {
                 throw new Exception($"User with same username '{user.Username}' already exists");
             }
 
-            var entity = await _db.Users.FirstOrDefaultAsync(x => x.Id.Equals(user.Id));
+            var entity = await context.Users.FirstOrDefaultAsync(x => x.Id.Equals(user.Id));
 
             if (entity != null)
             {
@@ -42,7 +42,7 @@ namespace InventoryDesktop.EntityFramework.Users
                 entity.Username = user.Username;
                 entity.Password = user.Password;
                 entity.Role = user.Role;
-                await _db.SaveChangesAsync();
+                await context.SaveChangesAsync();
                 return entity;
             }
             else
@@ -53,24 +53,24 @@ namespace InventoryDesktop.EntityFramework.Users
 
         public async Task<User> GetAsync(int id)
         {
-            return await _db.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return await context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<User>> GetListAsync()
         {
-            return await _db.Users.Where(x => x.IsIncluded && !x.IsDeleted).OrderBy(x => x.Role).ToListAsync();
+            return await context.Users.Where(x => x.IsIncluded && !x.IsDeleted).OrderBy(x => x.Role).ToListAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(x => x.Id == id) ?? throw new Exception($"User with id '{id}' not found");
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id) ?? throw new Exception($"User with id '{id}' not found");
             user.IsDeleted = true;
-            await _db.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
         public async Task<User> LoginAsync(string? username, string? password)
         {
-            var user = await _db.Users
+            var user = await context.Users
                     .FirstOrDefaultAsync(x =>
                     x.Username == username
                     && x.Password == password
@@ -98,7 +98,7 @@ namespace InventoryDesktop.EntityFramework.Users
 
         public async Task<User> GetSuperAdminAsync(string role)
         {
-            return await _db.Users.FirstOrDefaultAsync(x => x.Role.Equals(role));
+            return await context.Users.FirstOrDefaultAsync(x => x.Role.Equals(role));
         }
     }
 }

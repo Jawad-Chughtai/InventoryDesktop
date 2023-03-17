@@ -35,6 +35,7 @@
             LeftToolStripPanel = new ToolStripPanel();
             ContentPanel = new ToolStripContentPanel();
             topPanel = new Panel();
+            superAdminLabel = new Label();
             focusButton = new Button();
             panel1 = new Panel();
             userButton = new Button();
@@ -44,8 +45,9 @@
             navbar = new MenuStrip();
             menuDashboard = new ToolStripMenuItem();
             menuItem = new ToolStripMenuItem();
-            menuItemType = new ToolStripMenuItem();
             menuItemCategory = new ToolStripMenuItem();
+            menuItemType = new ToolStripMenuItem();
+            menuItemSetup = new ToolStripMenuItem();
             menuUser = new ToolStripMenuItem();
             logoPanel = new Panel();
             contentsToolStripMenuItem = new ToolStripMenuItem();
@@ -75,7 +77,6 @@
             exitToolStripMenuItem = new ToolStripMenuItem();
             userPropPanel = new Panel();
             logoutButton = new Button();
-            superAdminLabel = new Label();
             topPanel.SuspendLayout();
             panel1.SuspendLayout();
             sidePanel.SuspendLayout();
@@ -134,6 +135,20 @@
             topPanel.Name = "topPanel";
             topPanel.Size = new Size(1360, 50);
             topPanel.TabIndex = 3;
+            // 
+            // superAdminLabel
+            // 
+            superAdminLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            superAdminLabel.AutoSize = true;
+            superAdminLabel.Cursor = Cursors.Hand;
+            superAdminLabel.ForeColor = Color.DodgerBlue;
+            superAdminLabel.Location = new Point(1041, 20);
+            superAdminLabel.Name = "superAdminLabel";
+            superAdminLabel.Size = new Size(138, 19);
+            superAdminLabel.TabIndex = 10;
+            superAdminLabel.Text = "Back To Super Admin";
+            superAdminLabel.Visible = false;
+            superAdminLabel.Click += SuperAdminLabel_Click;
             // 
             // focusButton
             // 
@@ -208,12 +223,12 @@
             navbar.BackColor = Color.FromArgb(52, 53, 65);
             navbar.Font = new Font("Century Gothic", 14F, FontStyle.Regular, GraphicsUnit.Point);
             navbar.ImeMode = ImeMode.Off;
-            navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuItemType, menuItemCategory, menuUser });
+            navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuItemCategory, menuItemType, menuItemSetup, menuUser });
             navbar.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             navbar.Location = new Point(0, 0);
             navbar.Name = "navbar";
             navbar.Padding = new Padding(0);
-            navbar.Size = new Size(200, 214);
+            navbar.Size = new Size(200, 251);
             navbar.TabIndex = 0;
             // 
             // menuDashboard
@@ -236,6 +251,18 @@
             menuItem.TextAlign = ContentAlignment.MiddleLeft;
             menuItem.Click += MenuItem_Click;
             // 
+            // menuItemCategory
+            // 
+            menuItemCategory.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            menuItemCategory.ForeColor = Color.White;
+            menuItemCategory.Margin = new Padding(10, 0, 0, 0);
+            menuItemCategory.Name = "menuItemCategory";
+            menuItemCategory.Padding = new Padding(4, 6, 4, 6);
+            menuItemCategory.Size = new Size(189, 37);
+            menuItemCategory.Text = "- Item Categories";
+            menuItemCategory.TextAlign = ContentAlignment.MiddleLeft;
+            menuItemCategory.Click += MenuItemCategory_Click;
+            // 
             // menuItemType
             // 
             menuItemType.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
@@ -248,17 +275,17 @@
             menuItemType.TextAlign = ContentAlignment.MiddleLeft;
             menuItemType.Click += MenuItemType_Click;
             // 
-            // menuItemCategory
+            // menuItemSetup
             // 
-            menuItemCategory.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            menuItemCategory.ForeColor = Color.White;
-            menuItemCategory.Margin = new Padding(10, 0, 0, 0);
-            menuItemCategory.Name = "menuItemCategory";
-            menuItemCategory.Padding = new Padding(4, 6, 4, 6);
-            menuItemCategory.Size = new Size(189, 37);
-            menuItemCategory.Text = "- Item Categories";
-            menuItemCategory.TextAlign = ContentAlignment.MiddleLeft;
-            menuItemCategory.Click += MenuItemCategory_Click;
+            menuItemSetup.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            menuItemSetup.ForeColor = Color.White;
+            menuItemSetup.Margin = new Padding(10, 0, 0, 0);
+            menuItemSetup.Name = "menuItemSetup";
+            menuItemSetup.Padding = new Padding(4, 6, 4, 6);
+            menuItemSetup.Size = new Size(189, 37);
+            menuItemSetup.Text = "- Item Setup";
+            menuItemSetup.TextAlign = ContentAlignment.MiddleLeft;
+            menuItemSetup.Click += MenuItemSetup_Click;
             // 
             // menuUser
             // 
@@ -479,20 +506,6 @@
             logoutButton.UseVisualStyleBackColor = true;
             logoutButton.Click += LogoutButton_Click;
             // 
-            // superAdminLabel
-            // 
-            superAdminLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            superAdminLabel.AutoSize = true;
-            superAdminLabel.Cursor = Cursors.Hand;
-            superAdminLabel.ForeColor = Color.DodgerBlue;
-            superAdminLabel.Location = new Point(966, 31);
-            superAdminLabel.Name = "superAdminLabel";
-            superAdminLabel.Size = new Size(138, 19);
-            superAdminLabel.TabIndex = 10;
-            superAdminLabel.Text = "Back To Super Admin";
-            superAdminLabel.Visible = false;
-            superAdminLabel.Click += SuperAdminLabel_Click;
-            // 
             // MainForm
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -501,6 +514,7 @@
             Controls.Add(sidePanel);
             Controls.Add(topPanel);
             Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             IsMdiContainer = true;
             MainMenuStrip = navbar;
             Name = "MainForm";
@@ -569,5 +583,6 @@
         private Panel userPropPanel;
         private Button logoutButton;
         private Label superAdminLabel;
+        private ToolStripMenuItem menuItemSetup;
     }
 }

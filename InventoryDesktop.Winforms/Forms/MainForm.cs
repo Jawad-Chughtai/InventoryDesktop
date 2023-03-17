@@ -37,7 +37,7 @@ namespace InventoryDesktop.Winforms
             {
                 _loggedInUser = user;
             }
-
+            superAdminLabel.Visible = false;
             userButton.Text = _loggedInUser.FullName;
             menuUser.Visible = true;
 
@@ -78,6 +78,7 @@ namespace InventoryDesktop.Winforms
                 userPropPanel.Visible = false;
                 menuItemType.Visible = true;
                 menuItemCategory.Visible = true;
+                menuItemSetup.Visible = true;
             }
         }
 
@@ -85,13 +86,6 @@ namespace InventoryDesktop.Winforms
         {
             CloseDropDownItems();
             OpenChildForm(new DashboardForm(), PageTitles.Dashboard);
-        }
-
-        private void CloseDropDownItems()
-        {
-            userPropPanel.Visible = false;
-            menuItemType.Visible = false;
-            menuItemCategory.Visible = false;
         }
 
         private void MenuItemType_Click(object sender, EventArgs e)
@@ -112,6 +106,20 @@ namespace InventoryDesktop.Winforms
             OpenChildForm(new UserForm(), PageTitles.User);
         }
 
+        private void MenuItemSetup_Click(object sender, EventArgs e)
+        {
+            CloseDropDownItems();
+            OpenChildForm(new ItemSetupForm(), PageTitles.ItemSetup);
+        }
+
+
+        private void CloseDropDownItems()
+        {
+            userPropPanel.Visible = false;
+            menuItemType.Visible = false;
+            menuItemCategory.Visible = false;
+            menuItemSetup.Visible = false;
+        }
         private void UserButton_MouseLeave(object sender, EventArgs e)
         {
             focusButton.Select();
@@ -137,5 +145,6 @@ namespace InventoryDesktop.Winforms
             IsSuperAdmin = false;
             SetUpUser(user);
         }
+
     }
 }

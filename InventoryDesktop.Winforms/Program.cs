@@ -16,10 +16,10 @@ namespace InventoryDesktop.Winforms
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            using (var context = new InventoryDbContext())
-            {
-                context.Database.EnsureCreated();
-            }
+            //using (var context = new InventoryDbContext())
+            //{
+            //    context.Database.EnsureCreated();
+            //}
 
 
             using var loginForm = new LoginForm();
@@ -31,6 +31,8 @@ namespace InventoryDesktop.Winforms
                 };
                 Application.Run(mainForm);
             }
+
+            //Application.Run(new ItemSetupForm());
         }
     }
 }
