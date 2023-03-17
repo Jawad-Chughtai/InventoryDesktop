@@ -25,7 +25,7 @@ namespace InventoryDesktop.EntityFramework.Users
 
         public bool IsIncluded { get; set; } = true;
 
-        public DateTime CreationTime { get; set; } = new DateTime();
+        public DateTime CreationTime { get; set; } = DateTime.Now;
 
         public string CreationTimeString { get { return CreationTime.ToString("MMM, dd yyyy hh:mm tt"); } }
 
