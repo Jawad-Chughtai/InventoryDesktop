@@ -49,7 +49,8 @@
             menuItemType = new ToolStripMenuItem();
             menuItemSetup = new ToolStripMenuItem();
             menuUser = new ToolStripMenuItem();
-            logoPanel = new Panel();
+            panel2 = new Panel();
+            pictureBox1 = new PictureBox();
             contentsToolStripMenuItem = new ToolStripMenuItem();
             indexToolStripMenuItem = new ToolStripMenuItem();
             searchToolStripMenuItem = new ToolStripMenuItem();
@@ -82,6 +83,8 @@
             sidePanel.SuspendLayout();
             navPanel.SuspendLayout();
             navbar.SuspendLayout();
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             userPropPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -142,7 +145,7 @@
             superAdminLabel.AutoSize = true;
             superAdminLabel.Cursor = Cursors.Hand;
             superAdminLabel.ForeColor = Color.DodgerBlue;
-            superAdminLabel.Location = new Point(1041, 20);
+            superAdminLabel.Location = new Point(966, 18);
             superAdminLabel.Name = "superAdminLabel";
             superAdminLabel.Size = new Size(138, 19);
             superAdminLabel.TabIndex = 10;
@@ -199,7 +202,6 @@
             // 
             sidePanel.BackColor = Color.FromArgb(52, 53, 65);
             sidePanel.Controls.Add(navPanel);
-            sidePanel.Controls.Add(logoPanel);
             sidePanel.Dock = DockStyle.Left;
             sidePanel.ForeColor = Color.White;
             sidePanel.Location = new Point(0, 50);
@@ -212,10 +214,11 @@
             navPanel.AutoScroll = true;
             navPanel.BackColor = Color.Transparent;
             navPanel.Controls.Add(navbar);
+            navPanel.Controls.Add(panel2);
             navPanel.Dock = DockStyle.Fill;
-            navPanel.Location = new Point(0, 135);
+            navPanel.Location = new Point(0, 0);
             navPanel.Name = "navPanel";
-            navPanel.Size = new Size(200, 564);
+            navPanel.Size = new Size(200, 699);
             navPanel.TabIndex = 1;
             // 
             // navbar
@@ -225,10 +228,10 @@
             navbar.ImeMode = ImeMode.Off;
             navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuItemCategory, menuItemType, menuItemSetup, menuUser });
             navbar.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-            navbar.Location = new Point(0, 0);
+            navbar.Location = new Point(0, 95);
             navbar.Name = "navbar";
             navbar.Padding = new Padding(0);
-            navbar.Size = new Size(200, 251);
+            navbar.Size = new Size(200, 270);
             navbar.TabIndex = 0;
             // 
             // menuDashboard
@@ -297,16 +300,25 @@
             menuUser.TextAlign = ContentAlignment.MiddleLeft;
             menuUser.Click += MenuUser_Click;
             // 
-            // logoPanel
+            // panel2
             // 
-            logoPanel.BackColor = Color.FromArgb(52, 53, 65);
-            logoPanel.BackgroundImage = (Image)resources.GetObject("logoPanel.BackgroundImage");
-            logoPanel.BackgroundImageLayout = ImageLayout.Zoom;
-            logoPanel.Dock = DockStyle.Top;
-            logoPanel.Location = new Point(0, 0);
-            logoPanel.Name = "logoPanel";
-            logoPanel.Size = new Size(200, 135);
-            logoPanel.TabIndex = 0;
+            panel2.Controls.Add(pictureBox1);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(200, 95);
+            panel2.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(200, 95);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
             // 
             // contentsToolStripMenuItem
             // 
@@ -530,6 +542,8 @@
             navPanel.PerformLayout();
             navbar.ResumeLayout(false);
             navbar.PerformLayout();
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             userPropPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -544,7 +558,6 @@
         private Panel topPanel;
         private Label pageTitleLabel;
         private Panel sidePanel;
-        private Panel logoPanel;
         private Panel navPanel;
         private MenuStrip navbar;
         private ToolStripMenuItem menuItem;
@@ -584,5 +597,7 @@
         private Button logoutButton;
         private Label superAdminLabel;
         private ToolStripMenuItem menuItemSetup;
+        private Panel panel2;
+        private PictureBox pictureBox1;
     }
 }
