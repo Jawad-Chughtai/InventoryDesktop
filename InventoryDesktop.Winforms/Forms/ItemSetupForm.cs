@@ -33,21 +33,29 @@ namespace InventoryDesktop.Winforms.Forms
         public async Task SetupCompany()
         {
             var data = await _companyAppService.GetListAsync();
-            companyListbox.DataSource = data;
-            companyListbox.DisplayMember = "Name";
-            companyListbox.ValueMember = "Id";
 
-            companyListbox.SelectedItem = null;
+            companyDatagrid.DataSource = data;
+
+            companyDatagrid.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            companyDatagrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+
+            companyDatagrid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            companyDatagrid.Columns[0].MinimumWidth = 10;
+            companyDatagrid.CurrentCell = null;
         }
 
         public async Task SetupDistributor()
         {
             var data = await _distributorAppService.GetListAsync();
-            distributorListbox.DataSource = data;
-            distributorListbox.DisplayMember = "Name Contact";
-            distributorListbox.ValueMember = "Id";
 
-            distributorListbox.SelectedItem = null;
+            distributorDatagrid.DataSource = data;
+
+            distributorDatagrid.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            distributorDatagrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            distributorDatagrid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            distributorDatagrid.Columns[0].MinimumWidth = 10;
+            distributorDatagrid.CurrentCell = null;
         }
 
         private async void CompanySaveButton_Click(object sender, EventArgs e)
@@ -108,9 +116,9 @@ namespace InventoryDesktop.Winforms.Forms
         {
             try
             {
-                if (companyListbox.SelectedItem != null)
+                if (companyDatagrid.SelectedCells.Count > 0)
                 {
-                    await _companyAppService.DeleteAsync((int)companyListbox.SelectedValue);
+                    await _companyAppService.DeleteAsync((int)companyDatagrid.SelectedCells[0].Value);
                     await SetupCompany();
                 }
             }
@@ -124,9 +132,9 @@ namespace InventoryDesktop.Winforms.Forms
         {
             try
             {
-                if (distributorListbox.SelectedItem != null)
+                if (distributorDatagrid.SelectedCells.Count > 0)
                 {
-                    await _distributorAppService.DeleteAsync((int)distributorListbox.SelectedValue);
+                    await _distributorAppService.DeleteAsync((int)distributorDatagrid.SelectedCells[0].Value);
                     await SetupDistributor();
                 }
             }

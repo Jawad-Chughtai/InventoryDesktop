@@ -76,6 +76,7 @@ namespace InventoryDesktop.Winforms
             else
             {
                 userPropPanel.Visible = false;
+                menuPurchaseItem.Visible = true;
                 menuItemType.Visible = true;
                 menuItemCategory.Visible = true;
                 menuItemSetup.Visible = true;
@@ -112,10 +113,16 @@ namespace InventoryDesktop.Winforms
             OpenChildForm(new ItemSetupForm(), PageTitles.ItemSetup);
         }
 
+        private void MenuPurchaseItem_Click(object sender, EventArgs e)
+        {
+            CloseDropDownItems();
+            OpenChildForm(new PurchaseItemForm(), PageTitles.PurchaseItem);
+        }
 
         private void CloseDropDownItems()
         {
             userPropPanel.Visible = false;
+            menuPurchaseItem.Visible = false;
             menuItemType.Visible = false;
             menuItemCategory.Visible = false;
             menuItemSetup.Visible = false;

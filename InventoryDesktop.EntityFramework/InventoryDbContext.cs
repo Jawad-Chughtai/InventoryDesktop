@@ -2,6 +2,7 @@
 using InventoryDesktop.EntityFramework.Distributors;
 using InventoryDesktop.EntityFramework.ItemCategories;
 using InventoryDesktop.EntityFramework.ItemTypes;
+using InventoryDesktop.EntityFramework.PurchaseItems;
 using InventoryDesktop.EntityFramework.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +15,7 @@ namespace InventoryDesktop.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Distributor> Distributors { get; set; }
-
+        public DbSet<PurchaseItem> PurchaseItems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

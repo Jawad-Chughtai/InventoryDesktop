@@ -78,6 +78,7 @@
             exitToolStripMenuItem = new ToolStripMenuItem();
             userPropPanel = new Panel();
             logoutButton = new Button();
+            menuPurchaseItem = new ToolStripMenuItem();
             topPanel.SuspendLayout();
             panel1.SuspendLayout();
             sidePanel.SuspendLayout();
@@ -226,76 +227,79 @@
             navbar.BackColor = Color.FromArgb(52, 53, 65);
             navbar.Font = new Font("Century Gothic", 14F, FontStyle.Regular, GraphicsUnit.Point);
             navbar.ImeMode = ImeMode.Off;
-            navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuItemCategory, menuItemType, menuItemSetup, menuUser });
+            navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuPurchaseItem, menuItemCategory, menuItemType, menuItemSetup, menuUser });
             navbar.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             navbar.Location = new Point(0, 95);
             navbar.Name = "navbar";
             navbar.Padding = new Padding(0);
-            navbar.Size = new Size(200, 270);
+            navbar.Size = new Size(200, 302);
             navbar.TabIndex = 0;
             // 
             // menuDashboard
             // 
+            menuDashboard.Font = new Font("Century Gothic", 14F, FontStyle.Bold, GraphicsUnit.Point);
             menuDashboard.ForeColor = Color.White;
             menuDashboard.Name = "menuDashboard";
             menuDashboard.Padding = new Padding(4, 10, 4, 10);
-            menuDashboard.Size = new Size(199, 46);
+            menuDashboard.Size = new Size(199, 47);
             menuDashboard.Text = "- Dashboard";
             menuDashboard.TextAlign = ContentAlignment.MiddleLeft;
             menuDashboard.Click += MenuDashboard_Click;
             // 
             // menuItem
             // 
+            menuItem.Font = new Font("Century Gothic", 14F, FontStyle.Bold, GraphicsUnit.Point);
             menuItem.ForeColor = Color.White;
             menuItem.Name = "menuItem";
             menuItem.Padding = new Padding(4, 10, 4, 10);
-            menuItem.Size = new Size(199, 46);
+            menuItem.Size = new Size(199, 47);
             menuItem.Text = "- Items";
             menuItem.TextAlign = ContentAlignment.MiddleLeft;
             menuItem.Click += MenuItem_Click;
             // 
             // menuItemCategory
             // 
-            menuItemCategory.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            menuItemCategory.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             menuItemCategory.ForeColor = Color.White;
             menuItemCategory.Margin = new Padding(10, 0, 0, 0);
             menuItemCategory.Name = "menuItemCategory";
             menuItemCategory.Padding = new Padding(4, 6, 4, 6);
-            menuItemCategory.Size = new Size(189, 37);
+            menuItemCategory.Size = new Size(189, 35);
             menuItemCategory.Text = "- Item Categories";
             menuItemCategory.TextAlign = ContentAlignment.MiddleLeft;
             menuItemCategory.Click += MenuItemCategory_Click;
             // 
             // menuItemType
             // 
-            menuItemType.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            menuItemType.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             menuItemType.ForeColor = Color.White;
             menuItemType.Margin = new Padding(10, 0, 0, 0);
             menuItemType.Name = "menuItemType";
             menuItemType.Padding = new Padding(4, 6, 4, 6);
-            menuItemType.Size = new Size(189, 37);
+            menuItemType.Size = new Size(189, 35);
             menuItemType.Text = "- Item Types";
             menuItemType.TextAlign = ContentAlignment.MiddleLeft;
             menuItemType.Click += MenuItemType_Click;
             // 
             // menuItemSetup
             // 
-            menuItemSetup.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            menuItemSetup.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             menuItemSetup.ForeColor = Color.White;
             menuItemSetup.Margin = new Padding(10, 0, 0, 0);
             menuItemSetup.Name = "menuItemSetup";
             menuItemSetup.Padding = new Padding(4, 6, 4, 6);
-            menuItemSetup.Size = new Size(189, 37);
+            menuItemSetup.Size = new Size(189, 35);
             menuItemSetup.Text = "- Item Setup";
             menuItemSetup.TextAlign = ContentAlignment.MiddleLeft;
             menuItemSetup.Click += MenuItemSetup_Click;
             // 
             // menuUser
             // 
+            menuUser.Font = new Font("Century Gothic", 14F, FontStyle.Bold, GraphicsUnit.Point);
             menuUser.ForeColor = Color.White;
             menuUser.Name = "menuUser";
             menuUser.Padding = new Padding(4, 10, 4, 10);
-            menuUser.Size = new Size(199, 46);
+            menuUser.Size = new Size(199, 47);
             menuUser.Text = "- Users";
             menuUser.TextAlign = ContentAlignment.MiddleLeft;
             menuUser.Click += MenuUser_Click;
@@ -518,6 +522,19 @@
             logoutButton.UseVisualStyleBackColor = true;
             logoutButton.Click += LogoutButton_Click;
             // 
+            // menuPurchaseItem
+            // 
+            menuPurchaseItem.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            menuPurchaseItem.ForeColor = Color.White;
+            menuPurchaseItem.ImageAlign = ContentAlignment.TopCenter;
+            menuPurchaseItem.Margin = new Padding(10, 0, 0, 0);
+            menuPurchaseItem.Name = "menuPurchaseItem";
+            menuPurchaseItem.Padding = new Padding(4, 6, 4, 6);
+            menuPurchaseItem.Size = new Size(189, 35);
+            menuPurchaseItem.Text = "- Purchase Item";
+            menuPurchaseItem.TextAlign = ContentAlignment.MiddleLeft;
+            menuPurchaseItem.Click += MenuPurchaseItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -599,5 +616,6 @@
         private ToolStripMenuItem menuItemSetup;
         private Panel panel2;
         private PictureBox pictureBox1;
+        private ToolStripMenuItem menuPurchaseItem;
     }
 }
