@@ -24,10 +24,17 @@ namespace InventoryDesktop.EntityFramework.Companies
 
         public async Task DeleteAsync(int id)
         {
-            var any = await context.Companies.FirstOrDefaultAsync(x => x.Id == id)
-                ?? throw new Exception($"Company with id '{id}' not found");
-            context.Companies.Remove(any);
-            await context.SaveChangesAsync();
+            if (! await context.PurchaseItems.AnyAsync(x => x.CompanyId == id))
+            {
+                var any = await context.Companies.FirstOrDefaultAsync(x => x.Id == id)
+                        ?? throw new Exception($"Company with id '{id}' not found");
+                context.Companies.Remove(any);
+                await context.SaveChangesAsync(); 
+            }
+            else
+            {
+                throw new Exception("Can not delete Company - Record exists in Purchase Items");
+            }
         }
 
         public async Task<Company> GetAsync(int id)

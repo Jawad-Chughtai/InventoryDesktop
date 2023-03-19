@@ -24,10 +24,17 @@ namespace InventoryDesktop.EntityFramework.Distributors
 
         public async Task DeleteAsync(int id)
         {
-            var any = await context.Distributors.FirstOrDefaultAsync( x => x.Id == id) 
-                ?? throw new Exception($"Distributor with id '{id}' not found");
-            context.Distributors.Remove(any);
-            await context.SaveChangesAsync();
+            if (! await context.PurchaseItems.AnyAsync(x => x.DistributorId == id))
+            {
+                var any = await context.Distributors.FirstOrDefaultAsync(x => x.Id == id)
+                        ?? throw new Exception($"Distributor with id '{id}' not found");
+                context.Distributors.Remove(any);
+                await context.SaveChangesAsync(); 
+            }
+            else
+            {
+                throw new Exception("Can not delete Distributor - Record exists in Purchase Items");
+            }
         }
 
         public async Task<Distributor> GetAsync(int id)

@@ -88,9 +88,17 @@ namespace InventoryDesktop.EntityFramework.ItemCategories
 
         public async Task DeleteAsync(int id)
         {
-            var entity = await context.ItemCategories.FirstOrDefaultAsync(x => x.Id == id) ?? throw new Exception($"No record found with id: {id}");
-            context.ItemCategories.Remove(entity);
-            await context.SaveChangesAsync();
+            if (!await context.PurchaseItems.AnyAsync(x => x.ItemCategoryId == id))
+            {
+                var entity = await context.ItemCategories.FirstOrDefaultAsync(x => x.Id == id)
+                        ?? throw new Exception($"No record found with id: {id}");
+                context.ItemCategories.Remove(entity);
+                await context.SaveChangesAsync(); 
+            }
+            else
+            {
+                throw new Exception($"Can not delete Item Category - Record exists in Purchase Items");
+            }
         }
 
         public async Task<ItemCategory> FindByNameAsync(string name)
