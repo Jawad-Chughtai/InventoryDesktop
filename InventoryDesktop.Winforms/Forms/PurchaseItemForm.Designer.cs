@@ -39,8 +39,6 @@
             panel10 = new Panel();
             datagrid = new DataGridView();
             panel9 = new Panel();
-            button1 = new Button();
-            button2 = new Button();
             deleteButton = new Button();
             editButton = new Button();
             panel8 = new Panel();
@@ -49,6 +47,8 @@
             panel6 = new Panel();
             panel7 = new Panel();
             panel3 = new Panel();
+            clearCompany = new Label();
+            clearDistributor = new Label();
             label4 = new Label();
             descriptionTextbox = new TextBox();
             distributorCombobox = new ComboBox();
@@ -179,8 +179,6 @@
             // 
             // panel9
             // 
-            panel9.Controls.Add(button1);
-            panel9.Controls.Add(button2);
             panel9.Controls.Add(deleteButton);
             panel9.Controls.Add(editButton);
             panel9.Dock = DockStyle.Bottom;
@@ -189,44 +187,19 @@
             panel9.Size = new Size(1082, 42);
             panel9.TabIndex = 22;
             // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.BackColor = Color.Firebrick;
-            button1.FlatStyle = FlatStyle.Popup;
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(918, 7);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 26);
-            button1.TabIndex = 12;
-            button1.Text = "Delete";
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.BackColor = Color.FromArgb(16, 163, 127);
-            button2.FlatStyle = FlatStyle.Popup;
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(1007, 7);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 26);
-            button2.TabIndex = 11;
-            button2.Text = "Edit";
-            button2.UseVisualStyleBackColor = false;
-            // 
             // deleteButton
             // 
             deleteButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             deleteButton.BackColor = Color.Firebrick;
             deleteButton.FlatStyle = FlatStyle.Popup;
             deleteButton.ForeColor = Color.White;
-            deleteButton.Location = new Point(1800, 6);
+            deleteButton.Location = new Point(926, 6);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(75, 26);
             deleteButton.TabIndex = 9;
             deleteButton.Text = "Delete";
             deleteButton.UseVisualStyleBackColor = false;
+            deleteButton.Click += DeleteButton_Click;
             // 
             // editButton
             // 
@@ -234,12 +207,13 @@
             editButton.BackColor = Color.FromArgb(16, 163, 127);
             editButton.FlatStyle = FlatStyle.Popup;
             editButton.ForeColor = Color.White;
-            editButton.Location = new Point(1889, 6);
+            editButton.Location = new Point(1007, 6);
             editButton.Name = "editButton";
             editButton.Size = new Size(75, 26);
             editButton.TabIndex = 8;
             editButton.Text = "Edit";
             editButton.UseVisualStyleBackColor = false;
+            editButton.Click += EditButton_Click;
             // 
             // panel8
             // 
@@ -273,6 +247,7 @@
             searchTextbox.Name = "searchTextbox";
             searchTextbox.Size = new Size(223, 25);
             searchTextbox.TabIndex = 9;
+            searchTextbox.KeyDown += SearchTextbox_KeyDown;
             // 
             // panel6
             // 
@@ -294,6 +269,8 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(clearCompany);
+            panel3.Controls.Add(clearDistributor);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(descriptionTextbox);
             panel3.Controls.Add(distributorCombobox);
@@ -315,6 +292,32 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(1082, 129);
             panel3.TabIndex = 18;
+            // 
+            // clearCompany
+            // 
+            clearCompany.AutoSize = true;
+            clearCompany.Cursor = Cursors.Hand;
+            clearCompany.Font = new Font("Segoe UI", 9F, FontStyle.Underline, GraphicsUnit.Point);
+            clearCompany.ForeColor = Color.Firebrick;
+            clearCompany.Location = new Point(947, 2);
+            clearCompany.Name = "clearCompany";
+            clearCompany.Size = new Size(34, 15);
+            clearCompany.TabIndex = 25;
+            clearCompany.Text = "Clear";
+            clearCompany.Click += ClearCompany_Click;
+            // 
+            // clearDistributor
+            // 
+            clearDistributor.AutoSize = true;
+            clearDistributor.Cursor = Cursors.Hand;
+            clearDistributor.Font = new Font("Segoe UI", 9F, FontStyle.Underline, GraphicsUnit.Point);
+            clearDistributor.ForeColor = Color.Firebrick;
+            clearDistributor.Location = new Point(194, 67);
+            clearDistributor.Name = "clearDistributor";
+            clearDistributor.Size = new Size(34, 15);
+            clearDistributor.TabIndex = 24;
+            clearDistributor.Text = "Clear";
+            clearDistributor.Click += ClearDistributor_Click;
             // 
             // label4
             // 
@@ -347,7 +350,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(2, 67);
+            label6.Location = new Point(0, 67);
             label6.Name = "label6";
             label6.Size = new Size(63, 15);
             label6.TabIndex = 21;
@@ -367,7 +370,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(755, 2);
+            label3.Location = new Point(753, 2);
             label3.Name = "label3";
             label3.Size = new Size(59, 15);
             label3.TabIndex = 18;
@@ -557,10 +560,10 @@
         private Panel panel9;
         private Button deleteButton;
         private Button editButton;
-        private Button button1;
-        private Button button2;
         private Panel panel10;
         private DataGridView datagrid;
         private System.ComponentModel.BackgroundWorker FetchDataBackgroundWorker;
+        private Label clearCompany;
+        private Label clearDistributor;
     }
 }

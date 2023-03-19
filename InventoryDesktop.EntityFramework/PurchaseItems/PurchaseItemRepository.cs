@@ -35,7 +35,14 @@ namespace InventoryDesktop.EntityFramework.PurchaseItems
                 throw new Exception($"Purchase item with same name '{purchaseItem.Name}' already exists");
             }
 
-            entity = purchaseItem;
+            entity.Name = purchaseItem.Name;
+            entity.Code = purchaseItem.Code;
+            entity.Description = purchaseItem.Description;
+            entity.ItemCategoryId = purchaseItem.ItemCategoryId;
+            entity.MinimumQuantity = purchaseItem.MinimumQuantity;
+            entity.DistributorId = purchaseItem.DistributorId;
+            entity.CompanyId = purchaseItem.CompanyId;
+
             await context.SaveChangesAsync();
         }
 

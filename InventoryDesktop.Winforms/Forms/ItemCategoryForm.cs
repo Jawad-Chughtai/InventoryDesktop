@@ -137,6 +137,7 @@ namespace InventoryDesktop.Winforms.Forms
                     {
                         await _itemCategoryService.DeleteAsync(_itemCategory.Id);
                         await GetListAsync(searchTextbox.Text);
+                        _itemCategory = null;
                     }
                     else
                     {
