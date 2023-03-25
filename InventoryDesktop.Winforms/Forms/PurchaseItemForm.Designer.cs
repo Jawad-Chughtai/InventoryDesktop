@@ -117,6 +117,7 @@
             // 
             // panel10
             // 
+            panel10.AutoScroll = true;
             panel10.Controls.Add(datagrid);
             panel10.Dock = DockStyle.Fill;
             panel10.Location = new Point(0, 45);

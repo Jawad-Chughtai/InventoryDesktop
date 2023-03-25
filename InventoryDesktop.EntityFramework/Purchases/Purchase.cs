@@ -15,6 +15,7 @@ namespace InventoryDesktop.EntityFramework.Purchases
 
         public int PurchaseQuantity { get; set; }   
         public double PurchaseUnitPrice { get; set; }   
+        public double PurchaseTotal { get { return PurchaseQuantity * PurchaseUnitPrice; } }
 
         public double SalePacketPrice { get; set; }
         public double SaleUnitPrice { get; set; }

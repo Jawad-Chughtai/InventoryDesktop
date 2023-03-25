@@ -5,6 +5,7 @@ namespace InventoryDesktop.Winforms.Enums
     public static class PageTitles
     {
         public const string Dashboard = "Dashboard";
+        public const string Purchase = "Purchase";
         public const string Item = "Items";
         public const string PurchaseItem = "Purchase Items";
         public const string ItemType = "Item Types";

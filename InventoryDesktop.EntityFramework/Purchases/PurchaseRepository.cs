@@ -4,7 +4,7 @@ namespace InventoryDesktop.EntityFramework.Purchases
 {
     public class PurchaseRepository
     {
-        private readonly InventoryDbContext context;
+        private readonly InventoryDbContext context = new();
 
         public async Task CreateAsync(Purchase purchase)
         {
@@ -41,14 +41,14 @@ namespace InventoryDesktop.EntityFramework.Purchases
             return await context.Purchases.FirstOrDefaultAsync(x => x.Barcode == barcode);
         }
 
-        public async Task<List<Purchase>> GetListAsync(string? filter = null, int? purchseItemId = null)
+        public async Task<List<Purchase>> GetListAsync(string? filter = null, int? purchaseItemId = null)
         {
             var query = await context.Purchases.AsQueryable()
                             .Where(x => filter == null
                             || x.PurchaseItemDescription.Contains(filter)
                             || x.Batch.Contains(filter)
                             || x.Barcode.Contains(filter))
-                            .Where(x => purchseItemId == null || x.PurchaseItemId == purchseItemId)
+                            .Where(x => purchaseItemId == null || x.PurchaseItemId == purchaseItemId)
                             .OrderByDescending(x => x.CreationTime)
                             .ToListAsync();
             return query;

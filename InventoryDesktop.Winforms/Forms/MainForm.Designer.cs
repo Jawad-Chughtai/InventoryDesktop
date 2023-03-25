@@ -45,10 +45,12 @@
             navbar = new MenuStrip();
             menuDashboard = new ToolStripMenuItem();
             menuItem = new ToolStripMenuItem();
+            menuPurchaseItem = new ToolStripMenuItem();
             menuItemCategory = new ToolStripMenuItem();
             menuItemType = new ToolStripMenuItem();
             menuItemSetup = new ToolStripMenuItem();
             menuUser = new ToolStripMenuItem();
+            menuCreatePurchase = new ToolStripMenuItem();
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
             contentsToolStripMenuItem = new ToolStripMenuItem();
@@ -78,7 +80,6 @@
             exitToolStripMenuItem = new ToolStripMenuItem();
             userPropPanel = new Panel();
             logoutButton = new Button();
-            menuPurchaseItem = new ToolStripMenuItem();
             topPanel.SuspendLayout();
             panel1.SuspendLayout();
             sidePanel.SuspendLayout();
@@ -227,12 +228,12 @@
             navbar.BackColor = Color.FromArgb(52, 53, 65);
             navbar.Font = new Font("Century Gothic", 14F, FontStyle.Regular, GraphicsUnit.Point);
             navbar.ImeMode = ImeMode.Off;
-            navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuPurchaseItem, menuItemCategory, menuItemType, menuItemSetup, menuUser });
+            navbar.Items.AddRange(new ToolStripItem[] { menuDashboard, menuItem, menuPurchaseItem, menuItemCategory, menuItemType, menuItemSetup, menuUser, menuCreatePurchase });
             navbar.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             navbar.Location = new Point(0, 95);
             navbar.Name = "navbar";
             navbar.Padding = new Padding(0);
-            navbar.Size = new Size(200, 302);
+            navbar.Size = new Size(200, 330);
             navbar.TabIndex = 0;
             // 
             // menuDashboard
@@ -256,6 +257,19 @@
             menuItem.Text = "- Items";
             menuItem.TextAlign = ContentAlignment.MiddleLeft;
             menuItem.Click += MenuItem_Click;
+            // 
+            // menuPurchaseItem
+            // 
+            menuPurchaseItem.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            menuPurchaseItem.ForeColor = Color.White;
+            menuPurchaseItem.ImageAlign = ContentAlignment.TopCenter;
+            menuPurchaseItem.Margin = new Padding(10, 0, 0, 0);
+            menuPurchaseItem.Name = "menuPurchaseItem";
+            menuPurchaseItem.Padding = new Padding(4, 6, 4, 6);
+            menuPurchaseItem.Size = new Size(189, 35);
+            menuPurchaseItem.Text = "- Purchase Item";
+            menuPurchaseItem.TextAlign = ContentAlignment.MiddleLeft;
+            menuPurchaseItem.Click += MenuPurchaseItem_Click;
             // 
             // menuItemCategory
             // 
@@ -303,6 +317,17 @@
             menuUser.Text = "- Users";
             menuUser.TextAlign = ContentAlignment.MiddleLeft;
             menuUser.Click += MenuUser_Click;
+            // 
+            // menuCreatePurchase
+            // 
+            menuCreatePurchase.Font = new Font("Century Gothic", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            menuCreatePurchase.ForeColor = Color.White;
+            menuCreatePurchase.Name = "menuCreatePurchase";
+            menuCreatePurchase.Padding = new Padding(4, 10, 4, 10);
+            menuCreatePurchase.Size = new Size(199, 47);
+            menuCreatePurchase.Text = "- Create Purchase";
+            menuCreatePurchase.TextAlign = ContentAlignment.MiddleLeft;
+            menuCreatePurchase.Click += MenuCreatePurchase_Click;
             // 
             // panel2
             // 
@@ -522,19 +547,6 @@
             logoutButton.UseVisualStyleBackColor = true;
             logoutButton.Click += LogoutButton_Click;
             // 
-            // menuPurchaseItem
-            // 
-            menuPurchaseItem.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            menuPurchaseItem.ForeColor = Color.White;
-            menuPurchaseItem.ImageAlign = ContentAlignment.TopCenter;
-            menuPurchaseItem.Margin = new Padding(10, 0, 0, 0);
-            menuPurchaseItem.Name = "menuPurchaseItem";
-            menuPurchaseItem.Padding = new Padding(4, 6, 4, 6);
-            menuPurchaseItem.Size = new Size(189, 35);
-            menuPurchaseItem.Text = "- Purchase Item";
-            menuPurchaseItem.TextAlign = ContentAlignment.MiddleLeft;
-            menuPurchaseItem.Click += MenuPurchaseItem_Click;
-            // 
             // MainForm
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -543,7 +555,6 @@
             Controls.Add(sidePanel);
             Controls.Add(topPanel);
             Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
             IsMdiContainer = true;
             MainMenuStrip = navbar;
             Name = "MainForm";
@@ -617,5 +628,6 @@
         private Panel panel2;
         private PictureBox pictureBox1;
         private ToolStripMenuItem menuPurchaseItem;
+        private ToolStripMenuItem menuCreatePurchase;
     }
 }

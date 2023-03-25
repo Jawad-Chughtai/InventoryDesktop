@@ -6,7 +6,7 @@ using System.Formats.Asn1;
 
 namespace InventoryDesktop.Applications.PurchaseItems
 {
-    public class PurchaseItemAppService
+    public class PurchaseItemService
     {
         private readonly PurchaseItemRepository _purchaseItemRepository = new();
         private readonly ItemCategoryRepository _itemCategoryRepository = new();

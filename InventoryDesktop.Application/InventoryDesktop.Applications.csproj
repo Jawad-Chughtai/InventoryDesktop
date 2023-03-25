@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BarcodeLib" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\InventoryDesktop.EntityFramework\InventoryDesktop.EntityFramework.csproj" />
   </ItemGroup>
 

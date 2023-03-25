@@ -2,7 +2,6 @@
 using InventoryDesktop.EntityFramework.Users;
 using InventoryDesktop.Winforms.Enums;
 using InventoryDesktop.Winforms.Forms;
-using System.Runtime.CompilerServices;
 
 namespace InventoryDesktop.Winforms
 {
@@ -117,6 +116,12 @@ namespace InventoryDesktop.Winforms
         {
             CloseDropDownItems();
             OpenChildForm(new PurchaseItemForm(), PageTitles.PurchaseItem);
+        }
+
+        private void MenuCreatePurchase_Click(object sender, EventArgs e)
+        {
+            CloseDropDownItems();
+            OpenChildForm(new PurchaseForm(), PageTitles.Purchase);
         }
 
         private void CloseDropDownItems()

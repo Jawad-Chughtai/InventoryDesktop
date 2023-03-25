@@ -88,6 +88,7 @@ namespace InventoryDesktop.EntityFramework.PurchaseItems
                                 .ThenInclude(c => c.ItemType)
                                 .Include(x => x.Distributor)
                                 .Include(x => x.Company)
+                                .OrderBy(x => x.Name)
                                 .ToListAsync();
             }
             else
@@ -96,6 +97,7 @@ namespace InventoryDesktop.EntityFramework.PurchaseItems
                                 .Where(x => searchText == null
                                 || x.Name.Contains(searchText)
                                 || x.Code.Contains(searchText))
+                                .OrderBy(x => x.Name)
                                 .ToListAsync();
             }
         }

@@ -1,8 +1,6 @@
-﻿using InventoryDesktop.Applications.ItemCategories;
-using InventoryDesktop.Applications.PurchaseItems;
+﻿using InventoryDesktop.Applications.PurchaseItems;
 using InventoryDesktop.EntityFramework.Companies;
 using InventoryDesktop.EntityFramework.Distributors;
-using InventoryDesktop.EntityFramework.ItemCategories;
 using InventoryDesktop.EntityFramework.PurchaseItems;
 using InventoryDesktop.Winforms.Enums;
 using System.ComponentModel;
@@ -11,7 +9,7 @@ namespace InventoryDesktop.Winforms.Forms
 {
     public partial class PurchaseItemForm : Form
     {
-        private readonly PurchaseItemAppService _purchaseItemAppService = new();
+        private readonly PurchaseItemService _purchaseItemService = new();
         private PurchaseItem? _purchaseItem { get; set; } = null;
 
         public PurchaseItemForm()
@@ -42,7 +40,7 @@ namespace InventoryDesktop.Winforms.Forms
                             DistributorId = ((Distributor)distributorCombobox.SelectedItem)?.Id ?? null,
                         };
 
-                        await _purchaseItemAppService.CreateAsync(_purchaseItem);
+                        await _purchaseItemService.CreateAsync(_purchaseItem);
                     }
                     else
                     {
@@ -58,7 +56,7 @@ namespace InventoryDesktop.Winforms.Forms
                             DistributorId = ((Distributor)distributorCombobox.SelectedItem)?.Id ?? null,
                         };
 
-                        await _purchaseItemAppService.UpdateAsync(_purchaseItem);
+                        await _purchaseItemService.UpdateAsync(_purchaseItem);
                     }
 
                     ResetForm();
@@ -87,7 +85,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async Task GetListAsync(string? searchText = null)
         {
-            var data = await _purchaseItemAppService.GetListAsync(searchText: searchText, includeDetails: true);
+            var data = await _purchaseItemService.GetListAsync(searchText: searchText, includeDetails: true);
             datagrid.DataSource = data;
             InitDataGridView();
         }
@@ -141,7 +139,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async Task GetItemCategoryLookupAsync()
         {
-            var data = await _purchaseItemAppService.GetItemCategoryLookupAsync();
+            var data = await _purchaseItemService.GetItemCategoryLookupAsync();
             categoryCombobox.DataSource = data;
             categoryCombobox.DisplayMember = "Name";
             categoryCombobox.ValueMember = "Id";
@@ -151,7 +149,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async Task GetCompanyLookupAsync()
         {
-            var data = await _purchaseItemAppService.GetCompanyLookupAsync();
+            var data = await _purchaseItemService.GetCompanyLookupAsync();
             companyCombobox.DataSource = data;
             companyCombobox.DisplayMember = "Name";
             companyCombobox.ValueMember = "Id";
@@ -161,7 +159,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async Task GetDistributorLookupAsync()
         {
-            var data = await _purchaseItemAppService.GetDistributorLookupAsync();
+            var data = await _purchaseItemService.GetDistributorLookupAsync();
             distributorCombobox.DataSource = data;
             distributorCombobox.DisplayMember = "Name";
             distributorCombobox.ValueMember = "Id";
@@ -270,7 +268,7 @@ namespace InventoryDesktop.Winforms.Forms
                     SetSelectedPurchaseItem();
                     if (MessageBox.Show($"Are you sure you want to delete {_purchaseItem.Name}", "Confirm Deletion", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        await _purchaseItemAppService.DeleteAsync(_purchaseItem.Id);
+                        await _purchaseItemService.DeleteAsync(_purchaseItem.Id);
                         GetListBackgroundWorker_DoWork(sender, new DoWorkEventArgs(e));
                         _purchaseItem = null;
                     }

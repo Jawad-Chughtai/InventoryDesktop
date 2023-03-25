@@ -1,10 +1,4 @@
 ﻿using InventoryDesktop.EntityFramework.PurchaseItems;
-using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryDesktop.Applications.PurchaseItems
 {
@@ -47,6 +41,22 @@ namespace InventoryDesktop.Applications.PurchaseItems
                     CompanyName = item.Company?.Name,
                     DistributorId = item.DistributorId,
                     DistributorName = item.Distributor?.Name
+                });
+            }
+
+            return Task.FromResult(dtos);
+        }
+
+        public static Task<List<PurchaseItemLookupDto>> ToPurchaseItemLookupDto(this List<PurchaseItem> items)
+        {
+            var dtos = new List<PurchaseItemLookupDto>();
+            foreach(var item in items)
+            {
+                dtos.Add(new PurchaseItemLookupDto
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Code = item.Code
                 });
             }
 
