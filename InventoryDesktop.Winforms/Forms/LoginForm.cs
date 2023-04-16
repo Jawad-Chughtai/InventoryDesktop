@@ -46,12 +46,12 @@ namespace InventoryDesktop.Winforms.Forms
                     loginButton.Enabled = true;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 errorLabel.Visible = true;
                 loginButton.Enabled = true;
                 MessageBox.Show("An error occured during login. Contact Administrator", "Login Error");
-                throw ex;
+                throw;
             }
         }
 

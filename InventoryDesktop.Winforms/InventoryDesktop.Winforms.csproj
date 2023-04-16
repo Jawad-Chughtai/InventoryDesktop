@@ -19,6 +19,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="EasyInvent.mdf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="EasyInvent.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="inventory.ico" />
   </ItemGroup>
 
@@ -32,6 +39,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Serilog" Version="2.12.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

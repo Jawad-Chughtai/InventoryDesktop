@@ -1,6 +1,7 @@
 ﻿using InventoryDesktop.Applications.ItemTypes;
 using InventoryDesktop.EntityFramework.ItemTypes;
 using InventoryDesktop.Winforms.Enums;
+using Serilog;
 
 namespace InventoryDesktop.Winforms.Forms
 {
@@ -66,6 +67,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 
@@ -90,6 +92,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 

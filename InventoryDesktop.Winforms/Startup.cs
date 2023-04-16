@@ -2,6 +2,7 @@
 using InventoryDesktop.Applications.Users;
 using InventoryDesktop.EntityFramework;
 using InventoryDesktop.Winforms.Forms;
+using Serilog;
 using System.Configuration;
 
 namespace InventoryDesktop.Winforms
@@ -12,8 +13,16 @@ namespace InventoryDesktop.Winforms
         {
             try
             {
+                Log.Logger = new LoggerConfiguration()
+                            .MinimumLevel.Debug()
+                            .WriteTo.File("Logs\\log.txt", rollingInterval: RollingInterval.Day)
+                            .CreateLogger();
+                Log.Information("Application started.");
+
                 //ConnectionSettings.ConnectionString = ConfigurationManager.ConnectionStrings["LocalDb"].ConnectionString;
                 //DataSeeder.SeedAsync();
+
+                Log.Information(ConnectionSettings.ConnectionString);
 
                 var container = Container.Configure();
 
@@ -34,19 +43,8 @@ namespace InventoryDesktop.Winforms
             }
             catch (Exception ex)
             {
-                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-                // Create the full path for the text file
-                string filePath = Path.Combine(desktopPath, "logs.txt");
-
-                using StreamWriter sw = new(filePath, true);
-                sw.WriteLine(DateTime.Now);
-                sw.WriteLine("----------- Start of Exception -----------");
-                sw.WriteLine();
-                sw.WriteLine(ex);
-                sw.WriteLine();
-                sw.WriteLine("----------- End of Exception -----------");
-                sw.WriteLine();
+                Log.Fatal(ex.ToString());
+                Log.CloseAndFlush();
             }
         }
     }

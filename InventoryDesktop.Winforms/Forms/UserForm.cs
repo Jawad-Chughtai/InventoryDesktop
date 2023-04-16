@@ -1,6 +1,7 @@
 ﻿using InventoryDesktop.Applications.Users;
 using InventoryDesktop.EntityFramework.Users;
 using InventoryDesktop.Winforms.Enums;
+using Serilog;
 
 namespace InventoryDesktop.Winforms.Forms
 {
@@ -122,6 +123,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
                 _user = null;
             }
         }
@@ -214,6 +216,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 
@@ -239,6 +242,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 

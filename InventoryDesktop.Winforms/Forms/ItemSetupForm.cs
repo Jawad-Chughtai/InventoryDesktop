@@ -2,6 +2,7 @@
 using InventoryDesktop.Applications.Distributors;
 using InventoryDesktop.EntityFramework.Companies;
 using InventoryDesktop.EntityFramework.Distributors;
+using Serilog;
 
 namespace InventoryDesktop.Winforms.Forms
 {
@@ -76,6 +77,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 
@@ -104,6 +106,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 
@@ -120,6 +123,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 
@@ -136,6 +140,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
     }

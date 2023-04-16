@@ -561,6 +561,7 @@
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             WindowState = FormWindowState.Maximized;
+            FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
             topPanel.ResumeLayout(false);
             topPanel.PerformLayout();

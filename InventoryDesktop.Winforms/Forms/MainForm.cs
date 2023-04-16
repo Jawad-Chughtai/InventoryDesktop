@@ -3,6 +3,7 @@ using InventoryDesktop.Applications.Users;
 using InventoryDesktop.EntityFramework.Users;
 using InventoryDesktop.Winforms.Enums;
 using InventoryDesktop.Winforms.Forms;
+using Serilog;
 
 namespace InventoryDesktop.Winforms
 {
@@ -21,11 +22,13 @@ namespace InventoryDesktop.Winforms
 
         public MainForm(
             User? loggedInUser,
-            IContainer container)
+            IContainer container,
+            IUserService userService)
         {
             InitializeComponent();
             LoggedInUser = loggedInUser;
             _container = container;
+            _userService = userService;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -167,5 +170,10 @@ namespace InventoryDesktop.Winforms
             SetUpUser(user);
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Log.Information("Application Closed.");
+            Log.CloseAndFlush();
+        }
     }
 }

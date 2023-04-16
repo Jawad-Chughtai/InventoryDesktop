@@ -2,6 +2,7 @@
 using InventoryDesktop.Applications.Purchases;
 using InventoryDesktop.EntityFramework.PurchaseItems;
 using InventoryDesktop.EntityFramework.Purchases;
+using Serilog;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -138,6 +139,7 @@ namespace InventoryDesktop.Winforms.Forms
             {
                 _purchase = null;
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 
@@ -226,6 +228,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
             }
         }
 

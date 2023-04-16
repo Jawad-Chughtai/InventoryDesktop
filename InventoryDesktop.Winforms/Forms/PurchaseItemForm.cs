@@ -3,6 +3,7 @@ using InventoryDesktop.EntityFramework.Companies;
 using InventoryDesktop.EntityFramework.Distributors;
 using InventoryDesktop.EntityFramework.PurchaseItems;
 using InventoryDesktop.Winforms.Enums;
+using Serilog;
 using System.ComponentModel;
 
 namespace InventoryDesktop.Winforms.Forms
@@ -68,6 +69,7 @@ namespace InventoryDesktop.Winforms.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Log.Error(ex.ToString());
                 ResetForm();
             }
         }
