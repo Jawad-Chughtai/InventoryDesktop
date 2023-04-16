@@ -1,15 +1,19 @@
 ﻿using InventoryDesktop.Applications.Users;
 using InventoryDesktop.EntityFramework.Users;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics.Eventing.Reader;
 
 namespace InventoryDesktop.Winforms.Forms
 {
     public partial class LoginForm : Form
     {
-        private readonly UserService _userService = new();
+        private readonly IUserService _userService;
         public User? LoggedInUser { get; private set; } = null;
-        public LoginForm()
+
+        public LoginForm(IUserService userService)
         {
             InitializeComponent();
+            _userService = userService;
         }
 
         private async void LoginButton_Click(object sender, EventArgs e)
@@ -20,35 +24,34 @@ namespace InventoryDesktop.Winforms.Forms
             var username = usernameTextbox.Text;
             var password = passwordTextbox.Text;
 
-            Thread.Sleep(50);
-            
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 errorLabel.Visible = true;
                 loginButton.Enabled = true;
+                return;
             }
-            else
-            {
-                try
-                {
-                    LoggedInUser = await _userService.LoginAsync(username, password);
 
-                    if (LoggedInUser != null)
-                    {
-                        DialogResult = DialogResult.OK;
-                        Close();
-                    }
-                    else
-                    {
-                        errorLabel.Visible = true;
-                        loginButton.Enabled = true;
-                    }
+            try
+            {
+                LoggedInUser = await _userService.LoginAsync(username, password);
+
+                if (LoggedInUser != null)
+                {
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
-                catch
+                else
                 {
                     errorLabel.Visible = true;
-                    loginButton.Enabled = true; 
+                    loginButton.Enabled = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                errorLabel.Visible = true;
+                loginButton.Enabled = true;
+                MessageBox.Show("An error occured during login. Contact Administrator", "Login Error");
+                throw ex;
             }
         }
 

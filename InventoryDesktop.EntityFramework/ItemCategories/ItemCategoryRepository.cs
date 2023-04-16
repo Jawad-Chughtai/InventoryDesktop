@@ -2,10 +2,13 @@
 
 namespace InventoryDesktop.EntityFramework.ItemCategories
 {
-    public class ItemCategoryRepository
+    public class ItemCategoryRepository : IItemCategoryRepository
     {
-        private readonly InventoryDbContext context = new();
-
+        private readonly InventoryDbContext context;
+        public ItemCategoryRepository(InventoryDbContext context)
+        {
+            this.context = context;
+        }
         public async Task<ItemCategory> CreateAsync(ItemCategory category)
         {
             #region Existing Check
@@ -93,7 +96,7 @@ namespace InventoryDesktop.EntityFramework.ItemCategories
                 var entity = await context.ItemCategories.FirstOrDefaultAsync(x => x.Id == id)
                         ?? throw new Exception($"No record found with id: {id}");
                 context.ItemCategories.Remove(entity);
-                await context.SaveChangesAsync(); 
+                await context.SaveChangesAsync();
             }
             else
             {

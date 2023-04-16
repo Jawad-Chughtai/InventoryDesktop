@@ -2,10 +2,13 @@
 
 namespace InventoryDesktop.EntityFramework.ItemTypes
 {
-    public class ItemTypeRepository
+    public class ItemTypeRepository : IItemTypeRepository
     {
-        private readonly InventoryDbContext context = new();
-
+        private readonly InventoryDbContext context;
+        public ItemTypeRepository(InventoryDbContext context)
+        {
+            this.context = context;
+        }
         public async Task<ItemType> CreateAsync(ItemType itemType)
         {
             #region Existing Check

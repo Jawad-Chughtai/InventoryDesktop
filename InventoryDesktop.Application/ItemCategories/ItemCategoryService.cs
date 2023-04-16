@@ -3,10 +3,18 @@ using InventoryDesktop.EntityFramework.ItemTypes;
 
 namespace InventoryDesktop.Applications.ItemCategories
 {
-    public class ItemCategoryService
+    public class ItemCategoryService : IItemCategoryService
     {
-        private readonly ItemCategoryRepository _itemCategoryRepository = new();
-        private readonly ItemTypeRepository _itemTypeRepository = new();
+        private readonly IItemCategoryRepository _itemCategoryRepository;
+        private readonly IItemTypeRepository _itemTypeRepository;
+
+        public ItemCategoryService(
+            IItemCategoryRepository itemCategoryRepository,
+            IItemTypeRepository itemTypeRepository)
+        {
+            _itemCategoryRepository = itemCategoryRepository;
+            _itemTypeRepository = itemTypeRepository;
+        }
 
         public async Task<ItemCategory> GetAsync(int id)
         {

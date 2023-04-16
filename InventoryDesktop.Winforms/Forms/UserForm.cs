@@ -6,12 +6,14 @@ namespace InventoryDesktop.Winforms.Forms
 {
     public partial class UserForm : Form
     {
-        private readonly UserService _userService = new();
+        private readonly IUserService _userService;
         private User? _user = null;
         MainForm? _mainForm = null;
 
-        public UserForm()
+        public UserForm(
+            IUserService userService)
         {
+            _userService = userService;
             InitializeComponent();
         }
 
@@ -23,7 +25,8 @@ namespace InventoryDesktop.Winforms.Forms
             InitRoles();
 
             _mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
-            if (_mainForm != null && _mainForm._loggedInUser.Role.Contains(UserRoles.SuperAdmin))
+            bool isSuperAdmin = _mainForm.LoggedInUser?.Role.Contains(UserRoles.SuperAdmin) ?? false;
+            if (_mainForm != null && isSuperAdmin)
             {
                 loginWithUser.Visible = true;
             }
@@ -244,7 +247,7 @@ namespace InventoryDesktop.Winforms.Forms
             try
             {
                 _mainForm = Application.OpenForms.OfType<MainForm>().FirstOrDefault();
-                if (_mainForm != null && _mainForm._loggedInUser.Role.Contains(UserRoles.SuperAdmin))
+                if (_mainForm != null && _mainForm.LoggedInUser.Role.Contains(UserRoles.SuperAdmin))
                 {
                     if (datagrid.SelectedCells.Count > 0)
                     {

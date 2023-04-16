@@ -7,10 +7,18 @@ using System.Drawing.Imaging;
 
 namespace InventoryDesktop.Applications.Purchases
 {
-    public class PurchaseService
+    public class PurchaseService : IPurchaseService
     {
-        private readonly PurchaseRepository _purchaseRepository = new();
-        private readonly PurchaseItemRepository _purchaseItemRepository = new();
+        private readonly IPurchaseRepository _purchaseRepository;
+        private readonly IPurchaseItemRepository _purchaseItemRepository;
+
+        public PurchaseService(
+            IPurchaseRepository purchaseRepository,
+            IPurchaseItemRepository purchaseItemRepository)
+        {
+            _purchaseRepository = purchaseRepository;
+            _purchaseItemRepository = purchaseItemRepository;
+        }
 
         public async Task CreateAsync(Purchase purchase)
         {
@@ -55,13 +63,13 @@ namespace InventoryDesktop.Applications.Purchases
                 barcodeNumber = randomNumber.ToString();
 
                 var any = await _purchaseRepository.GetAsync(barcodeNumber);
-                if(any == null)
+                if (any == null)
                 {
                     Exists = true;
                 }
 
             } while (!Exists);
-            
+
             var barcode = new Barcode
             {
                 IncludeLabel = true,
@@ -71,7 +79,10 @@ namespace InventoryDesktop.Applications.Purchases
             };
 
             var barcodeImage = barcode.Encode(TYPE.CODE128, barcodeNumber);
-            var directoryPath = @"D:\barcode";
+
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string directoryPath = Path.Combine(desktopPath, "barcode");
+
             var filePath = $@"{directoryPath}\barcode_{barcodeNumber}.png";
             if (!Directory.Exists(directoryPath))
             {

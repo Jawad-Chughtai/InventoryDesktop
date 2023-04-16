@@ -2,9 +2,13 @@
 
 namespace InventoryDesktop.EntityFramework.Users
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
-        private readonly InventoryDbContext context = new();
+        private readonly InventoryDbContext context;
+        public UserRepository(InventoryDbContext context)
+        {
+            this.context = context;
+        }
 
         public async Task<User> CreateAsync(User user)
         {

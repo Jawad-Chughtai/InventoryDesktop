@@ -2,10 +2,13 @@
 
 namespace InventoryDesktop.EntityFramework.PurchaseItems
 {
-    public class PurchaseItemRepository
+    public class PurchaseItemRepository : IPurchaseItemRepository
     {
-        private readonly InventoryDbContext context = new();
-
+        private readonly InventoryDbContext context;
+        public PurchaseItemRepository(InventoryDbContext context)
+        {
+            this.context = context;
+        }
         public async Task CreateAsync(PurchaseItem purchaseItem)
         {
             if (purchaseItem == null)
@@ -52,7 +55,7 @@ namespace InventoryDesktop.EntityFramework.PurchaseItems
                                 .FirstOrDefaultAsync(x => x.Id == id)
                                 ?? throw new Exception($"Purchase item with id '{id}' not found");
 
-            context.PurchaseItems.Remove(entity);  
+            context.PurchaseItems.Remove(entity);
             await context.SaveChangesAsync();
         }
 
@@ -65,13 +68,13 @@ namespace InventoryDesktop.EntityFramework.PurchaseItems
                                 .ThenInclude(c => c.ItemType)
                                 .Include(x => x.Distributor)
                                 .Include(x => x.Company)
-                                .FirstOrDefaultAsync(x => x.Id == id) 
+                                .FirstOrDefaultAsync(x => x.Id == id)
                                 ?? throw new Exception($"Purchase item with id '{id}' not found");
             }
             else
             {
                 return await context.PurchaseItems
-                                .FirstOrDefaultAsync(x => x.Id == id) 
+                                .FirstOrDefaultAsync(x => x.Id == id)
                                 ?? throw new Exception($"Purchase item with id '{id}' not found");
             }
         }

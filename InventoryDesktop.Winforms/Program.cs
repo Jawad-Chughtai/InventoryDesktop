@@ -1,6 +1,8 @@
+using Autofac;
+using InventoryDesktop.Applications.Users;
 using InventoryDesktop.EntityFramework;
 using InventoryDesktop.Winforms.Forms;
-using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 namespace InventoryDesktop.Winforms
 {
@@ -14,25 +16,10 @@ namespace InventoryDesktop.Winforms
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-
-            //using (var context = new InventoryDbContext())
-            //{
-            //    context.Database.EnsureCreated();
-            //}
-
-
-            using var loginForm = new LoginForm();
-            if (loginForm.ShowDialog() == DialogResult.OK)
-            {
-                var mainForm = new MainForm
-                {
-                    _loggedInUser = loginForm.LoggedInUser
-                };
-                Application.Run(mainForm);
-            }
-
-            //Application.Run(new ItemSetupForm());
+            
+                ApplicationConfiguration.Initialize();
+                Startup.Run();
+            
         }
     }
 }

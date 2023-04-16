@@ -12,7 +12,7 @@ namespace InventoryDesktop.EntityFramework.Migrations
 {
     [DbContext(typeof(InventoryDbContext))]
     [Migration("20230310210124_addedcode")]
-    partial class addedcode
+    partial class AddedCode
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

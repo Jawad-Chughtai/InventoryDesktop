@@ -6,12 +6,25 @@ using System.Formats.Asn1;
 
 namespace InventoryDesktop.Applications.PurchaseItems
 {
-    public class PurchaseItemService
+    public class PurchaseItemService : IPurchaseItemService
     {
-        private readonly PurchaseItemRepository _purchaseItemRepository = new();
-        private readonly ItemCategoryRepository _itemCategoryRepository = new();
-        private readonly CompanyRepository _companyRepository = new();
-        private readonly DistributorRepository _distributorRepository = new();
+        private readonly IPurchaseItemRepository _purchaseItemRepository;
+        private readonly IItemCategoryRepository _itemCategoryRepository;
+        private readonly ICompanyRepository _companyRepository;
+        private readonly IDistributorRepository _distributorRepository;
+
+        public PurchaseItemService(
+            IPurchaseItemRepository purchaseItemRepository,
+            IItemCategoryRepository itemCategoryRepository,
+            ICompanyRepository companyRepository,
+            IDistributorRepository distributorRepository
+            )
+        {
+            _purchaseItemRepository = purchaseItemRepository;
+            _itemCategoryRepository = itemCategoryRepository;
+            _companyRepository = companyRepository;
+            _distributorRepository = distributorRepository;
+        }
 
         public async Task CreateAsync(PurchaseItem purchaseItem)
         {

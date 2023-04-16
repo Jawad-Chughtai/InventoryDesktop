@@ -2,9 +2,13 @@
 
 namespace InventoryDesktop.Applications.Companies
 {
-    public class CompanyAppService
+    public class CompanyService : ICompanyService
     {
-        private readonly CompanyRepository _companyRepository = new();
+        private readonly ICompanyRepository _companyRepository;
+        public CompanyService(ICompanyRepository companyRepository)
+        {
+            _companyRepository = companyRepository;
+        }
 
         public async Task CreateAsync(Company company)
         {

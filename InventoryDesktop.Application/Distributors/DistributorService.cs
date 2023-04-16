@@ -2,10 +2,13 @@
 
 namespace InventoryDesktop.Applications.Distributors
 {
-    public class DistributorAppService
+    public class DistributorService : IDistributorService
     {
-        private readonly DistributorRepository _distributorRepository = new();
-
+        private readonly IDistributorRepository _distributorRepository;
+        public DistributorService(IDistributorRepository distributorRepository)
+        {
+            _distributorRepository = distributorRepository;
+        }
         public async Task CreateAsync(Distributor distributor)
         {
             distributor.Name = distributor.Name.Trim();

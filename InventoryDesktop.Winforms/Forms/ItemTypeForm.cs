@@ -6,11 +6,12 @@ namespace InventoryDesktop.Winforms.Forms
 {
     public partial class ItemTypeForm : Form
     {
-        private readonly ItemTypeService _itemTypeService = new();
+        private readonly IItemTypeService _itemTypeService;
         private ItemType? _itemType = null;
 
-        public ItemTypeForm()
+        public ItemTypeForm(IItemTypeService itemTypeService)
         {
+            _itemTypeService = itemTypeService;
             InitializeComponent();
         }
 

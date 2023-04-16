@@ -2,25 +2,20 @@
 using InventoryDesktop.Applications.Distributors;
 using InventoryDesktop.EntityFramework.Companies;
 using InventoryDesktop.EntityFramework.Distributors;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace InventoryDesktop.Winforms.Forms
 {
     public partial class ItemSetupForm : Form
     {
-        private readonly CompanyAppService _companyAppService = new();
-        private readonly DistributorAppService _distributorAppService = new();
+        private readonly ICompanyService _companyService;
+        private readonly IDistributorService _distributorService;
 
-        public ItemSetupForm()
+        public ItemSetupForm(
+            ICompanyService companyService,
+            IDistributorService distributorService)
         {
+            _companyService = companyService;
+            _distributorService = distributorService;
             InitializeComponent();
         }
 
@@ -32,7 +27,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         public async Task SetupCompany()
         {
-            var data = await _companyAppService.GetListAsync();
+            var data = await _companyService.GetListAsync();
 
             companyDatagrid.DataSource = data;
 
@@ -47,7 +42,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         public async Task SetupDistributor()
         {
-            var data = await _distributorAppService.GetListAsync();
+            var data = await _distributorService.GetListAsync();
 
             distributorDatagrid.DataSource = data;
 
@@ -69,12 +64,12 @@ namespace InventoryDesktop.Winforms.Forms
                     return;
                 }
 
-                Company company = new Company
+                Company company = new()
                 {
                     Name = companyNameTextbox.Text,
                 };
 
-                await _companyAppService.CreateAsync(company);
+                await _companyService.CreateAsync(company);
                 companyNameTextbox.Text = null;
                 await SetupCompany();
             }
@@ -95,13 +90,13 @@ namespace InventoryDesktop.Winforms.Forms
                     return;
                 }
 
-                Distributor distributor = new Distributor
+                Distributor distributor = new()
                 {
                     Name = distributorNameTextbox.Text,
                     Contact = distributorContactTextbox.Text
                 };
 
-                await _distributorAppService.CreateAsync(distributor);
+                await _distributorService.CreateAsync(distributor);
                 distributorContactTextbox.Text = null;
                 distributorNameTextbox.Text = null;
                 await SetupDistributor();
@@ -118,7 +113,7 @@ namespace InventoryDesktop.Winforms.Forms
             {
                 if (companyDatagrid.SelectedCells.Count > 0)
                 {
-                    await _companyAppService.DeleteAsync((int)companyDatagrid.SelectedCells[0].Value);
+                    await _companyService.DeleteAsync((int)companyDatagrid.SelectedCells[0].Value);
                     await SetupCompany();
                 }
             }
@@ -134,7 +129,7 @@ namespace InventoryDesktop.Winforms.Forms
             {
                 if (distributorDatagrid.SelectedCells.Count > 0)
                 {
-                    await _distributorAppService.DeleteAsync((int)distributorDatagrid.SelectedCells[0].Value);
+                    await _distributorService.DeleteAsync((int)distributorDatagrid.SelectedCells[0].Value);
                     await SetupDistributor();
                 }
             }

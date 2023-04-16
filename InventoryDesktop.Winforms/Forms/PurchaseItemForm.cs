@@ -9,11 +9,13 @@ namespace InventoryDesktop.Winforms.Forms
 {
     public partial class PurchaseItemForm : Form
     {
-        private readonly PurchaseItemService _purchaseItemService = new();
-        private PurchaseItem? _purchaseItem { get; set; } = null;
+        private readonly IPurchaseItemService _purchaseItemService;
+        private PurchaseItem? _purchaseItem = null;
 
-        public PurchaseItemForm()
+        public PurchaseItemForm(
+            IPurchaseItemService purchaseItemService)
         {
+            _purchaseItemService = purchaseItemService;
             InitializeComponent();
         }
 

@@ -37,6 +37,9 @@
             panel7 = new Panel();
             panel3 = new Panel();
             panel2 = new Panel();
+            panel14 = new Panel();
+            purchaseTotalLabel = new Label();
+            label7 = new Label();
             panel9 = new Panel();
             totalQuantityLabel = new Label();
             label12 = new Label();
@@ -82,12 +85,10 @@
             searchTextbox = new TextBox();
             panel10 = new Panel();
             FetchDataBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            panel14 = new Panel();
-            purchaseTotalLabel = new Label();
-            label7 = new Label();
             panel7.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
+            panel14.SuspendLayout();
             panel9.SuspendLayout();
             panel8.SuspendLayout();
             panel6.SuspendLayout();
@@ -96,7 +97,6 @@
             ((System.ComponentModel.ISupportInitialize)datagrid).BeginInit();
             panel12.SuspendLayout();
             panel11.SuspendLayout();
-            panel14.SuspendLayout();
             SuspendLayout();
             // 
             // panel5
@@ -117,6 +117,7 @@
             // 
             // panel7
             // 
+            panel7.AutoScroll = true;
             panel7.Controls.Add(panel3);
             panel7.Dock = DockStyle.Top;
             panel7.Location = new Point(75, 0);
@@ -165,6 +166,36 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(214, 89);
             panel2.TabIndex = 19;
+            // 
+            // panel14
+            // 
+            panel14.Controls.Add(purchaseTotalLabel);
+            panel14.Controls.Add(label7);
+            panel14.Dock = DockStyle.Top;
+            panel14.Location = new Point(0, 0);
+            panel14.Name = "panel14";
+            panel14.Size = new Size(214, 20);
+            panel14.TabIndex = 7;
+            // 
+            // purchaseTotalLabel
+            // 
+            purchaseTotalLabel.AutoSize = true;
+            purchaseTotalLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            purchaseTotalLabel.Location = new Point(127, 0);
+            purchaseTotalLabel.Name = "purchaseTotalLabel";
+            purchaseTotalLabel.Size = new Size(14, 15);
+            purchaseTotalLabel.TabIndex = 1;
+            purchaseTotalLabel.Text = "0";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(3, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(90, 15);
+            label7.TabIndex = 0;
+            label7.Text = "Purchase Total:";
             // 
             // panel9
             // 
@@ -695,36 +726,6 @@
             // 
             FetchDataBackgroundWorker.DoWork += FetchDataBackgroundWorker_DoWork;
             // 
-            // panel14
-            // 
-            panel14.Controls.Add(purchaseTotalLabel);
-            panel14.Controls.Add(label7);
-            panel14.Dock = DockStyle.Top;
-            panel14.Location = new Point(0, 0);
-            panel14.Name = "panel14";
-            panel14.Size = new Size(214, 20);
-            panel14.TabIndex = 7;
-            // 
-            // purchaseTotalLabel
-            // 
-            purchaseTotalLabel.AutoSize = true;
-            purchaseTotalLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            purchaseTotalLabel.Location = new Point(127, 0);
-            purchaseTotalLabel.Name = "purchaseTotalLabel";
-            purchaseTotalLabel.Size = new Size(14, 15);
-            purchaseTotalLabel.TabIndex = 1;
-            purchaseTotalLabel.Text = "0";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(3, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(90, 15);
-            label7.TabIndex = 0;
-            label7.Text = "Purchase Total:";
-            // 
             // PurchaseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -745,6 +746,8 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel2.ResumeLayout(false);
+            panel14.ResumeLayout(false);
+            panel14.PerformLayout();
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
             panel8.ResumeLayout(false);
@@ -757,8 +760,6 @@
             panel12.ResumeLayout(false);
             panel11.ResumeLayout(false);
             panel11.PerformLayout();
-            panel14.ResumeLayout(false);
-            panel14.PerformLayout();
             ResumeLayout(false);
         }
 

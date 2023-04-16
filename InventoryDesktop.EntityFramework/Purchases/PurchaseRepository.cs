@@ -2,9 +2,13 @@
 
 namespace InventoryDesktop.EntityFramework.Purchases
 {
-    public class PurchaseRepository
+    public class PurchaseRepository : IPurchaseRepository
     {
-        private readonly InventoryDbContext context = new();
+        private readonly InventoryDbContext context;
+        public PurchaseRepository(InventoryDbContext context)
+        {
+            this.context = context;
+        }
 
         public async Task CreateAsync(Purchase purchase)
         {
@@ -56,7 +60,7 @@ namespace InventoryDesktop.EntityFramework.Purchases
 
         public async Task DeleteAsync(int id)
         {
-            var entity = await context.Purchases.FirstOrDefaultAsync(x => x.Id == id) 
+            var entity = await context.Purchases.FirstOrDefaultAsync(x => x.Id == id)
                 ?? throw new Exception($"Purchase with Id: '{id}' not found.");
             context.Purchases.Remove(entity);
             await context.SaveChangesAsync();
@@ -64,7 +68,7 @@ namespace InventoryDesktop.EntityFramework.Purchases
 
         public async Task DeleteAsync(string barcode)
         {
-            var entity = await context.Purchases.FirstOrDefaultAsync(x => x.Barcode == barcode) 
+            var entity = await context.Purchases.FirstOrDefaultAsync(x => x.Barcode == barcode)
                 ?? throw new Exception($"Purchase with Barcode: '{barcode}' not found.");
             context.Purchases.Remove(entity);
             await context.SaveChangesAsync();

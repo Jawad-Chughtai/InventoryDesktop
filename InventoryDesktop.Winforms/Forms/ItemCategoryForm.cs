@@ -8,12 +8,15 @@ namespace InventoryDesktop.Winforms.Forms
 {
     public partial class ItemCategoryForm : Form
     {
-        private readonly ItemCategoryService _itemCategoryService = new();
-        private ItemCategory? _itemCategory { get; set; } = null;
+        private readonly IItemCategoryService _itemCategoryService;
+
+        private ItemCategory? _itemCategory = null;
         bool isLoading = true;
 
-        public ItemCategoryForm()
+        public ItemCategoryForm(
+            IItemCategoryService itemCategoryService)
         {
+            _itemCategoryService = itemCategoryService;
             InitializeComponent();
         }
 

@@ -9,12 +9,14 @@ namespace InventoryDesktop.Winforms.Forms
 {
     public partial class PurchaseForm : Form
     {
-        private readonly PurchaseService _purchaseService = new();
-        private bool IsLoading = true;
+        private readonly IPurchaseService _purchaseService;
+        private bool IsFirstCall = true;
         private Purchase? _purchase = null;
 
-        public PurchaseForm()
+        public PurchaseForm(
+            IPurchaseService purchaseService)
         {
+            _purchaseService = purchaseService;
             InitializeComponent();
         }
 
@@ -190,12 +192,12 @@ namespace InventoryDesktop.Winforms.Forms
 
         private async void FetchDataBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (IsLoading)
+            if (IsFirstCall)
             {
                 await GetPurchaseItemsAsync();
             }
             await GetListAsync(searchTextbox.Text, (int?)itemFilter.SelectedValue);
-            IsLoading = false;
+            IsFirstCall = false;
         }
 
         private async Task GetPurchaseItemsAsync()
@@ -293,6 +295,13 @@ namespace InventoryDesktop.Winforms.Forms
 
         private void ClearItemFilter_Click(object sender, EventArgs e)
         {
+            // Wait to Background worker to finish before running another operation on dbContext.
+            var isBusy = this.FetchDataBackgroundWorker.IsBusy;
+            while (isBusy)
+            {
+                isBusy = this.FetchDataBackgroundWorker.IsBusy;
+            }
+
             itemFilter.SelectedItem = null;
             FetchDataBackgroundWorker_DoWork(sender, new DoWorkEventArgs(e));
         }
@@ -313,7 +322,7 @@ namespace InventoryDesktop.Winforms.Forms
 
         private void ItemFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!IsLoading)
+            if (!IsFirstCall)
             {
                 FetchDataBackgroundWorker_DoWork(sender, new DoWorkEventArgs(e));
             }

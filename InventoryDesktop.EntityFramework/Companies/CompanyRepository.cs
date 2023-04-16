@@ -2,9 +2,13 @@
 
 namespace InventoryDesktop.EntityFramework.Companies
 {
-    public class CompanyRepository
+    public class CompanyRepository : ICompanyRepository
     {
-        private readonly InventoryDbContext context = new();
+        private readonly InventoryDbContext context;
+        public CompanyRepository(InventoryDbContext context)
+        {
+            this.context = context;
+        }
 
         public async Task CreateAsync(Company company)
         {
@@ -24,12 +28,12 @@ namespace InventoryDesktop.EntityFramework.Companies
 
         public async Task DeleteAsync(int id)
         {
-            if (! await context.PurchaseItems.AnyAsync(x => x.CompanyId == id))
+            if (!await context.PurchaseItems.AnyAsync(x => x.CompanyId == id))
             {
                 var any = await context.Companies.FirstOrDefaultAsync(x => x.Id == id)
                         ?? throw new Exception($"Company with id '{id}' not found");
                 context.Companies.Remove(any);
-                await context.SaveChangesAsync(); 
+                await context.SaveChangesAsync();
             }
             else
             {

@@ -9,7 +9,7 @@ namespace InventoryDesktop.Winforms
     public class CustomToolStripRenderer : ToolStripRenderer
     {
         public static Color selectionColor = Color.FromArgb(119, 120, 128);
-        Brush selectionBrush = new SolidBrush(selectionColor);
+        readonly Brush selectionBrush = new SolidBrush(selectionColor);
         protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
         {
             if (e.Item.Selected)

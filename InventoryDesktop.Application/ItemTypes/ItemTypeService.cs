@@ -2,10 +2,13 @@
 
 namespace InventoryDesktop.Applications.ItemTypes
 {
-    public class ItemTypeService
+    public class ItemTypeService : IItemTypeService
     {
-        private readonly ItemTypeRepository _itemTypeRepository = new();
-
+        private readonly IItemTypeRepository _itemTypeRepository;
+        public ItemTypeService(IItemTypeRepository itemTypeRepository)
+        {
+            _itemTypeRepository = itemTypeRepository;
+        }
         public async Task<ItemType> GetAsync(int id)
         {
             return await _itemTypeRepository.GetAsync(id);

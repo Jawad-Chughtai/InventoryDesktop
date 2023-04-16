@@ -1,4 +1,5 @@
-﻿using InventoryDesktop.Applications.Users;
+﻿using Autofac;
+using InventoryDesktop.Applications.Users;
 using InventoryDesktop.EntityFramework.Users;
 using InventoryDesktop.Winforms.Enums;
 using InventoryDesktop.Winforms.Forms;
@@ -7,41 +8,49 @@ namespace InventoryDesktop.Winforms
 {
     public partial class MainForm : Form
     {
-        private readonly UserService _userService = new();
-        private Form? _activeForm { get; set; } = null;
-        public User? _loggedInUser { get; set; } = null;
-
         /// <summary>
         /// If super admin is logged in from another user's account then set it to true
         /// </summary>
         public bool IsSuperAdmin { get; set; } = false;
+        public User? LoggedInUser { get; set; } = null;
 
+        private readonly IUserService _userService;
+        private readonly IContainer _container;
 
-        public MainForm()
+        private Form? _activeForm = null;
+
+        public MainForm(
+            User? loggedInUser,
+            IContainer container)
         {
             InitializeComponent();
+            LoggedInUser = loggedInUser;
+            _container = container;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             CloseDropDownItems();
             SetUpUser();
-            OpenChildForm(new DashboardForm(), PageTitles.Dashboard);
-            navbar.Renderer = new CustomToolStripRenderer();
+            OpenChildForm(_container.Resolve<DashboardForm>(), PageTitles.Dashboard);
+            navbar.Renderer = _container.Resolve<CustomToolStripRenderer>();
         }
 
         public void SetUpUser(User? user = null)
         {
             if (user != null)
             {
-                _loggedInUser = user;
+                LoggedInUser = user;
             }
             superAdminLabel.Visible = false;
-            userButton.Text = _loggedInUser.FullName;
+            userButton.Text = LoggedInUser?.FullName;
             menuUser.Visible = true;
 
-            if (!_loggedInUser.Role.Equals(UserRoles.Admin)
-                && !_loggedInUser.Role.Equals(UserRoles.SuperAdmin))
+            var userRole = LoggedInUser?.Role;
+
+            if (userRole != null
+                && !userRole.Equals(UserRoles.Admin)
+                && !userRole.Equals(UserRoles.SuperAdmin))
             {
                 menuUser.Visible = false;
             }
@@ -85,43 +94,43 @@ namespace InventoryDesktop.Winforms
         private void MenuDashboard_Click(object sender, EventArgs e)
         {
             CloseDropDownItems();
-            OpenChildForm(new DashboardForm(), PageTitles.Dashboard);
+            OpenChildForm(_container.Resolve<DashboardForm>(), PageTitles.Dashboard);
         }
 
         private void MenuItemType_Click(object sender, EventArgs e)
         {
             CloseDropDownItems();
-            OpenChildForm(new ItemTypeForm(), PageTitles.ItemType);
+            OpenChildForm(_container.Resolve<ItemTypeForm>(), PageTitles.ItemType);
         }
 
         private void MenuItemCategory_Click(object sender, EventArgs e)
         {
             CloseDropDownItems();
-            OpenChildForm(new ItemCategoryForm(), PageTitles.ItemCategory);
+            OpenChildForm(_container.Resolve<ItemCategoryForm>(), PageTitles.ItemCategory);
         }
 
         private void MenuUser_Click(object sender, EventArgs e)
         {
             CloseDropDownItems();
-            OpenChildForm(new UserForm(), PageTitles.User);
+            OpenChildForm(_container.Resolve<UserForm>(), PageTitles.User);
         }
 
         private void MenuItemSetup_Click(object sender, EventArgs e)
         {
             CloseDropDownItems();
-            OpenChildForm(new ItemSetupForm(), PageTitles.ItemSetup);
+            OpenChildForm(_container.Resolve<ItemSetupForm>(), PageTitles.ItemSetup);
         }
 
         private void MenuPurchaseItem_Click(object sender, EventArgs e)
         {
             CloseDropDownItems();
-            OpenChildForm(new PurchaseItemForm(), PageTitles.PurchaseItem);
+            OpenChildForm(_container.Resolve<PurchaseItemForm>(), PageTitles.PurchaseItem);
         }
 
         private void MenuCreatePurchase_Click(object sender, EventArgs e)
         {
             CloseDropDownItems();
-            OpenChildForm(new PurchaseForm(), PageTitles.Purchase);
+            OpenChildForm(_container.Resolve<PurchaseForm>(), PageTitles.Purchase);
         }
 
         private void CloseDropDownItems()

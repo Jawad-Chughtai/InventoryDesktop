@@ -2,18 +2,24 @@
 
 namespace InventoryDesktop.EntityFramework.Distributors
 {
-    public class DistributorRepository
+    public class DistributorRepository : IDistributorRepository
     {
-        private readonly InventoryDbContext context = new();
+        private readonly InventoryDbContext context;
+        
+        public DistributorRepository(
+            InventoryDbContext context)
+        {
+            this.context = context;
+        }
 
         public async Task CreateAsync(Distributor distributor)
         {
-            if(distributor == null)
+            if (distributor == null)
             {
                 throw new ArgumentNullException(nameof(distributor));
             }
 
-            if(await context.Distributors.AnyAsync(x => x.Name.ToLower() == distributor.Name.ToLower()))
+            if (await context.Distributors.AnyAsync(x => x.Name.ToLower() == distributor.Name.ToLower()))
             {
                 throw new Exception($"Distributor with same name '{distributor.Name}' already exists");
             }
@@ -24,12 +30,12 @@ namespace InventoryDesktop.EntityFramework.Distributors
 
         public async Task DeleteAsync(int id)
         {
-            if (! await context.PurchaseItems.AnyAsync(x => x.DistributorId == id))
+            if (!await context.PurchaseItems.AnyAsync(x => x.DistributorId == id))
             {
                 var any = await context.Distributors.FirstOrDefaultAsync(x => x.Id == id)
                         ?? throw new Exception($"Distributor with id '{id}' not found");
                 context.Distributors.Remove(any);
-                await context.SaveChangesAsync(); 
+                await context.SaveChangesAsync();
             }
             else
             {
