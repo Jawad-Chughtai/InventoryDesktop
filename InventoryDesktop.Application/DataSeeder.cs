@@ -1,4 +1,5 @@
-﻿using InventoryDesktop.EntityFramework.Users;
+﻿using InventoryDesktop.Applications.Users;
+using InventoryDesktop.EntityFramework.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryDesktop.EntityFramework
@@ -15,22 +16,14 @@ namespace InventoryDesktop.EntityFramework
                 return;
             }
 
-            context.Users.AddRange(new User
+            context.Users.Add(new User
             {
                 FirstName = "Super",
                 LastName = "Admin",
-                Username = "superadmin",
-                Password = "Admin123?",
+                Username = "admin",
+                Password = UserService.HashPassword("admin"),
                 Role = "SuperAdmin",
                 IsIncluded = false
-            }, new User
-            {
-                FirstName = "Muhammad",
-                LastName = "Ayaz",
-                Username = "admin",
-                Password = "admin",
-                Role = "Admin",
-                IsIncluded = true
             });
 
             await context.SaveChangesAsync();

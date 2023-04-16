@@ -20,7 +20,7 @@ namespace InventoryDesktop.Winforms
                 Log.Information("Application started.");
 
                 //ConnectionSettings.ConnectionString = ConfigurationManager.ConnectionStrings["LocalDb"].ConnectionString;
-                //DataSeeder.SeedAsync();
+                DataSeeder.SeedAsync();
 
                 Log.Information(ConnectionSettings.ConnectionString);
 
